@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mapbox.plugin:maps-lifecycle:10.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f90714c68dc51b9e243537d5211b59e2/transformed/maps-lifecycle-10.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c867faf408aa1bb24dd31f34a8bc8dcd/transformed/maps-lifecycle-10.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/75d4ec87ad445a43085645d44c55d19b/transformed/maps-lifecycle-10.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/75d4ec87ad445a43085645d44c55d19b/transformed/maps-lifecycle-10.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/75d4ec87ad445a43085645d44c55d19b/transformed/maps-lifecycle-10.1.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-lifecycle/10.1.0/1ccb968a30a79f83290bb36856ffa120dfc3ec1/maps-lifecycle-10.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-lifecycle/10.1.0/7d3bea6c0f95e7c9131ffc170c7f94389fd0878f/maps-lifecycle-10.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

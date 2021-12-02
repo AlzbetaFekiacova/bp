@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Zahoď svoje smeti</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoic2lzaWxpZW5rYSIsImEiOiJja3VtajBpdWMwand1Mm50aHNpZ2QwaXloIn0.thJyUu4aO5VyCuiS3ilxoQ</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btnLocalize">btnLocalize</string>
+    <string name="btnFilter">btnFilter</string>
+    <string name="addBin">Pridať kôš</string>
+    <string name="forPlastic">Na plast</string>
+    <string name="forPaper">Na papier</string>
+    <string name="forMix">Na zmesový odpad</string>
+    <string name="addContainer">Pridať kontajner</string>
+    <string name="forGlass">Na sklo</string>
+    <string name="forBio">Na bio odpad</string>
+    <string name="forElectronics">Na elektro odpad</string>
+    <string name="addClothesCollect">Pridať zber šatstva</string>
+    <string name="addCollectingSite">Pridať zberné miesto</string>
+    <string name="logIn">Prihlásiť sa</string>
+    <string name="register">Registrovať sa</string>
+    <string name="appInfo">Informácie o aplikácií</string>
+    <string name="recycleInfo">Informácie o triedení</string>
+</resources>

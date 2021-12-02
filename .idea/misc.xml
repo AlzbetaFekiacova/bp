@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.134375" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_baseline_app_registration_24.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_baseline_checkroom_24.xml" value="0.13385416666666666" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.13385416666666666" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_baseline_gps_fixed_24.xml" value="0.13385416666666666" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_baseline_how_to_vote_24.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.134375" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_botle_and_can.xml" value="0.134375" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_clothes_hanger.xml" value="0.13385416666666666" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_launcher_background.xml" value="0.134375" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_paho503_cans_or_bottles_white_vector.xml" value="0.1" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_bin_blue.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_bin_free_png_image.xml" value="0.10462962962962963" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_bin_svgrepo_com.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_bin_yellow.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_container_blue.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_container_brown.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_container_green.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_container_red.xml" value="0.24814814814814815" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/drawable/ic_trash_container_yellow.xml" value="0.134375" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/layout/activity_main.xml" value="0.24791666666666667" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/layout/fragment_login.xml" value="0.24791666666666667" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/layout/fragment_map.xml" value="0.109375" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/layout/fragment_registration.xml" value="0.24791666666666667" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/menu-v26/main_menu.xml" value="0.4" />
+        <entry key="..\:/Users/fekia/Downloads/mapbox (1)/app/src/main/res/menu/main_menu.xml" value="0.264" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
