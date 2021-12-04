@@ -25,4 +25,5 @@
     <string name="title_register">Registrácia</string>
     <string name="textReenterPassword">Zadaj heslo znovu</string>
     <string name="img_desc_application_icon">Application Icon</string>
+    <string name="txt_to_continue_must_log_in">Pre pokračovanie sa musíš prihlásiť alebo registrovať</string>
 </resources>

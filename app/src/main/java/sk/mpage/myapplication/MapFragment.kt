@@ -19,17 +19,14 @@ import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
 import com.mapbox.maps.MapboxMap
-import com.mapbox.maps.Style
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import sk.mpage.myapplication.databinding.FragmentMapBinding
-import android.R.menu
 import android.annotation.SuppressLint
 
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.navigation.fragment.findNavController
-import com.mapbox.maps.extension.style.expressions.dsl.generated.switchCase
 
 const val REQUEST_CODE = 101
 
@@ -188,6 +185,8 @@ class MapFragment : Fragment(), View.OnClickListener {
         when (item.itemId){
             R.id.itemClothes -> {
                 Toast.makeText(context, "Clicked on clothes", Toast.LENGTH_LONG).show()
+                var dialog = CustomDialogFragment()
+                fragmentManager?.let { dialog.show(it, "customDialog") }
             }
             R.id.itemBackingUp -> {
                 Toast.makeText(context, "Clicked on back up", Toast.LENGTH_LONG).show()
