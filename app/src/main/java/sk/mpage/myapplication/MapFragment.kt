@@ -107,7 +107,7 @@ class MapFragment : Fragment(), View.OnClickListener {
         }
         task.addOnSuccessListener {
             if (it != null) {
-                Toast.makeText(context, "succeed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Lokalizovné", Toast.LENGTH_SHORT).show()
                 val point = Point.fromLngLat(it.longitude, it.latitude)
                 val initialCameraOptions = CameraOptions.Builder()
                     .center(point)
@@ -121,7 +121,7 @@ class MapFragment : Fragment(), View.OnClickListener {
                 addAnnotationToMap(point)
 
             } else {
-                Toast.makeText(context, "no succeed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Nepodarilo sa lokalizovať", Toast.LENGTH_SHORT).show()
             }
         }
     }

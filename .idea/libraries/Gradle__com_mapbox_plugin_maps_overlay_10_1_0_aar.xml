@@ -4,9 +4,10 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5af18d2ba2e002c58c6642063dd7810d/transformed/maps-overlay-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/87db1d6a9f73f8332514caade9464cc6/transformed/maps-overlay-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3a0de1775cd487a91d97beb8208cd096/transformed/maps-overlay-10.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d0143c5f802623277e7715548fa654c3/transformed/maps-overlay-10.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d0143c5f802623277e7715548fa654c3/transformed/maps-overlay-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d0143c5f802623277e7715548fa654c3/transformed/maps-overlay-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7e8aeb50a0847e6d1357963b8acccbed/transformed/maps-overlay-10.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/7e8aeb50a0847e6d1357963b8acccbed/transformed/maps-overlay-10.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7e8aeb50a0847e6d1357963b8acccbed/transformed/maps-overlay-10.1.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-overlay/10.1.0/fa5447adef73f09bd1bffae7dae17dcf4c028848/maps-overlay-10.1.0-javadoc.jar!/" />

@@ -5,8 +5,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03b8638028dcef33f06f4a93a344b549/transformed/maps-style-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b2f6a2a0883b395939df26ea559b6e0c/transformed/maps-style-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/249b3cba345dac01ce5bafe02bfb9f9a/transformed/maps-style-10.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/249b3cba345dac01ce5bafe02bfb9f9a/transformed/maps-style-10.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/249b3cba345dac01ce5bafe02bfb9f9a/transformed/maps-style-10.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/01efa3cca82df7fefecdc274598b493a/transformed/maps-style-10.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/01efa3cca82df7fefecdc274598b493a/transformed/maps-style-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/01efa3cca82df7fefecdc274598b493a/transformed/maps-style-10.1.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.extension/maps-style/10.1.0/f64947dd55c4ad92d37eb842ebf5cd4a4703b74b/maps-style-10.1.0-javadoc.jar!/" />

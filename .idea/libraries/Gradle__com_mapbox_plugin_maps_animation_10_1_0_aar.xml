@@ -5,8 +5,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d4c67689ce268b13766a9a5478c19f05/transformed/maps-animation-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4ad085a5d695cb617a1df9ebca53b973/transformed/maps-animation-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0d35f8312f694070ef24001789f1a9e7/transformed/maps-animation-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0d35f8312f694070ef24001789f1a9e7/transformed/maps-animation-10.1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0d35f8312f694070ef24001789f1a9e7/transformed/maps-animation-10.1.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/edc7faac665daf4d56ac1602d4b2edaa/transformed/maps-animation-10.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/edc7faac665daf4d56ac1602d4b2edaa/transformed/maps-animation-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/edc7faac665daf4d56ac1602d4b2edaa/transformed/maps-animation-10.1.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-animation/10.1.0/9d55bac6d1c4c36f1e86e0beb88fa4e50b0d0a58/maps-animation-10.1.0-javadoc.jar!/" />

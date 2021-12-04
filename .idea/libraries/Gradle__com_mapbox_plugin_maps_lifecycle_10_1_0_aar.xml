@@ -4,9 +4,10 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f90714c68dc51b9e243537d5211b59e2/transformed/maps-lifecycle-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c867faf408aa1bb24dd31f34a8bc8dcd/transformed/maps-lifecycle-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/75d4ec87ad445a43085645d44c55d19b/transformed/maps-lifecycle-10.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/be293cf6c20eec4d3cf9aa64cc82cf2f/transformed/maps-lifecycle-10.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/be293cf6c20eec4d3cf9aa64cc82cf2f/transformed/maps-lifecycle-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/be293cf6c20eec4d3cf9aa64cc82cf2f/transformed/maps-lifecycle-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a3f036317e6c8377a62e9ea5a8076469/transformed/maps-lifecycle-10.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a3f036317e6c8377a62e9ea5a8076469/transformed/maps-lifecycle-10.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a3f036317e6c8377a62e9ea5a8076469/transformed/maps-lifecycle-10.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-lifecycle/10.1.0/1ccb968a30a79f83290bb36856ffa120dfc3ec1/maps-lifecycle-10.1.0-javadoc.jar!/" />

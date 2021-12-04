@@ -4,9 +4,10 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4df5ffcfc86bdc9d50850b7b7534e860/transformed/common-20.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cd8afe83cc29f5d05abddc855ac8ff84/transformed/common-20.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4d4f3a9c315e019609bcd7659121798e/transformed/common-20.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/53c8e244a9b156860954ded703e8a204/transformed/common-20.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/53c8e244a9b156860954ded703e8a204/transformed/common-20.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/53c8e244a9b156860954ded703e8a204/transformed/common-20.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4625f8fa9912a822eb1bc2b311cb52ae/transformed/common-20.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4625f8fa9912a822eb1bc2b311cb52ae/transformed/common-20.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4625f8fa9912a822eb1bc2b311cb52ae/transformed/common-20.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.common/common/20.1.0/fa0ec670c20e97738c1e184bece8e106322e7847/common-20.1.0-javadoc.jar!/" />

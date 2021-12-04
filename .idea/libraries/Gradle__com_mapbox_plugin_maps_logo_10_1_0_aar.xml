@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.plugin:maps-logo:10.1.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/26eccddf1afeae763ef7a89a5fca1f7b/transformed/maps-logo-10.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/26eccddf1afeae763ef7a89a5fca1f7b/transformed/maps-logo-10.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/26eccddf1afeae763ef7a89a5fca1f7b/transformed/maps-logo-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9749bfc55a15c44131dcecdd1886f9b8/transformed/maps-logo-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9749bfc55a15c44131dcecdd1886f9b8/transformed/maps-logo-10.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9749bfc55a15c44131dcecdd1886f9b8/transformed/maps-logo-10.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-logo/10.1.0/3d4286ca1c0397b73c22e0ab9eadccd7e3c027c3/maps-logo-10.1.0-javadoc.jar!/" />

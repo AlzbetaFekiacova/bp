@@ -4,9 +4,10 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c9a02cc5a2a807ed5fe8c4940bc28881/transformed/mapbox-android-core-5.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/07b9da440e4a0b89c7a33c82eaf55b0e/transformed/mapbox-android-core-5.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6f65cbddbe1a0a6f13239ae53d2c6fe3/transformed/mapbox-android-core-5.0.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/56a0d6f693b3a08f4939a582e6d6b6e8/transformed/mapbox-android-core-5.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/56a0d6f693b3a08f4939a582e6d6b6e8/transformed/mapbox-android-core-5.0.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/56a0d6f693b3a08f4939a582e6d6b6e8/transformed/mapbox-android-core-5.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/255d2ebff936610139258a73f10a6dcd/transformed/mapbox-android-core-5.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/255d2ebff936610139258a73f10a6dcd/transformed/mapbox-android-core-5.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/255d2ebff936610139258a73f10a6dcd/transformed/mapbox-android-core-5.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
