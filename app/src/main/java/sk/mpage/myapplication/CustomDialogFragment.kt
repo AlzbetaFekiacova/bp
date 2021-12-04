@@ -18,18 +18,6 @@ class CustomDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       /* var rootView: View = inflater.inflate(R.layout.fragment_dialog, container, false)
-
-        rootView.findViewById<Button>(R.id.dialog_button_log_in).setOnClickListener {
-            inflater.inflate(R.layout.fragment_login, container, true)
-        }
-
-        rootView.findViewById<Button>(R.id.dialog_button_log_in).setOnClickListener {
-            inflater.inflate(R.layout.fragment_registration, container, true)
-        }
-
-        return rootView*/
-
         _binding = FragmentDialogBinding.inflate(inflater, container, false)
         binding.dialogButtonLogIn.setOnClickListener {
             dismiss()

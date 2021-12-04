@@ -182,14 +182,16 @@ class MapFragment : Fragment(), View.OnClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //Toast.makeText(context, "Item clicked", Toast.LENGTH_SHORT).show()
-        when (item.itemId){
+        var dialog = CustomDialogFragment()
+        when (item.itemId) {
+
             R.id.itemClothes -> {
                 Toast.makeText(context, "Clicked on clothes", Toast.LENGTH_LONG).show()
-                var dialog = CustomDialogFragment()
-                fragmentManager?.let { dialog.show(it, "customDialog") }
+                parentFragmentManager.let { dialog.show(it, "customDialog") }
             }
             R.id.itemBackingUp -> {
                 Toast.makeText(context, "Clicked on back up", Toast.LENGTH_LONG).show()
+                parentFragmentManager.let { dialog.show(it, "customDialog") }
             }
             R.id.itemLogIn -> {
                 findNavController().navigate(R.id.loginFragment)
