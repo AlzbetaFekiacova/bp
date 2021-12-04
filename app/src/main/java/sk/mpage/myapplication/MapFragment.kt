@@ -28,6 +28,7 @@ import android.R.menu
 import android.annotation.SuppressLint
 
 import androidx.appcompat.view.menu.MenuBuilder
+import com.mapbox.maps.extension.style.expressions.dsl.generated.switchCase
 
 const val REQUEST_CODE = 101
 
@@ -182,7 +183,32 @@ class MapFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(context, "Item clicked", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context, "Item clicked", Toast.LENGTH_SHORT).show()
+        when (item.itemId){
+            R.id.itemClothes -> {
+                Toast.makeText(context, "Clicked on clothes", Toast.LENGTH_LONG).show()
+            }
+            R.id.itemBackingUp -> {
+                Toast.makeText(context, "Clicked on back up", Toast.LENGTH_LONG).show()
+            }
+            R.id.itemLogIn -> {
+                Toast.makeText(context, "Clicked on log in", Toast.LENGTH_LONG).show()
+            }
+            R.id.itemRegister -> {
+                Toast.makeText(context, "Clicked on register", Toast.LENGTH_LONG).show()
+            }
+            R.id.itemAppInfo -> {
+                Toast.makeText(context, "Clicked on app info", Toast.LENGTH_LONG).show()
+            }
+            R.id.itemRecycleInfo -> {
+                Toast.makeText(context, "Clicked on recycle info", Toast.LENGTH_LONG).show()
+            }
+            else -> {
+                Toast.makeText(context, "Clicked on antoher item", Toast.LENGTH_LONG).show()
+
+            }
+
+        }
         return super.onOptionsItemSelected(item)
     }
 }

@@ -55,16 +55,16 @@
         android:icon="@drawable/ic_cans_or_bottles"
 />
 
-    <item android:id="@+id/logIn"
+    <item android:id="@+id/itemLogIn"
         android:title="@string/logIn"
         android:icon="@drawable/ic_baseline_login_24"/>
-    <item android:id="@+id/register"
+    <item android:id="@+id/itemRegister"
         android:title="@string/register"
         android:icon="@drawable/ic_baseline_app_registration_24"/>
-    <item android:id="@+id/showAppInfo"
+    <item android:id="@+id/itemAppInfo"
         android:title="@string/appInfo"
         android:icon="@drawable/ic_baseline_info_24"/>
-    <item android:id="@+id/showRecycleInfo"
+    <item android:id="@+id/itemRecycleInfo"
         android:title="@string/recycleInfo"
         android:icon="@drawable/ic_baseline_how_to_vote_24"/>
 

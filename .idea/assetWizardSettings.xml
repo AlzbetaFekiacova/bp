@@ -33,8 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_how_to_vote_24" />
-                            <entry key="sourceFile" value="C:\Users\fekia\Downloads\trash-bin-svgrepo-com.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_trash_310219" />
+                            <entry key="sourceFile" value="C:\Users\fekia\Downloads\trash-310219.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -18,4 +18,8 @@
     <string name="register">Registrovať sa</string>
     <string name="appInfo">Informácie o aplikácií</string>
     <string name="recycleInfo">Informácie o triedení</string>
+    <string name="title_log_in">Prihlásenie</string>
+    <string name="name">Meno</string>
+    <string name="log_in_txt">Prihlásiť sa</string>
+    <string name="password">textPassword</string>
 </resources>
