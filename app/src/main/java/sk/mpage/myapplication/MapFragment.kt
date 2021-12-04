@@ -28,6 +28,7 @@ import android.R.menu
 import android.annotation.SuppressLint
 
 import androidx.appcompat.view.menu.MenuBuilder
+import androidx.navigation.fragment.findNavController
 import com.mapbox.maps.extension.style.expressions.dsl.generated.switchCase
 
 const val REQUEST_CODE = 101
@@ -192,10 +193,10 @@ class MapFragment : Fragment(), View.OnClickListener {
                 Toast.makeText(context, "Clicked on back up", Toast.LENGTH_LONG).show()
             }
             R.id.itemLogIn -> {
-                Toast.makeText(context, "Clicked on log in", Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.loginFragment)
             }
             R.id.itemRegister -> {
-                Toast.makeText(context, "Clicked on register", Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.registrationFragment)
             }
             R.id.itemAppInfo -> {
                 Toast.makeText(context, "Clicked on app info", Toast.LENGTH_LONG).show()

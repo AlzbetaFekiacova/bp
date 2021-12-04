@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegistrationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/txtViewRegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_register"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="120dp"
+        android:layout_marginTop="25dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/editTxtNameRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtViewRegisterTitle"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/et_style"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:padding="20sp" />
+
+    <EditText
+        android:id="@+id/editTxtPasswordRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTxtNameRegister"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/et_style"
+        android:hint="@string/textPassword"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:padding="20sp" />
+
+    <EditText
+        android:id="@+id/editTxtReenterPasswordRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTxtPasswordRegister"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/et_style"
+        android:hint="@string/textReenterPassword"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:padding="20sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/log_in_txt"
+        android:layout_below="@id/editTxtReenterPasswordRegister"
+        android:layout_marginTop="25dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/et_style"/>
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="146dp"
+        android:layout_height="169dp"
+        android:src="@drawable/ic_trash_310219"
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="523dp"
+        android:layout_below="@id/button"
+        android:layout_marginTop="5dp"
+        android:layout_centerInParent="true"
+        app:tint="@color/mild_green"
+        android:contentDescription="@string/img_desc_application_icon" />
+
+
+</RelativeLayout>
