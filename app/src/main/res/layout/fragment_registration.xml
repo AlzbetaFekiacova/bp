@@ -19,7 +19,7 @@
         />
 
     <EditText
-        android:id="@+id/editTxtNameRegister"
+        android:id="@+id/editTxtEmailRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtViewRegisterTitle"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="25dp"
         android:background="@drawable/et_style"
         android:hint="@string/name"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="20sp" />
 
@@ -35,7 +35,7 @@
         android:id="@+id/editTxtPasswordRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTxtNameRegister"
+        android:layout_below="@+id/editTxtEmailRegister"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
@@ -61,10 +61,10 @@
         android:padding="20sp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/log_in_txt"
+        android:text="@string/register"
         android:layout_below="@id/editTxtReenterPasswordRegister"
         android:layout_marginTop="25dp"
         android:layout_centerInParent="true"
@@ -78,7 +78,7 @@
         android:src="@drawable/ic_trash_310219"
         tools:layout_editor_absoluteX="123dp"
         tools:layout_editor_absoluteY="523dp"
-        android:layout_below="@id/button"
+        android:layout_below="@id/btn_register"
         android:layout_marginTop="5dp"
         android:layout_centerInParent="true"
         app:tint="@color/mild_green"

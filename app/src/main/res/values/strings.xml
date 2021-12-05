@@ -19,7 +19,7 @@
     <string name="appInfo">Informácie o aplikácií</string>
     <string name="recycleInfo">Informácie o triedení</string>
     <string name="title_log_in">Prihlásenie</string>
-    <string name="name">Prihalsovacie meno</string>
+    <string name="name">Email</string>
     <string name="log_in_txt">Prihlásiť sa</string>
     <string name="textPassword">Zadaj heslo</string>
     <string name="title_register">Registrácia</string>

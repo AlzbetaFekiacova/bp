@@ -1,59 +1,113 @@
 package sk.mpage.myapplication
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.google.android.gms.location.LocationServices
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import sk.mpage.myapplication.databinding.FragmentMapBinding
+import sk.mpage.myapplication.databinding.FragmentRegistrationBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RegistrationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class RegistrationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class RegistrationFragment : Fragment(), View.OnClickListener {
+    private var _binding: FragmentRegistrationBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registration, container, false)
+        _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
+        binding.btnRegister.setOnClickListener(this)
+        auth = Firebase.auth
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegistrationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RegistrationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    override fun onClick(p0: View?) {
+        when {
+            TextUtils.isEmpty(binding.editTxtEmailRegister.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(context, "Musíš zadať emailovú adresu", Toast.LENGTH_LONG).show()
+            }
+            TextUtils.isEmpty(
+                binding.editTxtPasswordRegister.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(context, "Musíš zadať heslo", Toast.LENGTH_LONG).show()
+            }
+            TextUtils.isEmpty(
+                binding.editTxtReenterPasswordRegister.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(context, "Musíš znovu zadať heslo", Toast.LENGTH_LONG).show()
+            }
+            !checkEqualityOfPassword() -> {
+                Toast.makeText(context, "Heslá sa nezhodujú", Toast.LENGTH_LONG).show()
+            }
+            else -> {
+                val email = binding.editTxtEmailRegister.text.toString().trim { it <= ' ' }
+                val password = binding.editTxtPasswordRegister.text.toString()
+
+                // Create a
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+
+                            val user = auth.currentUser
+                            logInUser(email, password)
+                            Toast.makeText(context, "Úspešná registrácia", Toast.LENGTH_SHORT)
+                                .show()
+                            findNavController().navigate(R.id.mapFragment)
+                        } else {
+                            Toast.makeText(
+                                context,
+                                task.exception!!.message.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+            }
+        }
+    }
+
+    private fun logInUser(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    val user = auth.currentUser
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Toast.makeText(
+                        context, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+
+
+    }
+
+
+    fun checkEqualityOfPassword(): Boolean {
+        return binding.editTxtPasswordRegister.text.toString().equals(
+            binding.editTxtReenterPasswordRegister.text.toString()
+        )
     }
 }

@@ -27,6 +27,9 @@ import android.annotation.SuppressLint
 
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.ktx.auth
 
 const val REQUEST_CODE = 101
 
@@ -38,11 +41,14 @@ class MapFragment : Fragment(), View.OnClickListener {
     private lateinit var mapboxMap: MapboxMap
     private lateinit var onMapReady: (MapboxMap) -> Unit
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
+        // Initialize Firebase Auth
+        auth = Firebase.auth
     }
 
 
@@ -187,11 +193,13 @@ class MapFragment : Fragment(), View.OnClickListener {
 
             R.id.itemClothes -> {
                 Toast.makeText(context, "Clicked on clothes", Toast.LENGTH_LONG).show()
-                parentFragmentManager.let { dialog.show(it, "customDialog") }
+                if (!checkIfLoggedIn())
+                    parentFragmentManager.let { dialog.show(it, "customDialog") }
             }
             R.id.itemBackingUp -> {
                 Toast.makeText(context, "Clicked on back up", Toast.LENGTH_LONG).show()
-                parentFragmentManager.let { dialog.show(it, "customDialog") }
+                if (!checkIfLoggedIn())
+                    parentFragmentManager.let { dialog.show(it, "customDialog") }
             }
             R.id.itemLogIn -> {
                 findNavController().navigate(R.id.loginFragment)
@@ -212,6 +220,11 @@ class MapFragment : Fragment(), View.OnClickListener {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun checkIfLoggedIn(): Boolean {
+        val currentUser = auth.currentUser
+        return currentUser != null
     }
 }
 
