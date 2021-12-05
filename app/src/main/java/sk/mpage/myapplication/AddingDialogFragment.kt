@@ -21,12 +21,12 @@ class AddingDialogFragment:DialogFragment() {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         binding.dialogButtonLogIn.setOnClickListener {
             dismiss()
-            findNavController().navigate(R.id.loginFragment)
+            findNavController().navigate(R.id.mapFragment)
         }
 
         binding.dialogButtonRegister.setOnClickListener {
             dismiss()
-            findNavController().navigate(R.id.registrationFragment)
+            findNavController().navigate(R.id.mapFragment)
         }
 
         return binding.root

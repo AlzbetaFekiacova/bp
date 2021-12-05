@@ -30,6 +30,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
+import com.mapbox.maps.plugin.animation.MapAnimationOptions.Companion.mapAnimationOptions
+import com.mapbox.maps.plugin.animation.easeTo
+import com.mapbox.maps.plugin.animation.flyTo
 
 const val REQUEST_CODE = 101
 
@@ -115,10 +118,12 @@ class MapFragment : Fragment(), View.OnClickListener {
                     .zoom(15.5)
                     .build()
 
-                mapView.getMapboxMap().setCamera(
-                    initialCameraOptions
+                mapView.getMapboxMap().flyTo(
+                    initialCameraOptions,
+                    mapAnimationOptions {
+                        duration(5000)
+                    }
                 )
-
                 addAnnotationToMap(point)
 
             } else {
