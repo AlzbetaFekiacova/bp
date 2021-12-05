@@ -10,13 +10,11 @@
         android:id="@+id/txtViewRegisterTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_register"
         android:layout_marginStart="25dp"
-        android:layout_marginBottom="120dp"
         android:layout_marginTop="25dp"
+        android:text="@string/title_register"
         android:textSize="30sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTxtEmailRegister"
@@ -24,13 +22,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtViewRegisterTitle"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/et_style"
         android:hint="@string/name"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="20sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 
     <EditText
         android:id="@+id/editTxtPasswordRegister"
