@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:icon="@drawable/ic_baseline_logout_24"
+        app:showAsAction="ifRoom"
+        android:title="@string/log_out"
+        android:id="@+id/logOut"
+        />
+
     <item android:id="@+id/itemBin"
         android:title="@string/addBin"
         android:icon="@drawable/ic_trash_can_black">

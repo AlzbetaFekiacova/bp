@@ -181,20 +181,40 @@ class MapFragment : Fragment(), View.OnClickListener {
 
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val logOutItem = menu.findItem(R.id.logOut)
+        val registerItem = menu.findItem(R.id.itemRegister)
+        val logInItem = menu.findItem(R.id.itemLogIn)
+        registerItem.isVisible = !checkIfLoggedIn()
+        logInItem.isVisible = !checkIfLoggedIn()
+        logOutItem.isVisible = checkIfLoggedIn()
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //Toast.makeText(context, "Item clicked", Toast.LENGTH_SHORT).show()
-        var dialog = CustomDialogFragment()
+        val logOrRegDialogFragment = LogOrRegDialogFragment()
+        val addingDialogFragment = AddingDialogFragment()
         when (item.itemId) {
+
+            R.id.logOut -> {
+                if (checkIfLoggedIn()) {
+                    Firebase.auth.signOut()
+                    Toast.makeText(context, "Bol si úspešne odhlásený", Toast.LENGTH_SHORT).show()
+                }
+            }
 
             R.id.itemClothes -> {
                 Toast.makeText(context, "Clicked on clothes", Toast.LENGTH_LONG).show()
                 if (!checkIfLoggedIn())
-                    parentFragmentManager.let { dialog.show(it, "customDialog") }
+                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                else
+                    parentFragmentManager.let { addingDialogFragment.show(it, "customDialog") }
             }
             R.id.itemBackingUp -> {
                 Toast.makeText(context, "Clicked on back up", Toast.LENGTH_LONG).show()
                 if (!checkIfLoggedIn())
-                    parentFragmentManager.let { dialog.show(it, "customDialog") }
+                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
             }
             R.id.itemLogIn -> {
                 findNavController().navigate(R.id.loginFragment)
@@ -217,7 +237,7 @@ class MapFragment : Fragment(), View.OnClickListener {
         return super.onOptionsItemSelected(item)
     }
 
-    fun checkIfLoggedIn(): Boolean {
+    private fun checkIfLoggedIn(): Boolean {
         val currentUser = auth.currentUser
         return currentUser != null
     }

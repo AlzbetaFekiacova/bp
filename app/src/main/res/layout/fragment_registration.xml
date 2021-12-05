@@ -29,7 +29,8 @@
         android:hint="@string/name"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:padding="20sp" />
+        android:padding="20sp"
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/editTxtPasswordRegister"
@@ -43,7 +44,8 @@
         android:hint="@string/textPassword"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:padding="20sp" />
+        android:padding="20sp"
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/editTxtReenterPasswordRegister"
@@ -58,7 +60,8 @@
         android:hint="@string/textReenterPassword"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:padding="20sp" />
+        android:padding="20sp"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/btn_register"

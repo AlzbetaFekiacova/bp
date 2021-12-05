@@ -26,4 +26,8 @@
     <string name="textReenterPassword">Zadaj heslo znovu</string>
     <string name="img_desc_application_icon">Application Icon</string>
     <string name="txt_to_continue_must_log_in">Pre pokračovanie sa musíš prihlásiť alebo registrovať</string>
+    <string name="add_more_info">Chceš pridať ďalšie informácie?</string>
+    <string name="no">Nie</string>
+    <string name="yes">Áno</string>
+    <string name="log_out">Odhlásiť sa</string>
 </resources>
