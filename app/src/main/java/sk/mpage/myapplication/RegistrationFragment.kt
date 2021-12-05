@@ -1,21 +1,16 @@
 package sk.mpage.myapplication
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import sk.mpage.myapplication.databinding.FragmentMapBinding
 import sk.mpage.myapplication.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : Fragment(), View.OnClickListener {
@@ -78,7 +73,7 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
                             Toast.makeText(
                                 context,
                                 task.exception!!.message.toString(),
-                                Toast.LENGTH_SHORT
+                                Toast.LENGTH_LONG
                             ).show()
                         }
                     }
@@ -95,17 +90,15 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(
-                        context, "Authentication failed.",
+                        context, "Prihlásenie nebolo úspešné",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
-
-
     }
 
 
-    fun checkEqualityOfPassword(): Boolean {
+    private fun checkEqualityOfPassword(): Boolean {
         return binding.editTxtPasswordRegister.text.toString().equals(
             binding.editTxtReenterPasswordRegister.text.toString()
         )

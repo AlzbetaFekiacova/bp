@@ -80,11 +80,6 @@ class MapFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    fun getMapAsync(callback: (MapboxMap) -> Unit) = if (::mapboxMap.isInitialized) {
-        callback.invoke(mapboxMap)
-    } else this.onMapReady = callback
-
-
     override fun onClick(postition: View?) {
         fetchLocation()
     }

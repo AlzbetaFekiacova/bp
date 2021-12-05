@@ -47,7 +47,7 @@
         android:inputType="textPassword"/>
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_logIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_in_txt"
@@ -64,7 +64,7 @@
         android:src="@drawable/ic_trash_310219"
         tools:layout_editor_absoluteX="123dp"
         tools:layout_editor_absoluteY="523dp"
-        android:layout_below="@id/btn_register"
+        android:layout_below="@id/btn_logIn"
         android:layout_marginTop="5dp"
         android:layout_centerInParent="true"
         app:tint="@color/mild_green"

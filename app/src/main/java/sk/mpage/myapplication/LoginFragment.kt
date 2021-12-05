@@ -1,32 +1,25 @@
 package sk.mpage.myapplication
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import sk.mpage.myapplication.databinding.FragmentLoginBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class LoginFragment : Fragment(), View.OnClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -34,26 +27,42 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        binding.btnLogIn.setOnClickListener(this)
+        auth = Firebase.auth
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onClick(p0: View?) {
+        when {
+            TextUtils.isEmpty(binding.editTxtEmailLogIn.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(context, "Musíš zadať emailovú adresu", Toast.LENGTH_LONG).show()
             }
+            TextUtils.isEmpty(
+                binding.editTxtPasswordLogIn.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(context, "Musíš zadať heslo", Toast.LENGTH_LONG).show()
+            }
+
+            else -> {
+                val email = binding.editTxtEmailLogIn.text.toString().trim { it <= ' ' }
+                val password = binding.editTxtPasswordLogIn.text.toString()
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(context, "Prihlásenie bolo úspešné", Toast.LENGTH_LONG)
+                                .show()
+                            val user = auth.currentUser
+                            findNavController().navigate(R.id.mapFragment)
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(context, task.exception.toString(), Toast.LENGTH_LONG)
+                                .show()
+                        }
+                    }
+
+            }
+        }
+
     }
 }
