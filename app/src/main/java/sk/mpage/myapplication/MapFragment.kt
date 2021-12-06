@@ -215,14 +215,12 @@ class MapFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.itemClothes -> {
-                Toast.makeText(context, "Clicked on clothes", Toast.LENGTH_LONG).show()
                 if (!checkIfLoggedIn())
                     parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
                 else
                     parentFragmentManager.let { addingDialogFragment.show(it, "customDialog") }
             }
             R.id.itemBackingUp -> {
-                Toast.makeText(context, "Clicked on back up", Toast.LENGTH_LONG).show()
                 if (!checkIfLoggedIn())
                     parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
             }
@@ -237,6 +235,18 @@ class MapFragment : Fragment(), View.OnClickListener {
             }
             R.id.itemRecycleInfo -> {
                 Toast.makeText(context, "Clicked on recycle info", Toast.LENGTH_LONG).show()
+            }
+            R.id.itemBin -> {
+                if (!checkIfLoggedIn())
+                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                else
+                    parentFragmentManager.let { addingDialogFragment.show(it, "customDialog") }
+            }
+            R.id.itemContainer -> {
+                if (!checkIfLoggedIn())
+                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                else
+                    parentFragmentManager.let { addingDialogFragment.show(it, "customDialog") }
             }
             else -> {
                 Toast.makeText(context, "Clicked on antoher item", Toast.LENGTH_LONG).show()

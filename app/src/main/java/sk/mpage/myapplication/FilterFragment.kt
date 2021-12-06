@@ -2,6 +2,7 @@ package sk.mpage.myapplication
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import sk.mpage.myapplication.databinding.FragmentFilterBinding
@@ -34,6 +35,16 @@ class FilterFragment : DialogFragment() {
 
         val itemAdapter = ItemAdapter(requireContext(), getItemList())
         binding.recyclerViewItems.adapter = itemAdapter
+        itemAdapter.setOnItemClickListener(
+            object : ItemAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                    Toast.makeText(context, "Cliked on ${position.toString()}", Toast.LENGTH_SHORT).show()
+
+                }
+
+            }
+        )
+
         return binding.root
     }
 
