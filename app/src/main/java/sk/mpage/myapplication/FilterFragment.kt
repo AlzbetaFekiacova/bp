@@ -11,16 +11,16 @@ class FilterFragment : DialogFragment() {
     private val binding get() = _binding!!
     var values = arrayListOf(
         "Zberné miesta",
-        "Kontajner na sklo",
-        "Kontajner na plast",
-        "Kontajner na papier",
-        "Kontajner na zmesový odpad",
-        "Kontajner na elktro odpad",
-        "Kontajner na bio odpad",
-        "Kôš na zmesový odpad",
-        "Kôš na plast",
-        "Kôš na papier",
-        "Zber šatstva"
+        "Kontajner - Sklo",
+        "Kontajner - Plast",
+        "Kontajner - Papier",
+        "Kontajner - Zmesový odpad",
+        "Kontajner - Elktro odpad",
+        "Kontajner - Bio odpad",
+        "Kôš - Zmesový odpad",
+        "Kôš - Plast",
+        "Kôš - Papier",
+        "Zber - Šatstvo"
     )
 
     override fun onCreateView(
@@ -30,9 +30,6 @@ class FilterFragment : DialogFragment() {
     ): View {
         _binding = FragmentFilterBinding.inflate(inflater, container, false)
 
-        //listView = binding.listViewData
-        //adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_multiple_choice, values)
-        //listView.adapter = adapter
         binding.recyclerViewItems.layoutManager= LinearLayoutManager(context)
 
         val itemAdapter = ItemAdapter(requireContext(), getItemList())
