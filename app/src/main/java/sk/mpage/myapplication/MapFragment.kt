@@ -64,6 +64,11 @@ class MapFragment : Fragment(), View.OnClickListener {
         mapView = binding.mapView
 
         binding.btnPosition.setOnClickListener(this)
+        binding.btnFilter.setOnClickListener {
+            Toast.makeText(context, "clicked on filter", Toast.LENGTH_SHORT).show()
+            val dialog = FilterFragment()
+            parentFragmentManager.let { dialog.show(it, "customDialog") }
+        }
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
         return binding.root
     }
