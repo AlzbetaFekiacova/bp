@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment">
+
+    <TextView
+        android:id="@+id/titleInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/userInfo"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+<!--
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleInfo"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="25dp"
+        android:text="@string/name" />
+
+    <EditText
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleInfo"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/email"
+        android:minHeight="48dp"
+        android:text="@string/name" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meno"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/email"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_toEndOf="@+id/name"
+        android:minHeight="48dp"
+        android:text="Meno" />
+    -->
+    <Button
+        android:id="@+id/btn_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleInfo"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:text="Pridať meno" />
+
+    <Button
+        android:id="@+id/button_change_passwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_name"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:text="Zmeniť heslo" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="146dp"
+        android:layout_height="169dp"
+        android:layout_below="@+id/button_passwd"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="25dp"
+        android:contentDescription="@string/img_desc_application_icon"
+        android:src="@drawable/ic_trash_310219"
+        app:tint="@color/mild_green" />
+
+    <Button
+        android:id="@+id/button_log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView2"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="Odhlásiť sa" />
+
+    <Button
+        android:id="@+id/button_delete_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView2"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_toEndOf="@id/button_log_out"
+        android:text="Zmazať účet" />
+
+
+</RelativeLayout>

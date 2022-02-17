@@ -30,6 +30,7 @@
     <string name="no">Nie</string>
     <string name="yes">Áno</string>
     <string name="log_out">Odhlásiť sa</string>
+    <string name="userInfo">Informácie o užívateľovi</string>
 
 
 </resources>

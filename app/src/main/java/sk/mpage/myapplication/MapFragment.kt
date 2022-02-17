@@ -193,12 +193,12 @@ class MapFragment : Fragment(), View.OnClickListener {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        val logOutItem = menu.findItem(R.id.logOut)
+        //val logOutItem = menu.findItem(R.id.logOut)
         val registerItem = menu.findItem(R.id.itemRegister)
         val logInItem = menu.findItem(R.id.itemLogIn)
         registerItem.isVisible = !checkIfLoggedIn()
         logInItem.isVisible = !checkIfLoggedIn()
-        logOutItem.isVisible = checkIfLoggedIn()
+        //logOutItem.isVisible = checkIfLoggedIn()
     }
 
 
@@ -209,8 +209,12 @@ class MapFragment : Fragment(), View.OnClickListener {
 
             R.id.logOut -> {
                 if (checkIfLoggedIn()) {
-                    Firebase.auth.signOut()
-                    Toast.makeText(context, "Bol si úspešne odhlásený", Toast.LENGTH_SHORT).show()
+                    //Firebase.auth.signOut()
+                    //Toast.makeText(context, "Bol si úspešne odhlásený", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.profileFragment)
+                }
+                else{
+                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
                 }
             }
 

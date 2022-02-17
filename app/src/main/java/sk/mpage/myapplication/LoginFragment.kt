@@ -1,5 +1,6 @@
 package sk.mpage.myapplication
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
+    private var numberOfLogs = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -30,6 +32,18 @@ class LoginFragment : Fragment(), View.OnClickListener {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.btnLogIn.setOnClickListener(this)
         auth = Firebase.auth
+
+        binding.btnForgottenPassword.setOnClickListener{
+            val emailAddress = binding.editTxtEmailLogIn.text.toString().trim { it <= ' ' }
+
+            Firebase.auth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener { task ->
+                    Toast.makeText(context, "Zaslany reset hesla na Váš email.", Toast.LENGTH_SHORT).show();
+                    binding.btnForgottenPassword.visibility = View.INVISIBLE
+                    binding.btnLogIn.visibility = View.VISIBLE
+                }
+        }
+
         return binding.root
     }
 
@@ -58,6 +72,12 @@ class LoginFragment : Fragment(), View.OnClickListener {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(context, task.exception.toString(), Toast.LENGTH_LONG)
                                 .show()
+                            numberOfLogs++
+                            if (numberOfLogs >= 3) {
+                                numberOfLogs = 0
+                                binding.btnLogIn.visibility = View.INVISIBLE
+                                binding.btnForgottenPassword.visibility = View.VISIBLE
+                            }
                         }
                     }
 

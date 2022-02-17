@@ -6,8 +6,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3f3f1e433ae330dc692c3723f5d1de46/transformed/common-0.5.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/025ce441238859f66dcae5617226c615/transformed/common-0.5.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d07f4a59aac9c755b4c844fbf1e10d57/transformed/common-0.5.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d07f4a59aac9c755b4c844fbf1e10d57/transformed/common-0.5.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d07f4a59aac9c755b4c844fbf1e10d57/transformed/common-0.5.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/424a1247b8f33f72eb17683b7f31e3a2/transformed/common-0.5.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/424a1247b8f33f72eb17683b7f31e3a2/transformed/common-0.5.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/424a1247b8f33f72eb17683b7f31e3a2/transformed/common-0.5.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.base/common/0.5.0/926fe12c03fc6e6fe57037966e7f535454348399/common-0.5.0-javadoc.jar!/" />

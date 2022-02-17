@@ -5,6 +5,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/mapFragment">
 
+    <action
+        android:id="@+id/action_mapFragment_to_registrationFragment"
+        app:destination="@id/registrationFragment" />
     <fragment
         android:id="@+id/mapFragment"
         android:name="sk.mpage.myapplication.MapFragment"
@@ -16,6 +19,9 @@
         <action
             android:id="@+id/action_mapFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -27,4 +33,9 @@
         android:name="sk.mpage.myapplication.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="sk.mpage.myapplication.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
