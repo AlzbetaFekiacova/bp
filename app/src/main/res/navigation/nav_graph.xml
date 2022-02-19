@@ -10,7 +10,7 @@
         app:destination="@id/registrationFragment" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="sk.mpage.myapplication.MapFragment"
+        android:name="sk.mpage.myapplication.fragments.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
         <action
@@ -25,17 +25,17 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="sk.mpage.myapplication.RegistrationFragment"
+        android:name="sk.mpage.myapplication.fragments.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="sk.mpage.myapplication.LoginFragment"
+        android:name="sk.mpage.myapplication.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="sk.mpage.myapplication.ProfileFragment"
+        android:name="sk.mpage.myapplication.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

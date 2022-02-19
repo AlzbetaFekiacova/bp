@@ -2,8 +2,8 @@
   <library name="Gradle: com.mapbox.plugin:maps-attribution:10.1.0@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6a53cc7ed06c18bcd2dc7dca5f842933/transformed/maps-attribution-10.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6a53cc7ed06c18bcd2dc7dca5f842933/transformed/maps-attribution-10.1.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6a53cc7ed06c18bcd2dc7dca5f842933/transformed/maps-attribution-10.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6a53cc7ed06c18bcd2dc7dca5f842933/transformed/maps-attribution-10.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-attribution/10.1.0/d366f57d0f84f63d3b9fb69d7bf9e4869bffe306/maps-attribution-10.1.0-javadoc.jar!/" />

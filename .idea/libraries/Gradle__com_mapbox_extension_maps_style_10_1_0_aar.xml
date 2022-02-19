@@ -1,11 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.extension:maps-style:10.1.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f418afca73815ad3fe9d5a7e44c6261c/transformed/maps-style-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/03b8638028dcef33f06f4a93a344b549/transformed/maps-style-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b2f6a2a0883b395939df26ea559b6e0c/transformed/maps-style-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/249b3cba345dac01ce5bafe02bfb9f9a/transformed/maps-style-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/01efa3cca82df7fefecdc274598b493a/transformed/maps-style-10.1.0/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5297c411b2fd11c7fbf082b62d178856/transformed/maps-style-10.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5297c411b2fd11c7fbf082b62d178856/transformed/maps-style-10.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5297c411b2fd11c7fbf082b62d178856/transformed/maps-style-10.1.0/AndroidManifest.xml" />
