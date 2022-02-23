@@ -20,12 +20,12 @@ class LogOrRegDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLogOrRegBinding.inflate(inflater, container, false)
-        binding.dialogButtonLogIn.setOnClickListener {
+        binding.buttonLogIn.setOnClickListener {
             dismiss()
             findNavController().navigate(R.id.loginFragment)
         }
 
-        binding.dialogButtonRegister.setOnClickListener {
+        binding.buttonRegister.setOnClickListener {
             dismiss()
             findNavController().navigate(R.id.registrationFragment)
         }

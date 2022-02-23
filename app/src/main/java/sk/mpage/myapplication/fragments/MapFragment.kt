@@ -35,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.mapbox.maps.Style
 import com.mapbox.maps.plugin.animation.MapAnimationOptions.Companion.mapAnimationOptions
 import com.mapbox.maps.plugin.animation.flyTo
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
 import sk.mpage.myapplication.Place
 import sk.mpage.myapplication.R
 
@@ -50,14 +51,13 @@ class MapFragment : Fragment(), View.OnClickListener {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var auth: FirebaseAuth
     private var backUpPlaces = arrayListOf<Place>()
+    private lateinit var pointAnnotationManager: PointAnnotationManager
+    private var currentPosition = Point.fromLngLat(19.134915813306613, 48.63859747331707)
+    private var addingContent = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
-        // Initialize Firebase Auth
-        auth = Firebase.auth
-        readDatabase()
     }
 
 
@@ -66,8 +66,52 @@ class MapFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
+        //super.onCreate(savedInstanceState)
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+        //readDatabase()
+
+
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         mapView = binding.mapView
+
+        //val annotationApi = mapView.annotations
+        //pointAnnotationManager = annotationApi.createPointAnnotationManager(mapView)
+
+
+        binding.btnDone.setOnClickListener {
+
+            pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].isDraggable =
+                false
+            val bin = hashMapOf(
+                "latitude" to pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
+                "longitude" to pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude(),
+                "content" to 0,
+                "isActive" to true
+            )
+
+            val db = FirebaseFirestore.getInstance()
+
+            db.collection("trash_bins").add(bin)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        context,
+                        "Uspesne pridane",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
+
+
+                .addOnFailureListener {
+                    Toast.makeText(context, "Neprebehlo pridanie", Toast.LENGTH_SHORT).show()
+                }
+
+            binding.btnDone.visibility = View.INVISIBLE
+            addingContent = false
+
+        }
 
         binding.btnPosition.setOnClickListener(this)
         binding.btnFilter.setOnClickListener {
@@ -75,24 +119,11 @@ class MapFragment : Fragment(), View.OnClickListener {
             val dialog = FilterFragment()
             parentFragmentManager.let { dialog.show(it, "customDialog") }
         }
+
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
 
-        //readDatabase()
 
-        mapView.getMapboxMap().loadStyleUri(
-            Style.MAPBOX_STREETS,
-            object : Style.OnStyleLoaded {
-                override fun onStyleLoaded(style: Style) {
-                    for(p in backUpPlaces){
-                        addAnnotationToMap(Point.fromLngLat(p.longitude, p.latitude),R.drawable.marker)
-
-                    }
-                    //addAnnotationToMap()
-                }
-            }
-
-        )
         return binding.root
     }
 
@@ -142,9 +173,9 @@ class MapFragment : Fragment(), View.OnClickListener {
         task.addOnSuccessListener {
             if (it != null) {
                 Toast.makeText(context, "Lokalizovné", Toast.LENGTH_SHORT).show()
-                val point = Point.fromLngLat(it.longitude, it.latitude)
+                currentPosition = Point.fromLngLat(it.longitude, it.latitude)
                 val initialCameraOptions = CameraOptions.Builder()
-                    .center(point)
+                    .center(currentPosition)
                     .zoom(15.5)
                     .build()
 
@@ -154,7 +185,7 @@ class MapFragment : Fragment(), View.OnClickListener {
                         duration(5000)
                     }
                 )
-                addAnnotationToMap(point,R.drawable.red_marker )
+                addAnnotationToMap(currentPosition, R.drawable.marker_current_position, false)
 
             } else {
                 Toast.makeText(context, "Nepodarilo sa lokalizovať", Toast.LENGTH_SHORT).show()
@@ -162,15 +193,16 @@ class MapFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun addAnnotationToMap(point: Point, marker: Int ) {
+    private fun addAnnotationToMap(point: Point, marker: Int, draggable: Boolean) {
 // Create an instance of the Annotation API and get the PointAnnotationManager.
         bitmapFromDrawableRes(
             requireContext(),
             //R.drawable.red_marker
-        marker
+            marker
         )?.let {
             val annotationApi = mapView.annotations
-            val pointAnnotationManager = annotationApi.createPointAnnotationManager(mapView)
+            //val pointAnnotationManager = annotationApi.createPointAnnotationManager(mapView)
+            pointAnnotationManager = annotationApi.createPointAnnotationManager(mapView)
 // Set options for the resulting symbol layer.
             val pointAnnotationOptions: PointAnnotationOptions = PointAnnotationOptions()
 // Define a geographic coordinate.
@@ -179,9 +211,14 @@ class MapFragment : Fragment(), View.OnClickListener {
 // The bitmap will be added to map style automatically.
                 .withIconImage(it)
 // Add the resulting pointAnnotation to the map.
+                .withDraggable(draggable)
+
             pointAnnotationManager.create(pointAnnotationOptions)
+
         }
+
     }
+
 
     private fun bitmapFromDrawableRes(context: Context, @DrawableRes resourceId: Int) =
         convertDrawableToBitmap(AppCompatResources.getDrawable(context, resourceId))
@@ -219,24 +256,20 @@ class MapFragment : Fragment(), View.OnClickListener {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        //val logOutItem = menu.findItem(R.id.logOut)
         val registerItem = menu.findItem(R.id.itemRegister)
         val logInItem = menu.findItem(R.id.itemLogIn)
         registerItem.isVisible = !checkIfLoggedIn()
         logInItem.isVisible = !checkIfLoggedIn()
-        //logOutItem.isVisible = checkIfLoggedIn()
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val logOrRegDialogFragment = LogOrRegDialogFragment()
-        val addingDialogFragment = AddingDialogFragment()
+        //val addingDialogFragment = AddingDialogFragment(2)
         when (item.itemId) {
 
-            R.id.logOut -> {
+            R.id.itemProfile -> {
                 if (checkIfLoggedIn()) {
-                    //Firebase.auth.signOut()
-                    //Toast.makeText(context, "Bol si úspešne odhlásený", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.profileFragment)
                 } else {
                     parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
@@ -246,21 +279,44 @@ class MapFragment : Fragment(), View.OnClickListener {
             R.id.itemClothes -> {
                 if (!checkIfLoggedIn())
                     parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
-                else
-                    parentFragmentManager.let { addingDialogFragment.show(it, "customDialog") }
+                else if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    parentFragmentManager.let {
+                        addingContent = true
+
+                        parentFragmentManager.let {
+                            addItem(3, 0)
+                        }
+                    }
+                    //addingDialogFragment.show(it, "customDialog") }
+                }
             }
             R.id.itemBackingUp -> {
                 if (!checkIfLoggedIn())
                     parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                else if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    parentFragmentManager.let {
+                        addingContent = true
+                        addItem(4, 0)
+                        //AddingDialogFragment(4).show(it, "customDialog")
+                    }
+                }
             }
+
             R.id.itemLogIn -> {
                 findNavController().navigate(R.id.loginFragment)
-                /*var text = StringBuilder()
-                for (p in backUpPlaces){
-                    text.append("latitude: " + p.latitude + " longtitude" + p.longitude)
-                }
-
-                Toast.makeText(context, text, Toast.LENGTH_LONG).show()*/
             }
             R.id.itemRegister -> {
                 findNavController().navigate(R.id.registrationFragment)
@@ -274,22 +330,252 @@ class MapFragment : Fragment(), View.OnClickListener {
             R.id.itemBin -> {
                 if (!checkIfLoggedIn())
                     parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
-                else
-                    parentFragmentManager.let { addingDialogFragment.show(it, "customDialog") }
+                else if (!addingContent) {
+                    parentFragmentManager.let {
+                        //addingDialogFragment.show(it, "customDialog")
+                        //AddingDialogFragment(2).show(it, "customDialog")
+                    }
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
             }
+            R.id.subItemMixBin -> {
+                if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    addingContent = true
+
+                    parentFragmentManager.let {
+                        addItem(2, 1)
+                    }
+                }
+            }
+            R.id.subItemPaperBin -> {
+                if (addingContent)
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                else {
+                    addingContent = true
+                    parentFragmentManager.let {
+                        addItem(2, 2)
+                    }
+                }
+            }
+            R.id.subItemPlasticBin -> {
+                if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    addingContent = true
+
+                    parentFragmentManager.let {
+                        addItem(2, 3)
+                    }
+                }
+            }
+
             R.id.itemContainer -> {
                 if (!checkIfLoggedIn())
                     parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
-                else
-                    parentFragmentManager.let { addingDialogFragment.show(it, "customDialog") }
-            }
-            else -> {
-                Toast.makeText(context, "Clicked on antoher item", Toast.LENGTH_LONG).show()
+                else if (!addingContent) {
+                    parentFragmentManager.let {
+                        //addingDialogFragment.show(it, "customDialog")
+                        //AddingDialogFragment(2).show(it, "customDialog")
+                    }
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
             }
 
+            R.id.subItemMixContainer -> {
+
+                if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    addingContent = true
+
+                    parentFragmentManager.let {
+                        addItem(5, 1)
+                    }
+                }
+            }
+            R.id.subItemPaperContainer -> {
+
+                if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    addingContent = true
+
+                    parentFragmentManager.let {
+                        addItem(5, 2)
+                    }
+                }
+            }
+            R.id.subItemPlasticContainer -> {
+
+                if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    addingContent = true
+
+                    parentFragmentManager.let {
+                        addItem(5, 3)
+                    }
+                }
+            }
+            R.id.subItemElectronicsContainer -> {
+
+                if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    addingContent = true
+
+                    parentFragmentManager.let {
+                        addItem(5, 4)
+                    }
+                }
+            }
+            R.id.subItemBioContainer -> {
+
+                if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    addingContent = true
+
+                    parentFragmentManager.let {
+                        addItem(5, 5)
+                    }
+                }
+            }
+            R.id.subItemGlassContainer -> {
+
+                if (addingContent) {
+                    Toast.makeText(
+                        context,
+                        "Pre pridanie musis najprv potvrdit pridanie posledneho kosa",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    addingContent = true
+
+                    parentFragmentManager.let {
+                        addItem(5, 6)
+                    }
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun addItem(container: Int, content: Int) {
+        val position = Point.fromLngLat(
+            currentPosition.longitude() - 0.001,
+            currentPosition.latitude() + 0.001
+        )
+        if (container == 2) {
+            when (content) {
+                1 -> {
+                    addAnnotationToMap(position, R.drawable.marker_bin_comunal, true)
+                }
+                2 -> {
+                    addAnnotationToMap(position, R.drawable.marker_bin_paper, true)
+                }
+                3 -> {
+                    addAnnotationToMap(position, R.drawable.marker_bin_plastic, true)
+                }
+            }
+        } else if (container == 3) {
+            addAnnotationToMap(position, R.drawable.marker_collecting_clothes, true)
+        } else if (container == 4) {
+            addAnnotationToMap(position, R.drawable.marker_back_up, true)
+        } else {
+            when (content) {
+                1 -> {
+                    addAnnotationToMap(position, R.drawable.marker_container_comunal, true)
+                }
+                2 -> {
+                    addAnnotationToMap(position, R.drawable.marker_container_paper, true)
+                }
+                3 -> {
+                    addAnnotationToMap(position, R.drawable.marker_container_plastic, true)
+                }
+                4->{
+                    addAnnotationToMap(position, R.drawable.marker_container_electro, true)
+                }
+                5->{
+                    addAnnotationToMap(position, R.drawable.marker_container_bio, true)
+                }
+                6->{
+                    addAnnotationToMap(position, R.drawable.marker_container_glass, true)
+                }
+            }
+        }
+        val cameraOptions = CameraOptions.Builder()
+            .center(position)
+            .zoom(15.5)
+            .build()
+
+        mapView.getMapboxMap().flyTo(
+            cameraOptions,
+            mapAnimationOptions {
+                duration(3000)
+            }
+        )
+
+
+
+        binding.btnDone.visibility = View.VISIBLE
+
+
     }
 
     private fun checkIfLoggedIn(): Boolean {
@@ -299,44 +585,38 @@ class MapFragment : Fragment(), View.OnClickListener {
 
     private fun readDatabase() {
         val db = FirebaseFirestore.getInstance()
-        db.collection("backUp")
+        //db.collection("sample_collection")
+        db.collection("trash_containers")
+            //db.collection("backUp")
             .get()
             .addOnSuccessListener { result ->
-                for (document in result) {
+                result.forEach { document ->
                     Log.d("DATA", "${document.id} => ${document.data}")
+                    //Log.d("VLASTNE", document.getDouble("latitude").toString())
                     var p = Place(
+                        document.getDouble("latitude")!!,
+                        document.getDouble("longitude")!!
+                    )
+                    /*var p = Place(
                         document.getGeoPoint("coordinates")!!.latitude,
                         document.getGeoPoint("coordinates")!!.longitude
-                    )
+
+                        //   document.getDouble("latitude")!!,
+                        //  document.getDouble("longitude")!!
+                    )*/
+                    //Log.d("LATITUDE", document.getString("latitude")!!)
                     backUpPlaces.add(p)
-                    //addAnnotationToMap(Point.fromLngLat(p.longitude, p.latitude),R.drawable.marker)
+
+                    addAnnotationToMap(
+                        Point.fromLngLat(p.longitude, p.latitude),
+                        R.drawable.marker_back_up,
+                        false
+                    )
                 }
             }
             .addOnFailureListener { exception ->
                 Log.d("DATA", "Error getting documents: ", exception)
             }
-
-        /*for (p in backUpPlaces){
-            addAnnotationToMap(Point.fromLngLat(p.longitude, p.latitude))
-        }*/
     }
-/*
-    private fun addInitMarker(){
-        val symbolLayers = ArrayList<Feature>()
-        for(p in backUpPlaces){
-            symbolLayers.add(Feature.fromGeometry(Point.fromLngLat(p.longitude, p.latitude)))
-        }
-        mapView.getMapboxMap().loadStyle(
-            Style.Builder().fromUri(Style.MAPBOX_STREETS)
-                .withImage(ICON_ID, BitmapUtils
-                    .getBitmapFromDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.mapbox_marker_icon_default))!!)
-                .withSource(GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(symbolLayers)))
-                .withLayer(SymbolLayer(LAYER_ID, SOURCE_ID)
-                    .withProperties(iconImage(ICON_ID), iconSize(1.0f), iconAllowOverlap(true), iconIgnorePlacement(true)))
-        )
-        {
-            //Here is style loaded
-        }
-    }*/
 }
 

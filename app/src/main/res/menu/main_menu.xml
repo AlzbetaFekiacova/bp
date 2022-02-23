@@ -1,78 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:icon="@drawable/ic_baseline_person_24"
-        app:showAsAction="ifRoom"
+    <item
+        android:id="@+id/itemProfile"
+        android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/log_out"
-        android:id="@+id/logOut"
-        />
-
-    <item android:id="@+id/itemBin"
-        android:title="@string/addBin"
-        android:icon="@drawable/ic_trash_can_black">
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/itemBin"
+        android:icon="@drawable/ic_trash_can_black"
+        android:title="@string/addBin">
         <menu>
-            <item android:id="@+id/subItemPlasticBin"
-                android:title="@string/forPlastic"
-                android:icon="@drawable/ic_trash_bin_yellow"/>
-            <item android:id="@+id/subItemPaperBin"
-                android:title="@string/forPaper"
-                android:icon="@drawable/ic_trash_bin_blue"/>
-            <item android:id="@+id/subItemMixBin"
-                android:title="@string/forMix"
-                android:icon="@drawable/ic_trash_can_black"/>
+            <item
+                android:id="@+id/subItemPlasticBin"
+                android:icon="@drawable/ic_trash_bin_yellow"
+                android:title="@string/forPlastic" />
+            <item
+                android:id="@+id/subItemPaperBin"
+                android:icon="@drawable/ic_trash_bin_blue"
+                android:title="@string/forPaper" />
+            <item
+                android:id="@+id/subItemMixBin"
+                android:icon="@drawable/ic_trash_can_black"
+                android:title="@string/forMix" />
         </menu>
     </item>
 
-    <item android:id="@+id/itemContainer"
-        android:title="@string/addContainer"
-        android:icon="@drawable/ic_trash_container_black">
+    <item
+        android:id="@+id/itemContainer"
+        android:icon="@drawable/ic_trash_container_black"
+        android:title="@string/addContainer">
         <menu>
-            <item android:id="@+id/subItemPlasticContainer"
-                android:title="@string/forPlastic"
-                android:icon="@drawable/ic_trash_container_yellow"/>
-            <item android:id="@+id/subItemPaperContainer"
-                android:title="@string/forPaper"
-                android:icon="@drawable/ic_trash_container_blue"/>
-            <item android:id="@+id/subItemGlassContainer"
-                android:title="@string/forGlass"
-                android:icon="@drawable/ic_trash_container_green"/>
-            <item android:id="@+id/subItemBioContainer"
-                android:title="@string/forBio"
-                android:icon="@drawable/ic_trash_container_brown"/>
-            <item android:id="@+id/subItemElectronicsContainer"
-                android:title="@string/forElectronics"
-                android:icon="@drawable/ic_trash_container_red"/>
-            <item android:id="@+id/subItemMixContainer"
-                android:title="@string/forMix"
-                android:icon="@drawable/ic_trash_container_black"/>
+            <item
+                android:id="@+id/subItemPlasticContainer"
+                android:icon="@drawable/ic_trash_container_yellow"
+                android:title="@string/forPlastic" />
+            <item
+                android:id="@+id/subItemPaperContainer"
+                android:icon="@drawable/ic_trash_container_blue"
+                android:title="@string/forPaper" />
+            <item
+                android:id="@+id/subItemGlassContainer"
+                android:icon="@drawable/ic_trash_container_green"
+                android:title="@string/forGlass" />
+            <item
+                android:id="@+id/subItemBioContainer"
+                android:icon="@drawable/ic_trash_container_brown"
+                android:title="@string/forBio" />
+            <item
+                android:id="@+id/subItemElectronicsContainer"
+                android:icon="@drawable/ic_trash_container_red"
+                android:title="@string/forElectronics" />
+            <item
+                android:id="@+id/subItemMixContainer"
+                android:icon="@drawable/ic_trash_container_black"
+                android:title="@string/forMix" />
         </menu>
     </item>
 
     <item
         android:id="@+id/itemClothes"
-        android:title="@string/addClothesCollect"
-        android:icon="@drawable/ic_baseline_checkroom_24" />
+        android:icon="@drawable/ic_baseline_checkroom_24"
+        android:title="@string/addClothesCollect" />
 
 
-    <item android:id="@+id/itemBackingUp"
-        android:title="@string/addCollectingSite"
+    <item
+        android:id="@+id/itemBackingUp"
         android:icon="@drawable/ic_cans_or_bottles"
-/>
+        android:title="@string/addCollectingSite" />
 
-    <item android:id="@+id/itemLogIn"
-        android:title="@string/logIn"
-        android:icon="@drawable/ic_baseline_login_24"/>
-    <item android:id="@+id/itemRegister"
-        android:title="@string/register"
-        android:icon="@drawable/ic_baseline_app_registration_24"/>
-    <item android:id="@+id/itemAppInfo"
-        android:title="@string/appInfo"
-        android:icon="@drawable/ic_baseline_info_24"/>
-    <item android:id="@+id/itemRecycleInfo"
-        android:title="@string/recycleInfo"
-        android:icon="@drawable/ic_baseline_how_to_vote_24"/>
+    <item
+        android:id="@+id/itemLogIn"
+        android:icon="@drawable/ic_baseline_login_24"
+        android:title="@string/logIn" />
+    <item
+        android:id="@+id/itemRegister"
+        android:icon="@drawable/ic_baseline_app_registration_24"
+        android:title="@string/register" />
+    <item
+        android:id="@+id/itemAppInfo"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/appInfo" />
+    <item
+        android:id="@+id/itemRecycleInfo"
+        android:icon="@drawable/ic_baseline_how_to_vote_24"
+        android:title="@string/recycleInfo" />
 
 
 </menu>
