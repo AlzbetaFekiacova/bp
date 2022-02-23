@@ -32,7 +32,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.mapbox.maps.Style
 import com.mapbox.maps.plugin.animation.MapAnimationOptions.Companion.mapAnimationOptions
 import com.mapbox.maps.plugin.animation.flyTo
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
@@ -54,31 +53,23 @@ class MapFragment : Fragment(), View.OnClickListener {
     private lateinit var pointAnnotationManager: PointAnnotationManager
     private var currentPosition = Point.fromLngLat(19.134915813306613, 48.63859747331707)
     private var addingContent = false
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
+    private lateinit var content: Number
+    private lateinit var databaseName: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setHasOptionsMenu(true)
         //super.onCreate(savedInstanceState)
         // Initialize Firebase Auth
         auth = Firebase.auth
-        //readDatabase()
+        readDatabase()
 
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         mapView = binding.mapView
-
-        //val annotationApi = mapView.annotations
-        //pointAnnotationManager = annotationApi.createPointAnnotationManager(mapView)
-
 
         binding.btnDone.setOnClickListener {
 
@@ -87,13 +78,13 @@ class MapFragment : Fragment(), View.OnClickListener {
             val bin = hashMapOf(
                 "latitude" to pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
                 "longitude" to pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude(),
-                "content" to 0,
+                "content" to content,
                 "isActive" to true
             )
 
             val db = FirebaseFirestore.getInstance()
 
-            db.collection("trash_bins").add(bin)
+            db.collection(databaseName).add(bin)
                 .addOnSuccessListener {
                     Toast.makeText(
                         context,
@@ -289,10 +280,9 @@ class MapFragment : Fragment(), View.OnClickListener {
                 } else {
                     parentFragmentManager.let {
                         addingContent = true
-
-                        parentFragmentManager.let {
-                            addItem(3, 0)
-                        }
+                        content = 0
+                        databaseName = "clothesCollecting"
+                        addItem(3, 0)
                     }
                     //addingDialogFragment.show(it, "customDialog") }
                 }
@@ -309,6 +299,8 @@ class MapFragment : Fragment(), View.OnClickListener {
                 } else {
                     parentFragmentManager.let {
                         addingContent = true
+                        content = 0
+                        databaseName = "backUp"
                         addItem(4, 0)
                         //AddingDialogFragment(4).show(it, "customDialog")
                     }
@@ -354,10 +346,9 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-
-                    parentFragmentManager.let {
-                        addItem(2, 1)
-                    }
+                    content = 1
+                    databaseName = "trashBins"
+                    addItem(2, 1)
                 }
             }
             R.id.subItemPaperBin -> {
@@ -369,9 +360,9 @@ class MapFragment : Fragment(), View.OnClickListener {
                     ).show()
                 else {
                     addingContent = true
-                    parentFragmentManager.let {
-                        addItem(2, 2)
-                    }
+                    content = 2
+                    databaseName = "trashBins"
+                    addItem(2, 2)
                 }
             }
             R.id.subItemPlasticBin -> {
@@ -384,10 +375,9 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-
-                    parentFragmentManager.let {
-                        addItem(2, 3)
-                    }
+                    databaseName = "trashBins"
+                    content = 3
+                    addItem(2, 3)
                 }
             }
 
@@ -420,10 +410,9 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-
-                    parentFragmentManager.let {
-                        addItem(5, 1)
-                    }
+                    databaseName = "trashContainers"
+                    content = 1
+                    addItem(5, 1)
                 }
             }
             R.id.subItemPaperContainer -> {
@@ -437,10 +426,9 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-
-                    parentFragmentManager.let {
-                        addItem(5, 2)
-                    }
+                    databaseName = "trashContainers"
+                    content = 2
+                    addItem(5, 2)
                 }
             }
             R.id.subItemPlasticContainer -> {
@@ -454,10 +442,9 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-
-                    parentFragmentManager.let {
-                        addItem(5, 3)
-                    }
+                    databaseName = "trashContainers"
+                    content = 3
+                    addItem(5, 3)
                 }
             }
             R.id.subItemElectronicsContainer -> {
@@ -471,10 +458,9 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-
-                    parentFragmentManager.let {
-                        addItem(5, 4)
-                    }
+                    databaseName = "trashContainers"
+                    content = 4
+                    addItem(5, 4)
                 }
             }
             R.id.subItemBioContainer -> {
@@ -488,10 +474,9 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-
-                    parentFragmentManager.let {
-                        addItem(5, 5)
-                    }
+                    databaseName = "trashContainers"
+                    content = 5
+                    addItem(5, 5)
                 }
             }
             R.id.subItemGlassContainer -> {
@@ -505,10 +490,9 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-
-                    parentFragmentManager.let {
-                        addItem(5, 6)
-                    }
+                    databaseName = "trashContainers"
+                    content = 6
+                    addItem(5, 6)
                 }
             }
         }
@@ -521,41 +505,46 @@ class MapFragment : Fragment(), View.OnClickListener {
             currentPosition.longitude() - 0.001,
             currentPosition.latitude() + 0.001
         )
-        if (container == 2) {
-            when (content) {
-                1 -> {
-                    addAnnotationToMap(position, R.drawable.marker_bin_comunal, true)
-                }
-                2 -> {
-                    addAnnotationToMap(position, R.drawable.marker_bin_paper, true)
-                }
-                3 -> {
-                    addAnnotationToMap(position, R.drawable.marker_bin_plastic, true)
+        when (container) {
+            2 -> {
+                when (content) {
+                    1 -> {
+                        addAnnotationToMap(position, R.drawable.marker_bin_comunal, true)
+                    }
+                    2 -> {
+                        addAnnotationToMap(position, R.drawable.marker_bin_paper, true)
+                    }
+                    3 -> {
+                        addAnnotationToMap(position, R.drawable.marker_bin_plastic, true)
+                    }
                 }
             }
-        } else if (container == 3) {
-            addAnnotationToMap(position, R.drawable.marker_collecting_clothes, true)
-        } else if (container == 4) {
-            addAnnotationToMap(position, R.drawable.marker_back_up, true)
-        } else {
-            when (content) {
-                1 -> {
-                    addAnnotationToMap(position, R.drawable.marker_container_comunal, true)
-                }
-                2 -> {
-                    addAnnotationToMap(position, R.drawable.marker_container_paper, true)
-                }
-                3 -> {
-                    addAnnotationToMap(position, R.drawable.marker_container_plastic, true)
-                }
-                4->{
-                    addAnnotationToMap(position, R.drawable.marker_container_electro, true)
-                }
-                5->{
-                    addAnnotationToMap(position, R.drawable.marker_container_bio, true)
-                }
-                6->{
-                    addAnnotationToMap(position, R.drawable.marker_container_glass, true)
+            3 -> {
+                addAnnotationToMap(position, R.drawable.marker_collecting_clothes, true)
+            }
+            4 -> {
+                addAnnotationToMap(position, R.drawable.marker_back_up, true)
+            }
+            else -> {
+                when (content) {
+                    1 -> {
+                        addAnnotationToMap(position, R.drawable.marker_container_comunal, true)
+                    }
+                    2 -> {
+                        addAnnotationToMap(position, R.drawable.marker_container_paper, true)
+                    }
+                    3 -> {
+                        addAnnotationToMap(position, R.drawable.marker_container_plastic, true)
+                    }
+                    4 -> {
+                        addAnnotationToMap(position, R.drawable.marker_container_electro, true)
+                    }
+                    5 -> {
+                        addAnnotationToMap(position, R.drawable.marker_container_bio, true)
+                    }
+                    6 -> {
+                        addAnnotationToMap(position, R.drawable.marker_container_glass, true)
+                    }
                 }
             }
         }
@@ -586,30 +575,22 @@ class MapFragment : Fragment(), View.OnClickListener {
     private fun readDatabase() {
         val db = FirebaseFirestore.getInstance()
         //db.collection("sample_collection")
-        db.collection("trash_containers")
-            //db.collection("backUp")
+        //db.collection("trash_containers")
+        //db.collection("backUp")
+        db.collection("olo_data")
             .get()
             .addOnSuccessListener { result ->
                 result.forEach { document ->
                     Log.d("DATA", "${document.id} => ${document.data}")
-                    //Log.d("VLASTNE", document.getDouble("latitude").toString())
-                    var p = Place(
+                    val p = Place(
                         document.getDouble("latitude")!!,
                         document.getDouble("longitude")!!
                     )
-                    /*var p = Place(
-                        document.getGeoPoint("coordinates")!!.latitude,
-                        document.getGeoPoint("coordinates")!!.longitude
-
-                        //   document.getDouble("latitude")!!,
-                        //  document.getDouble("longitude")!!
-                    )*/
-                    //Log.d("LATITUDE", document.getString("latitude")!!)
                     backUpPlaces.add(p)
 
                     addAnnotationToMap(
                         Point.fromLngLat(p.longitude, p.latitude),
-                        R.drawable.marker_back_up,
+                        R.drawable.marker_container_glass,
                         false
                     )
                 }
