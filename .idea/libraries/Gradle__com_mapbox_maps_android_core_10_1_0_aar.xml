@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.maps:android-core:10.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e98351a9e1f1079922f050c520a476c4/transformed/android-core-10.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e98351a9e1f1079922f050c520a476c4/transformed/android-core-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e98351a9e1f1079922f050c520a476c4/transformed/android-core-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/dea360f47bfea3eb593cf4280e4c0e7b/transformed/android-core-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/dea360f47bfea3eb593cf4280e4c0e7b/transformed/android-core-10.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/dea360f47bfea3eb593cf4280e4c0e7b/transformed/android-core-10.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.maps/android-core/10.1.0/c8f807d7499dc782aa85ef44d2882fe05f2ce931/android-core-10.1.0-javadoc.jar!/" />

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/dark_green">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#00000000">
+
+
+        <TextView
+            android:id="@+id/popup_window_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="Potvrdzuješ existenciu tohto miesta?"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.219" />
+
+        <Button
+            android:id="@+id/button_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/et_style"
+            android:text="@string/yes"
+            app:layout_constraintEnd_toEndOf="@+id/popup_window_text"
+            app:layout_constraintStart_toStartOf="@+id/popup_window_text"
+            app:layout_constraintTop_toBottomOf="@+id/popup_window_text" />
+
+        <Button
+            android:id="@+id/button_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/et_style"
+            android:text="@string/no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/button_yes"
+            app:layout_constraintStart_toStartOf="@+id/button_yes"
+            app:layout_constraintTop_toBottomOf="@+id/button_yes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

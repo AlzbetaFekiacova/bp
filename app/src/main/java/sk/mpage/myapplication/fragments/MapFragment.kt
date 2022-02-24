@@ -1,46 +1,49 @@
 package sk.mpage.myapplication.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
 import com.mapbox.maps.MapboxMap
-import com.mapbox.maps.plugin.annotation.annotations
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
-import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
-import sk.mpage.myapplication.databinding.FragmentMapBinding
-import android.annotation.SuppressLint
-import android.util.Log
-
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.mapbox.maps.plugin.animation.MapAnimationOptions.Companion.mapAnimationOptions
 import com.mapbox.maps.plugin.animation.flyTo
+import com.mapbox.maps.plugin.annotation.annotations
+import com.mapbox.maps.plugin.annotation.generated.OnPointAnnotationClickListener
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
+import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
+import com.mapbox.maps.plugin.gestures.OnMapLongClickListener
+import com.mapbox.maps.plugin.gestures.addOnMapLongClickListener
 import sk.mpage.myapplication.Place
 import sk.mpage.myapplication.R
+import sk.mpage.myapplication.databinding.FragmentMapBinding
 
 const val REQUEST_CODE = 101
 
-class MapFragment : Fragment(), View.OnClickListener {
+class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
@@ -51,7 +54,7 @@ class MapFragment : Fragment(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     private var backUpPlaces = arrayListOf<Place>()
     private lateinit var pointAnnotationManager: PointAnnotationManager
-    private var currentPosition = Point.fromLngLat(19.134915813306613, 48.63859747331707)
+    private var currentPosition = Point.fromLngLat(19.13491, 48.6385)
     private var addingContent = false
     private lateinit var content: Number
     private lateinit var databaseName: String
@@ -65,7 +68,7 @@ class MapFragment : Fragment(), View.OnClickListener {
         //super.onCreate(savedInstanceState)
         // Initialize Firebase Auth
         auth = Firebase.auth
-        readDatabase()
+        //readDatabase()
 
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -131,6 +134,7 @@ class MapFragment : Fragment(), View.OnClickListener {
         if (::onMapReady.isInitialized) {
             onMapReady.invoke(mapboxMap)
         }
+        mapboxMap.addOnMapLongClickListener(this)
 
 
     }
@@ -204,12 +208,44 @@ class MapFragment : Fragment(), View.OnClickListener {
 // Add the resulting pointAnnotation to the map.
                 .withDraggable(draggable)
 
-            pointAnnotationManager.create(pointAnnotationOptions)
 
+            pointAnnotationManager.create(pointAnnotationOptions)
+            if (marker != R.drawable.marker_current_position) {
+                pointAnnotationManager.addClickListener(OnPointAnnotationClickListener {
+                    if (currentPosition.latitude() != 48.6385 && currentPosition.longitude() != 19.13491) {
+
+                        if (getDistance(
+                                currentPosition.latitude(),
+                                currentPosition.longitude(),
+                                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size-1].point.latitude(),
+                                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size-1].point.longitude()
+                            ) < 200
+                        ) {
+
+                            val confirmationFragment = PositionConfirmationFragment()
+                            confirmationFragment.show(parentFragmentManager, "customDialog")
+
+
+                        }
+                    }
+                    true
+                })
+            }
         }
 
     }
 
+    private fun getDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float {
+        val loc1 = Location("")
+        loc1.latitude = lat1
+        loc1.longitude = lng1
+        val loc2 = Location("")
+        loc2.latitude = lat2
+        loc2.longitude = lng2
+        Log.d("VZD", "" + loc1.distanceTo(loc2))
+        return loc1.distanceTo(loc2)
+
+    }
 
     private fun bitmapFromDrawableRes(context: Context, @DrawableRes resourceId: Int) =
         convertDrawableToBitmap(AppCompatResources.getDrawable(context, resourceId))
@@ -599,5 +635,11 @@ class MapFragment : Fragment(), View.OnClickListener {
                 Log.d("DATA", "Error getting documents: ", exception)
             }
     }
+
+    override fun onMapLongClick(point: Point): Boolean {
+        Log.d("KLICK", "kliknutie na mapu")
+        return false
+    }
+
 }
 

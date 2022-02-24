@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.annotation:annotation-experimental:1.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d73d579250f73d138432b46c2c0e0a55/transformed/annotation-experimental-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d73d579250f73d138432b46c2c0e0a55/transformed/annotation-experimental-1.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d73d579250f73d138432b46c2c0e0a55/transformed/annotation-experimental-1.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ef917f97bafc1340de4cde52ace0bb96/transformed/annotation-experimental-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ef917f97bafc1340de4cde52ace0bb96/transformed/annotation-experimental-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ef917f97bafc1340de4cde52ace0bb96/transformed/annotation-experimental-1.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

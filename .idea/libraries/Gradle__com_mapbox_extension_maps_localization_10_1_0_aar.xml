@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.extension:maps-localization:10.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6132d45a63fc2efb3403aa683042c8cd/transformed/maps-localization-10.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6132d45a63fc2efb3403aa683042c8cd/transformed/maps-localization-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6132d45a63fc2efb3403aa683042c8cd/transformed/maps-localization-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/de8ce3f41edd3781116285992e1b64aa/transformed/maps-localization-10.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/de8ce3f41edd3781116285992e1b64aa/transformed/maps-localization-10.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/de8ce3f41edd3781116285992e1b64aa/transformed/maps-localization-10.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.extension/maps-localization/10.1.0/8b58d1e451ebb2adca23ff839c0db864a8b86e42/maps-localization-10.1.0-javadoc.jar!/" />

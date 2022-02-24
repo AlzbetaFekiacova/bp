@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.extension:maps-style:10.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5297c411b2fd11c7fbf082b62d178856/transformed/maps-style-10.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5297c411b2fd11c7fbf082b62d178856/transformed/maps-style-10.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5297c411b2fd11c7fbf082b62d178856/transformed/maps-style-10.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f7c6656811b42c6a889e7cb10cc720ca/transformed/maps-style-10.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f7c6656811b42c6a889e7cb10cc720ca/transformed/maps-style-10.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f7c6656811b42c6a889e7cb10cc720ca/transformed/maps-style-10.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.extension/maps-style/10.1.0/f64947dd55c4ad92d37eb842ebf5cd4a4703b74b/maps-style-10.1.0-javadoc.jar!/" />
