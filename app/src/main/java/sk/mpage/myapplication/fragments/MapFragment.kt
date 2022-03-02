@@ -55,6 +55,17 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var auth: FirebaseAuth
     private var backUpPlaces = arrayListOf<Place>()
+    private var backUpMachines = arrayListOf<Container>()
+    private var containersPlastic = arrayListOf<Container>()
+    private var containersPaper = arrayListOf<Container>()
+    private var containersCommunal = arrayListOf<Container>()
+    private var containersBio = arrayListOf<Container>()
+    private var containersElectro = arrayListOf<Container>()
+    private var containersGlass = arrayListOf<Container>()
+    private var binsPlastic = arrayListOf<Container>()
+    private var binsPaper = arrayListOf<Container>()
+    private var binsCommunal = arrayListOf<Container>()
+    private var clothesCollecting = arrayListOf<Container>()
     private lateinit var pointAnnotationManager: PointAnnotationManager
     private var currentPosition = Point.fromLngLat(19.13491, 48.6385)
     private var addingContent = false
@@ -70,7 +81,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         //super.onCreate(savedInstanceState)
         // Initialize Firebase Auth
         auth = Firebase.auth
-        //readDatabase()
+        readDatabase()
 
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -657,12 +668,137 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         return currentUser != null
     }
 
+    private fun readCollection(
+        name: String,
+        db: FirebaseFirestore,
+        arrayToFill: ArrayList<Container>
+    ) {
+        db.collection(name)
+            .get()
+            .addOnSuccessListener { result ->
+                /*for (document in result) {
+                    Log.d("DOC", document.data.toString())
+                    val container = Container(
+                        document.getBoolean("isActive")!!, document.getDouble("latitude")!!,
+                        document.getDouble("longitude")!!
+                    )
+                    Log.d("CONTAINER", container.toString())
+                    arrayToFill.add(container)
+                }*/
+                arrayToFill.addAll(result.toObjects(Container::class.java))
+                Log.d("array", "LIST" + arrayToFill)
+                addMarkersFromArray(arrayToFill, name)
+            }
+            .addOnFailureListener { exception ->
+                Log.d("DATA", "Error getting documents: $name", exception)
+            }
+
+
+    }
+
+    private fun addMarkersFromArray(markers: ArrayList<Container>, name: String) {
+        for (container in markers) {
+            when (name) {
+                MyConstants.CONTAINER_GLASS -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_container_glass,
+                        false
+                    )
+                }
+                MyConstants.CONTAINER_PLASTIC -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_container_plastic,
+                        false
+                    )
+                }
+                MyConstants.CONTAINER_PAPER -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_container_paper,
+                        false
+                    )
+                }
+                MyConstants.CONTAINER_BIO -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_container_bio,
+                        false
+                    )
+                }
+                MyConstants.CONTAINER_COMMUNAL -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_container_comunal,
+                        false
+                    )
+                }
+                MyConstants.CONTAINER_ELECTRO -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_container_electro,
+                        false
+                    )
+                }
+                MyConstants.BIN_PLASTIC -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_bin_plastic,
+                        false
+                    )
+                }
+                MyConstants.BIN_PAPER -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_bin_paper,
+                        false
+                    )
+                }
+                MyConstants.BIN_COMMUNAL -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_bin_comunal,
+                        false
+                    )
+                }
+                MyConstants.CLOTHES_COLLECTING -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_collecting_clothes,
+                        false
+                    )
+                }
+                MyConstants.BACK_UP -> {
+                    addAnnotationToMap(
+                        Point.fromLngLat(container.longitude!!, container.latitude!!),
+                        R.drawable.marker_back_up,
+                        false
+                    )
+                }
+
+            }
+
+        }
+    }
+
     private fun readDatabase() {
         val db = FirebaseFirestore.getInstance()
+        readCollection(MyConstants.CLOTHES_COLLECTING, db, clothesCollecting)
+        readCollection(MyConstants.BACK_UP, db, backUpMachines)
+        readCollection(MyConstants.CONTAINER_BIO, db, containersBio)
+        readCollection(MyConstants.CONTAINER_COMMUNAL, db, containersCommunal)
+        readCollection(MyConstants.CONTAINER_PAPER, db, containersPaper)
+        readCollection(MyConstants.CONTAINER_PLASTIC, db, containersPlastic)
+        readCollection(MyConstants.CONTAINER_ELECTRO, db, containersElectro)
+        readCollection(MyConstants.CONTAINER_GLASS, db, containersGlass)
+        readCollection(MyConstants.BIN_COMMUNAL, db, binsCommunal)
+        readCollection(MyConstants.BIN_PAPER, db, binsPaper)
+        readCollection(MyConstants.BIN_PLASTIC, db, binsPlastic)
         //db.collection("sample_collection")
         //db.collection("trash_containers")
         //db.collection("backUp")
-        db.collection("olo_data")
+        /*db.collection("olo_data")
             .get()
             .addOnSuccessListener { result ->
                 result.forEach { document ->
@@ -682,7 +818,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
             }
             .addOnFailureListener { exception ->
                 Log.d("DATA", "Error getting documents: ", exception)
-            }
+            }*/
     }
 
     override fun onMapLongClick(point: Point): Boolean {

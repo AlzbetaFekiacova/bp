@@ -7,4 +7,6 @@ data class Container(
     val isActive: Boolean? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
- )
+ ) : Serializable{
+
+ }
