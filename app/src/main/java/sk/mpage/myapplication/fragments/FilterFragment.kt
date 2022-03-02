@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import sk.mpage.myapplication.adapters.ItemAdapter
 import sk.mpage.myapplication.databinding.FragmentFilterBinding
 
-class FilterFragment : DialogFragment() {
+class FilterFragment (var parameter:Number) : DialogFragment() {
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
     var values = arrayListOf(
@@ -39,6 +39,42 @@ class FilterFragment : DialogFragment() {
         itemAdapter.setOnItemClickListener(
             object : ItemAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
+                    when (position) {
+                        0 -> {
+
+
+                        }
+                        1 -> {
+
+                        }
+                        2 -> {
+
+                        }
+                        3 -> {
+
+                        }
+                        4 -> {
+
+                        }
+                        5 -> {
+
+                        }
+                        6 -> {
+
+                        }
+                        7 -> {
+
+                        }
+                        8 -> {
+
+                        }
+                        9 -> {
+
+                        }
+                        10 -> {
+
+                        }
+                    }
                     Toast.makeText(context, "Cliked on ${position.toString()}", Toast.LENGTH_SHORT).show()
 
                 }

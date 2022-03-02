@@ -37,6 +37,8 @@ import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import com.mapbox.maps.plugin.gestures.OnMapLongClickListener
 import com.mapbox.maps.plugin.gestures.addOnMapLongClickListener
+import sk.mpage.myapplication.Container
+import sk.mpage.myapplication.MyConstants
 import sk.mpage.myapplication.Place
 import sk.mpage.myapplication.R
 import sk.mpage.myapplication.databinding.FragmentMapBinding
@@ -78,16 +80,15 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
             pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].isDraggable =
                 false
-            val bin = hashMapOf(
-                "latitude" to pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
-                "longitude" to pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude(),
-                "content" to content,
-                "isActive" to true
+            val container = Container(
+                true,
+                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
+                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude()
             )
 
             val db = FirebaseFirestore.getInstance()
 
-            db.collection(databaseName).add(bin)
+            db.collection(databaseName).add(container)
                 .addOnSuccessListener {
                     Toast.makeText(
                         context,
@@ -109,8 +110,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
         binding.btnPosition.setOnClickListener(this)
         binding.btnFilter.setOnClickListener {
-            Toast.makeText(context, "clicked on filter", Toast.LENGTH_SHORT).show()
-            val dialog = FilterFragment()
+            val dialog = FilterFragment(1)
             parentFragmentManager.let { dialog.show(it, "customDialog") }
         }
 
@@ -211,14 +211,15 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
             pointAnnotationManager.create(pointAnnotationOptions)
             if (marker != R.drawable.marker_current_position) {
-                pointAnnotationManager.addClickListener(OnPointAnnotationClickListener {
+                pointAnnotationManager.addClickListener(OnPointAnnotationClickListener { it ->
+
                     if (currentPosition.latitude() != 48.6385 && currentPosition.longitude() != 19.13491) {
 
                         if (getDistance(
                                 currentPosition.latitude(),
                                 currentPosition.longitude(),
-                                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size-1].point.latitude(),
-                                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size-1].point.longitude()
+                                it.point.latitude(),
+                                it.point.longitude()
                             ) < 200
                         ) {
 
@@ -299,13 +300,23 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                 if (checkIfLoggedIn()) {
                     findNavController().navigate(R.id.profileFragment)
                 } else {
-                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                    parentFragmentManager.let {
+                        logOrRegDialogFragment.show(
+                            it,
+                            "customDialog"
+                        )
+                    }
                 }
             }
 
             R.id.itemClothes -> {
                 if (!checkIfLoggedIn())
-                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                    parentFragmentManager.let {
+                        logOrRegDialogFragment.show(
+                            it,
+                            "customDialog"
+                        )
+                    }
                 else if (addingContent) {
                     Toast.makeText(
                         context,
@@ -316,16 +327,25 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                 } else {
                     parentFragmentManager.let {
                         addingContent = true
-                        content = 0
-                        databaseName = "clothesCollecting"
-                        addItem(3, 0)
+                        //content = 0
+                        //databaseName = "clothesCollecting"
+                        //databaseName = MyConstants.CLOTHES_COLLECTING
+                        //addItem(3, 0)
+                        databaseName = MyConstants.CLOTHES_COLLECTING
+                        addItem(databaseName)
+
                     }
                     //addingDialogFragment.show(it, "customDialog") }
                 }
             }
             R.id.itemBackingUp -> {
                 if (!checkIfLoggedIn())
-                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                    parentFragmentManager.let {
+                        logOrRegDialogFragment.show(
+                            it,
+                            "customDialog"
+                        )
+                    }
                 else if (addingContent) {
                     Toast.makeText(
                         context,
@@ -336,8 +356,10 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                     parentFragmentManager.let {
                         addingContent = true
                         content = 0
-                        databaseName = "backUp"
-                        addItem(4, 0)
+                        //databaseName = "backUp"
+                        databaseName = MyConstants.BACK_UP
+                        addItem(databaseName)
+                        //addItem(4, 0)
                         //AddingDialogFragment(4).show(it, "customDialog")
                     }
                 }
@@ -357,7 +379,12 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
             }
             R.id.itemBin -> {
                 if (!checkIfLoggedIn())
-                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                    parentFragmentManager.let {
+                        logOrRegDialogFragment.show(
+                            it,
+                            "customDialog"
+                        )
+                    }
                 else if (!addingContent) {
                     parentFragmentManager.let {
                         //addingDialogFragment.show(it, "customDialog")
@@ -382,9 +409,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
                 } else {
                     addingContent = true
-                    content = 1
-                    databaseName = "trashBins"
-                    addItem(2, 1)
+                    databaseName = MyConstants.BIN_COMMUNAL
+                    addItem(databaseName)
+                    //content = 1
+                    //databaseName = "trashBins"
+                    //addItem(2, 1)
                 }
             }
             R.id.subItemPaperBin -> {
@@ -396,9 +425,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                     ).show()
                 else {
                     addingContent = true
-                    content = 2
-                    databaseName = "trashBins"
-                    addItem(2, 2)
+                    databaseName = MyConstants.BIN_PAPER
+                    addItem(databaseName)
+                    //content = 2
+                    //databaseName = "trashBins"
+                    //addItem(2, 2)
                 }
             }
             R.id.subItemPlasticBin -> {
@@ -411,15 +442,22 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
                 } else {
                     addingContent = true
-                    databaseName = "trashBins"
-                    content = 3
-                    addItem(2, 3)
+                    databaseName = MyConstants.BIN_PLASTIC
+                    addItem(databaseName)
+                    //databaseName = "trashBins"
+                    //content = 3
+                    //addItem(2, 3)
                 }
             }
 
             R.id.itemContainer -> {
                 if (!checkIfLoggedIn())
-                    parentFragmentManager.let { logOrRegDialogFragment.show(it, "customDialog") }
+                    parentFragmentManager.let {
+                        logOrRegDialogFragment.show(
+                            it,
+                            "customDialog"
+                        )
+                    }
                 else if (!addingContent) {
                     parentFragmentManager.let {
                         //addingDialogFragment.show(it, "customDialog")
@@ -446,9 +484,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
                 } else {
                     addingContent = true
-                    databaseName = "trashContainers"
-                    content = 1
-                    addItem(5, 1)
+                    databaseName = MyConstants.CONTAINER_COMMUNAL
+                    addItem(databaseName)
+                    //databaseName = "trashContainers"
+                    //content = 1
+                    //addItem(5, 1)
                 }
             }
             R.id.subItemPaperContainer -> {
@@ -462,9 +502,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
                 } else {
                     addingContent = true
-                    databaseName = "trashContainers"
-                    content = 2
-                    addItem(5, 2)
+                    databaseName = MyConstants.CONTAINER_PAPER
+                    addItem(databaseName)
+                    //databaseName = "trashContainers"
+                    //content = 2
+                    //addItem(5, 2)
                 }
             }
             R.id.subItemPlasticContainer -> {
@@ -478,9 +520,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
                 } else {
                     addingContent = true
-                    databaseName = "trashContainers"
-                    content = 3
-                    addItem(5, 3)
+                    //databaseName = "trashContainers"
+                    //content = 3
+                    //addItem(5, 3)
+                    databaseName = MyConstants.CONTAINER_PLASTIC
+                    addItem(databaseName)
                 }
             }
             R.id.subItemElectronicsContainer -> {
@@ -494,9 +538,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
                 } else {
                     addingContent = true
-                    databaseName = "trashContainers"
-                    content = 4
-                    addItem(5, 4)
+                    //databaseName = "trashContainers"
+                    //content = 4
+                    //addItem(5, 4)
+                    databaseName = MyConstants.CONTAINER_ELECTRO
+                    addItem(databaseName)
                 }
             }
             R.id.subItemBioContainer -> {
@@ -510,9 +556,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
                 } else {
                     addingContent = true
-                    databaseName = "trashContainers"
-                    content = 5
-                    addItem(5, 5)
+                    //databaseName = "trashContainers"
+                    //content = 5
+                    //addItem(5, 5)
+                    databaseName = MyConstants.CONTAINER_BIO
+                    addItem(databaseName)
                 }
             }
             R.id.subItemGlassContainer -> {
@@ -526,9 +574,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
                 } else {
                     addingContent = true
-                    databaseName = "trashContainers"
-                    content = 6
-                    addItem(5, 6)
+                    //databaseName = "trashContainers"
+                    //content = 6
+                    //addItem(5, 6)
+                    databaseName = MyConstants.CONTAINER_GLASS
+                    addItem(databaseName)
                 }
             }
         }
@@ -536,53 +586,52 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
     }
 
     @SuppressLint("MissingPermission")
-    private fun addItem(container: Int, content: Int) {
+    //private fun addItem(container: Int, content: Int) {
+    private fun addItem(item: String) {
         val position = Point.fromLngLat(
             currentPosition.longitude() - 0.001,
             currentPosition.latitude() + 0.001
         )
-        when (container) {
-            2 -> {
-                when (content) {
-                    1 -> {
-                        addAnnotationToMap(position, R.drawable.marker_bin_comunal, true)
-                    }
-                    2 -> {
-                        addAnnotationToMap(position, R.drawable.marker_bin_paper, true)
-                    }
-                    3 -> {
-                        addAnnotationToMap(position, R.drawable.marker_bin_plastic, true)
-                    }
-                }
+        when (item) {
+            MyConstants.CONTAINER_GLASS -> {
+                addAnnotationToMap(position, R.drawable.marker_container_glass, true)
             }
-            3 -> {
+            MyConstants.CONTAINER_ELECTRO -> {
+                addAnnotationToMap(position, R.drawable.marker_container_electro, true)
+            }
+            MyConstants.CONTAINER_PLASTIC -> {
+                addAnnotationToMap(position, R.drawable.marker_container_plastic, true)
+            }
+            MyConstants.CONTAINER_PAPER -> {
+                addAnnotationToMap(position, R.drawable.marker_container_paper, true)
+            }
+            MyConstants.CONTAINER_COMMUNAL -> {
+                addAnnotationToMap(position, R.drawable.marker_container_comunal, true)
+            }
+            MyConstants.CONTAINER_BIO -> {
+                addAnnotationToMap(position, R.drawable.marker_container_bio, true)
+            }
+            MyConstants.BIN_PLASTIC -> {
+                addAnnotationToMap(position, R.drawable.marker_bin_plastic, true)
+            }
+            MyConstants.BIN_PAPER -> {
+                addAnnotationToMap(position, R.drawable.marker_bin_paper, true)
+            }
+            MyConstants.BIN_COMMUNAL -> {
+                addAnnotationToMap(position, R.drawable.marker_bin_comunal, true)
+            }
+            MyConstants.CLOTHES_COLLECTING -> {
                 addAnnotationToMap(position, R.drawable.marker_collecting_clothes, true)
             }
-            4 -> {
+            MyConstants.BACK_UP -> {
                 addAnnotationToMap(position, R.drawable.marker_back_up, true)
             }
-            else -> {
-                when (content) {
-                    1 -> {
-                        addAnnotationToMap(position, R.drawable.marker_container_comunal, true)
-                    }
-                    2 -> {
-                        addAnnotationToMap(position, R.drawable.marker_container_paper, true)
-                    }
-                    3 -> {
-                        addAnnotationToMap(position, R.drawable.marker_container_plastic, true)
-                    }
-                    4 -> {
-                        addAnnotationToMap(position, R.drawable.marker_container_electro, true)
-                    }
-                    5 -> {
-                        addAnnotationToMap(position, R.drawable.marker_container_bio, true)
-                    }
-                    6 -> {
-                        addAnnotationToMap(position, R.drawable.marker_container_glass, true)
-                    }
-                }
-            }
+
+        }
+        if (item == MyConstants.CLOTHES_COLLECTING) {
+            addAnnotationToMap(position, R.drawable.marker_collecting_clothes, true)
+
+
         }
         val cameraOptions = CameraOptions.Builder()
             .center(position)
