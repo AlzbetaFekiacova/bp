@@ -1,6 +1,8 @@
 package sk.stuba.bp.adapters
 
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +12,16 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import sk.stuba.bp.R
 
-class ItemAdapter(val context: Context, val items: ArrayList<String>) :
+class ItemAdapter(
+    val context: Context,
+    val items: ArrayList<String>,
+    val all: MutableMap<String, Boolean>
+) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     private lateinit var clickListener: onItemClickListener
     private lateinit var holder: ViewHolder
+    private var boolValues = all.values.toList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         holder = ViewHolder(
@@ -40,36 +47,92 @@ class ItemAdapter(val context: Context, val items: ArrayList<String>) :
         when (position) {
             0 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_cans_or_bottles)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             1 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_container_green)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             2 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_container_yellow)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             3 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_container_blue)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             4 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_container_black)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             5 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_container_red)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             6 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_container_brown)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             7 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_can_black)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             8 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_bin_yellow)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             9 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_trash_bin_blue)
+                if (boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                } else {
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
             10 -> {
                 holder.imageIcon.setBackgroundResource(R.drawable.ic_baseline_checkroom_24)
+                if(boolValues[position]) {
+                    holder.cardViewItem.setCardBackgroundColor(Color.GRAY)
+                }
+                else{
+                    holder.cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
             }
 
         }
@@ -88,6 +151,13 @@ class ItemAdapter(val context: Context, val items: ArrayList<String>) :
 
         init {
             view.setOnClickListener {
+                if(cardViewItem.cardBackgroundColor.defaultColor == Color.GRAY){
+                    cardViewItem.setCardBackgroundColor(Color.WHITE)
+                }
+                else{
+                    cardViewItem.setCardBackgroundColor(Color.GRAY)
+                }
+
                 listener.onItemClick(adapterPosition)
             }
         }

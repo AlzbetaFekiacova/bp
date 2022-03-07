@@ -4,8 +4,15 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import sk.stuba.bp.MyConstants
+import sk.stuba.bp.R
+import sk.stuba.bp.SharedViewModel
 import sk.stuba.bp.adapters.ItemAdapter
 import sk.stuba.bp.databinding.FragmentFilterBinding
 
@@ -13,6 +20,7 @@ import sk.stuba.bp.databinding.FragmentFilterBinding
 class FilterFragment(var map: MutableMap<String, Boolean>) : DialogFragment() {
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
+    private lateinit var sharedViewModel: SharedViewModel
     private var values = arrayListOf(
         "Zberné miesta",
         "Kontajner - Sklo",
@@ -24,7 +32,8 @@ class FilterFragment(var map: MutableMap<String, Boolean>) : DialogFragment() {
         "Kôš - Zmesový odpad",
         "Kôš - Plast",
         "Kôš - Papier",
-        "Zber - Šatstvo"
+        "Zber - Šatstvo",
+        "Uložiť filter"
     )
 
     private var listOfKeys = arrayListOf(
@@ -38,7 +47,7 @@ class FilterFragment(var map: MutableMap<String, Boolean>) : DialogFragment() {
         MyConstants.BIN_COMMUNAL,
         MyConstants.BIN_PLASTIC,
         MyConstants.BIN_PAPER,
-        MyConstants.BIN_COMMUNAL
+        MyConstants.CLOTHES_COLLECTING
     )
 
     override fun onCreateView(
@@ -49,20 +58,27 @@ class FilterFragment(var map: MutableMap<String, Boolean>) : DialogFragment() {
         _binding = FragmentFilterBinding.inflate(inflater, container, false)
 
         binding.recyclerViewItems.layoutManager = LinearLayoutManager(context)
-
-        val itemAdapter = ItemAdapter(requireContext(), getItemList())
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        val itemAdapter = ItemAdapter(requireContext(), getItemList(), sharedViewModel.filters)
         binding.recyclerViewItems.adapter = itemAdapter
         itemAdapter.setOnItemClickListener(
             object : ItemAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
-                    map[listOfKeys[position]] = false
-                    Toast.makeText(
-                        context,
-                        "Cliked on $position",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    if (position == 11) {
+                        dismiss()
+                        //FragmentManager.findFragment<MapFragment>(requireView())
+                        findNavController().navigate(R.id.mapFragment)
+                    } else {
+                        map[listOfKeys[position]] = false
+                        sharedViewModel.change(listOfKeys[position])
+                        Toast.makeText(
+                            context,
+                            "Cliked on $position",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
 
+                    }
                 }
 
             }
@@ -79,7 +95,7 @@ class FilterFragment(var map: MutableMap<String, Boolean>) : DialogFragment() {
     private fun getItemList(): ArrayList<String> {
         val list = ArrayList<String>()
 
-        for (i in 0..10) {
+        for (i in 0..11) {
             list.add(values[i])
         }
         return list

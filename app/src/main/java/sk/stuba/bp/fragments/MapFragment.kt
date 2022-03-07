@@ -17,6 +17,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -40,6 +41,7 @@ import com.mapbox.maps.plugin.gestures.addOnMapLongClickListener
 import sk.stuba.bp.Container
 import sk.stuba.bp.MyConstants
 import sk.stuba.bp.R
+import sk.stuba.bp.SharedViewModel
 import sk.stuba.bp.databinding.FragmentMapBinding
 
 
@@ -71,6 +73,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
     private lateinit var content: Number
     private lateinit var databaseName: String
     private var filters = mutableMapOf<String, Boolean>()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -85,6 +88,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         mapView = binding.mapView
 
+        Log.d("MAP" , sharedViewModel.filters.toString())
         binding.btnDone.setOnClickListener {
 
             pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].isDraggable =
@@ -794,7 +798,44 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
     private fun readDatabase() {
         val db = FirebaseFirestore.getInstance()
-        readCollection(MyConstants.CLOTHES_COLLECTING, db, clothesCollecting)
+        if(sharedViewModel.filters[MyConstants.CLOTHES_COLLECTING] == true) {
+            readCollection(MyConstants.CLOTHES_COLLECTING, db, clothesCollecting)
+        }
+        if(sharedViewModel.filters[MyConstants.BACK_UP] == true) {
+            readCollection(MyConstants.BACK_UP, db, backUpMachines)
+        }
+        if(sharedViewModel.filters[MyConstants.CONTAINER_BIO] == true) {
+            readCollection(MyConstants.CONTAINER_BIO, db, containersBio)
+        }
+        if(sharedViewModel.filters[MyConstants.CONTAINER_COMMUNAL] == true) {
+            readCollection(MyConstants.CONTAINER_COMMUNAL, db, containersCommunal)
+        }
+        if(sharedViewModel.filters[MyConstants.CONTAINER_PAPER] == true) {
+            readCollection(MyConstants.CONTAINER_PAPER, db, containersPaper)
+        }
+        if(sharedViewModel.filters[MyConstants.CONTAINER_PLASTIC] == true) {
+            readCollection(MyConstants.CONTAINER_PLASTIC, db, containersPlastic)
+        }
+        if(sharedViewModel.filters[MyConstants.CONTAINER_ELECTRO] == true) {
+            readCollection(MyConstants.CONTAINER_ELECTRO, db, containersElectro)
+        }
+        if(sharedViewModel.filters[MyConstants.CONTAINER_GLASS] == true) {
+            readCollection(MyConstants.CONTAINER_GLASS, db, containersGlass)
+        }
+        if(sharedViewModel.filters[MyConstants.BIN_COMMUNAL] == true) {
+            readCollection(MyConstants.BIN_COMMUNAL, db, binsCommunal)
+        }
+        if(sharedViewModel.filters[MyConstants.BIN_PAPER] == true) {
+            readCollection(MyConstants.BIN_PAPER, db, binsPaper)
+        }
+        if(sharedViewModel.filters[MyConstants.BIN_PLASTIC] == true) {
+            readCollection(MyConstants.BIN_PLASTIC, db, binsPlastic)
+        }
+
+
+
+
+        /*readCollection(MyConstants.CLOTHES_COLLECTING, db, clothesCollecting)
         readCollection(MyConstants.BACK_UP, db, backUpMachines)
         readCollection(MyConstants.CONTAINER_BIO, db, containersBio)
         readCollection(MyConstants.CONTAINER_COMMUNAL, db, containersCommunal)
@@ -804,7 +845,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         readCollection(MyConstants.CONTAINER_GLASS, db, containersGlass)
         readCollection(MyConstants.BIN_COMMUNAL, db, binsCommunal)
         readCollection(MyConstants.BIN_PAPER, db, binsPaper)
-        readCollection(MyConstants.BIN_PLASTIC, db, binsPlastic)
+        readCollection(MyConstants.BIN_PLASTIC, db, binsPlastic)*/
         //db.collection("sample_collection")
         //db.collection("trash_containers")
         //db.collection("backUp")
@@ -818,7 +859,6 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         document.getDouble("longitude")!!
                     )
                     backUpPlaces.add(p)
-
                     addAnnotationToMap(
                         Point.fromLngLat(p.longitude, p.latitude),
                         R.drawable.marker_container_glass,
@@ -837,4 +877,3 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
     }
 
 }
-
