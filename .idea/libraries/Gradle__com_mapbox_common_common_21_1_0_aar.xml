@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mapbox.common:common:21.1.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/69490fa60be73a0093ff90e729129459/transformed/common-21.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/69490fa60be73a0093ff90e729129459/transformed/common-21.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/69490fa60be73a0093ff90e729129459/transformed/common-21.1.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.common/common/21.1.0/acfdefa8d9c90d337a31918a966057bb9860d41f/common-21.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.common/common/21.1.0/5d38db7d5da8d41ea595887b2f4e061527a4d6a7/common-21.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
