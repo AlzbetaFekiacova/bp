@@ -1,16 +1,15 @@
 package sk.stuba.bp
 
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotation
 import java.io.Serializable
 import java.util.*
 
-data class Container(
+ class Container(
     @field:JvmField // use this annotation if your Boolean field is prefixed with 'is'
-    val isActive: Boolean? = null,
+    var isActive: Boolean? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
-    val timeStamp: Date? = null,
-    val annotation: PointAnnotation? = null,
+    var timeStamp: Date? = null,
+    val custom: Boolean?=null
  ) : Serializable{
 
  }

@@ -2,7 +2,6 @@ package sk.stuba.bp.adapters
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,8 @@ import sk.stuba.bp.R
 
 class ItemAdapter(
     val context: Context,
-    val items: ArrayList<String>,
-    val all: MutableMap<String, Boolean>
+    private val items: ArrayList<String>,
+    all: MutableMap<String, Boolean>
 ) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
@@ -40,7 +39,7 @@ class ItemAdapter(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = items.get(position)
+        val item = items[position]
 
         holder.tvViewItem.text = item
 

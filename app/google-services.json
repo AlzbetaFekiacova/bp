@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "310616540013",
+    "project_id": "bachelor-82d62",
+    "storage_bucket": "bachelor-82d62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310616540013:android:6f6e04f4625da93ce29064",
+        "android_client_info": {
+          "package_name": "sk.stuba.bp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310616540013-l7p2742g917ajhqt1nhnvdatks2kuev8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZzwkrYyuVwaVBinmCrXVXdiDXAYRUbpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310616540013-l7p2742g917ajhqt1nhnvdatks2kuev8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

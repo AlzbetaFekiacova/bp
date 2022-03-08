@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +14,7 @@ import sk.stuba.bp.adapters.ItemAdapter
 import sk.stuba.bp.databinding.FragmentFilterBinding
 
 
-class FilterFragment(var map: MutableMap<String, Boolean>) : DialogFragment() {
+class FilterFragment : DialogFragment() {
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
     private lateinit var sharedViewModel: SharedViewModel
@@ -69,7 +66,6 @@ class FilterFragment(var map: MutableMap<String, Boolean>) : DialogFragment() {
                         //FragmentManager.findFragment<MapFragment>(requireView())
                         findNavController().navigate(R.id.mapFragment)
                     } else {
-                        map[listOfKeys[position]] = false
                         sharedViewModel.change(listOfKeys[position])
                         Toast.makeText(
                             context,

@@ -32,17 +32,13 @@ import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.plugin.animation.MapAnimationOptions.Companion.mapAnimationOptions
 import com.mapbox.maps.plugin.animation.flyTo
 import com.mapbox.maps.plugin.annotation.annotations
-import com.mapbox.maps.plugin.annotation.generated.OnPointAnnotationClickListener
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
-import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
+import com.mapbox.maps.plugin.annotation.generated.*
 import com.mapbox.maps.plugin.gestures.OnMapLongClickListener
 import com.mapbox.maps.plugin.gestures.addOnMapLongClickListener
-import sk.stuba.bp.Container
-import sk.stuba.bp.MyConstants
-import sk.stuba.bp.R
-import sk.stuba.bp.SharedViewModel
+import sk.stuba.bp.*
 import sk.stuba.bp.databinding.FragmentMapBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 const val REQUEST_CODE = 101
@@ -56,23 +52,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
     private lateinit var onMapReady: (MapboxMap) -> Unit
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var auth: FirebaseAuth
-    private var backUpMachines = arrayListOf<Container>()
-    private var containersPlastic = arrayListOf<Container>()
-    private var containersPaper = arrayListOf<Container>()
-    private var containersCommunal = arrayListOf<Container>()
-    private var containersBio = arrayListOf<Container>()
-    private var containersElectro = arrayListOf<Container>()
-    private var containersGlass = arrayListOf<Container>()
-    private var binsPlastic = arrayListOf<Container>()
-    private var binsPaper = arrayListOf<Container>()
-    private var binsCommunal = arrayListOf<Container>()
-    private var clothesCollecting = arrayListOf<Container>()
     private lateinit var pointAnnotationManager: PointAnnotationManager
     private var currentPosition = Point.fromLngLat(19.13491, 48.6385)
     private var addingContent = false
     private lateinit var content: Number
     private lateinit var databaseName: String
-    private var filters = mutableMapOf<String, Boolean>()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -88,7 +72,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         mapView = binding.mapView
 
-        Log.d("MAP" , sharedViewModel.filters.toString())
+        Log.d("MAP", sharedViewModel.filters.toString())
         binding.btnDone.setOnClickListener {
 
             pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].isDraggable =
@@ -96,36 +80,21 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
             val container = Container(
                 true,
                 pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
-                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude()
+                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude(),
+                Calendar.getInstance().time,
+                true
             )
 
             val db = FirebaseFirestore.getInstance()
-
-            db.collection(databaseName).add(container)
-                .addOnSuccessListener {
-                    Toast.makeText(
-                        context,
-                        "Uspesne pridane",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                }
-
-
-                .addOnFailureListener {
-                    Toast.makeText(context, "Neprebehlo pridanie", Toast.LENGTH_SHORT).show()
-                }
-
+            sharedViewModel.saveContainer(container, databaseName, db)
             binding.btnDone.visibility = View.INVISIBLE
             addingContent = false
 
         }
-        fillFilterMap()
         binding.btnPosition.setOnClickListener(this)
         binding.btnFilter.setOnClickListener {
-            val dialog = FilterFragment(filters)
+            val dialog = FilterFragment()
             parentFragmentManager.let { dialog.show(it, "customDialog") }
-            //Log.d("FILTER", filters.toString())
         }
 
         fusedLocationProviderClient =
@@ -133,22 +102,6 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
 
         return binding.root
-    }
-
-    private fun fillFilterMap() {
-        filters[MyConstants.BACK_UP] = true
-        filters[MyConstants.CONTAINER_GLASS] = true
-        filters[MyConstants.CONTAINER_PLASTIC] = true
-        filters[MyConstants.CONTAINER_PAPER] = true
-        filters[MyConstants.CONTAINER_COMMUNAL] = true
-        filters[MyConstants.CONTAINER_ELECTRO] = true
-        filters[MyConstants.CONTAINER_BIO] = true
-        filters[MyConstants.BIN_COMMUNAL] = true
-        filters[MyConstants.BIN_PLASTIC] = true
-        filters[MyConstants.BIN_PAPER] = true
-        filters[MyConstants.BIN_COMMUNAL] = true
-
-
     }
 
     override fun onDestroy() {
@@ -209,7 +162,12 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         duration(5000)
                     }
                 )
-                addAnnotationToMap(currentPosition, R.drawable.marker_current_position, false)
+                addAnnotationToMap(
+                    currentPosition,
+                    R.drawable.marker_current_position,
+                    false,
+                    false
+                )
 
             } else {
                 Toast.makeText(context, "Nepodarilo sa lokalizovať", Toast.LENGTH_SHORT).show()
@@ -217,7 +175,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         }
     }
 
-    private fun addAnnotationToMap(point: Point, marker: Int, draggable: Boolean) {
+    private fun addAnnotationToMap(point: Point, marker: Int, draggable: Boolean, custom: Boolean) {
 // Create an instance of the Annotation API and get the PointAnnotationManager.
         bitmapFromDrawableRes(
             requireContext(),
@@ -239,9 +197,8 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
 
 
             pointAnnotationManager.create(pointAnnotationOptions)
-            if (marker != R.drawable.marker_current_position) {
+            if (custom) {
                 pointAnnotationManager.addClickListener(OnPointAnnotationClickListener { it ->
-
                     if (currentPosition.latitude() != 48.6385 && currentPosition.longitude() != 19.13491) {
 
                         if (getDistance(
@@ -251,12 +208,56 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                                 it.point.longitude()
                             ) < 200
                         ) {
-
+                            when (marker) {
+                                R.drawable.marker_container_plastic -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.CONTAINER_PLASTIC
+                                }
+                                R.drawable.marker_container_paper -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.CONTAINER_PAPER
+                                }
+                                R.drawable.marker_container_glass -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.CONTAINER_GLASS
+                                }
+                                R.drawable.marker_container_electro -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.CONTAINER_ELECTRO
+                                }
+                                R.drawable.marker_container_bio -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.CONTAINER_BIO
+                                }
+                                R.drawable.marker_container_comunal -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.CONTAINER_COMMUNAL
+                                }
+                                R.drawable.marker_collecting_clothes -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.CLOTHES_COLLECTING
+                                }
+                                R.drawable.marker_back_up -> {
+                                    sharedViewModel.databaseName = MyConstants.BACK_UP
+                                }
+                                R.drawable.marker_bin_paper -> {
+                                    sharedViewModel.databaseName = MyConstants.BIN_PAPER
+                                }
+                                R.drawable.marker_bin_comunal -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.BIN_COMMUNAL
+                                }
+                                R.drawable.marker_bin_plastic -> {
+                                    sharedViewModel.databaseName =
+                                        MyConstants.BIN_PLASTIC
+                                }
+                            }
+                            sharedViewModel.db = FirebaseFirestore.getInstance()
+                            sharedViewModel.click(it, pointAnnotationManager)
                             val confirmationFragment = PositionConfirmationFragment()
                             confirmationFragment.show(parentFragmentManager, "customDialog")
-
-
                         }
+
                     }
                     true
                 })
@@ -272,7 +273,6 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         val loc2 = Location("")
         loc2.latitude = lat2
         loc2.longitude = lng2
-        Log.d("VZD", "" + loc1.distanceTo(loc2))
         return loc1.distanceTo(loc2)
 
     }
@@ -623,37 +623,81 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         )
         when (item) {
             MyConstants.CONTAINER_GLASS -> {
-                addAnnotationToMap(position, R.drawable.marker_container_glass, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_container_glass,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.CONTAINER_ELECTRO -> {
-                addAnnotationToMap(position, R.drawable.marker_container_electro, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_container_electro,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.CONTAINER_PLASTIC -> {
-                addAnnotationToMap(position, R.drawable.marker_container_plastic, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_container_plastic,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.CONTAINER_PAPER -> {
-                addAnnotationToMap(position, R.drawable.marker_container_paper, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_container_paper,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.CONTAINER_COMMUNAL -> {
-                addAnnotationToMap(position, R.drawable.marker_container_comunal, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_container_comunal,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.CONTAINER_BIO -> {
-                addAnnotationToMap(position, R.drawable.marker_container_bio, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_container_bio,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.BIN_PLASTIC -> {
-                addAnnotationToMap(position, R.drawable.marker_bin_plastic, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_bin_plastic,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.BIN_PAPER -> {
-                addAnnotationToMap(position, R.drawable.marker_bin_paper, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_bin_paper,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.BIN_COMMUNAL -> {
-                addAnnotationToMap(position, R.drawable.marker_bin_comunal, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_bin_comunal,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.CLOTHES_COLLECTING -> {
-                addAnnotationToMap(position, R.drawable.marker_collecting_clothes, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_collecting_clothes,
+                    draggable = true,
+                    custom = true
+                )
             }
             MyConstants.BACK_UP -> {
-                addAnnotationToMap(position, R.drawable.marker_back_up, true)
+                addAnnotationToMap(
+                    position, R.drawable.marker_back_up,
+                    draggable = true,
+                    custom = true
+                )
             }
 
         }
@@ -700,8 +744,8 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                     arrayToFill.add(container)
                 }*/
                 arrayToFill.addAll(result.toObjects(Container::class.java))
-                Log.d("array", "LIST" + arrayToFill)
                 addMarkersFromArray(arrayToFill, name)
+                databaseName = name
             }
             .addOnFailureListener { exception ->
                 Log.d("DATA", "Error getting documents: $name", exception)
@@ -717,158 +761,158 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_glass,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.CONTAINER_PLASTIC -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_plastic,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.CONTAINER_PAPER -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_paper,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.CONTAINER_BIO -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_bio,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.CONTAINER_COMMUNAL -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_comunal,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.CONTAINER_ELECTRO -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_electro,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.BIN_PLASTIC -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_bin_plastic,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.BIN_PAPER -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_bin_paper,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.BIN_COMMUNAL -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_bin_comunal,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.CLOTHES_COLLECTING -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_collecting_clothes,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
                 MyConstants.BACK_UP -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_back_up,
-                        false
+                        draggable = false,
+                        custom = true
                     )
                 }
-
             }
+            sharedViewModel.addCustom(
+                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1],
+                container
+            )
 
         }
     }
 
     private fun readDatabase() {
         val db = FirebaseFirestore.getInstance()
-        if(sharedViewModel.filters[MyConstants.CLOTHES_COLLECTING] == true) {
-            readCollection(MyConstants.CLOTHES_COLLECTING, db, clothesCollecting)
+        if (sharedViewModel.filters[MyConstants.CLOTHES_COLLECTING] == true) {
+            readCollection(
+                MyConstants.CLOTHES_COLLECTING,
+                db,
+                sharedViewModel.clothesCollecting
+            )
         }
-        if(sharedViewModel.filters[MyConstants.BACK_UP] == true) {
-            readCollection(MyConstants.BACK_UP, db, backUpMachines)
+        if (sharedViewModel.filters[MyConstants.BACK_UP] == true) {
+            readCollection(MyConstants.BACK_UP, db, sharedViewModel.backUpMachines)
         }
-        if(sharedViewModel.filters[MyConstants.CONTAINER_BIO] == true) {
-            readCollection(MyConstants.CONTAINER_BIO, db, containersBio)
+        if (sharedViewModel.filters[MyConstants.CONTAINER_BIO] == true) {
+            readCollection(MyConstants.CONTAINER_BIO, db, sharedViewModel.containersBio)
         }
-        if(sharedViewModel.filters[MyConstants.CONTAINER_COMMUNAL] == true) {
-            readCollection(MyConstants.CONTAINER_COMMUNAL, db, containersCommunal)
+        if (sharedViewModel.filters[MyConstants.CONTAINER_COMMUNAL] == true) {
+            readCollection(
+                MyConstants.CONTAINER_COMMUNAL,
+                db,
+                sharedViewModel.containersCommunal
+            )
         }
-        if(sharedViewModel.filters[MyConstants.CONTAINER_PAPER] == true) {
-            readCollection(MyConstants.CONTAINER_PAPER, db, containersPaper)
+        if (sharedViewModel.filters[MyConstants.CONTAINER_PAPER] == true) {
+            readCollection(
+                MyConstants.CONTAINER_PAPER,
+                db,
+                sharedViewModel.containersPaper
+            )
         }
-        if(sharedViewModel.filters[MyConstants.CONTAINER_PLASTIC] == true) {
-            readCollection(MyConstants.CONTAINER_PLASTIC, db, containersPlastic)
+        if (sharedViewModel.filters[MyConstants.CONTAINER_PLASTIC] == true) {
+            readCollection(
+                MyConstants.CONTAINER_PLASTIC,
+                db,
+                sharedViewModel.containersPlastic
+            )
         }
-        if(sharedViewModel.filters[MyConstants.CONTAINER_ELECTRO] == true) {
-            readCollection(MyConstants.CONTAINER_ELECTRO, db, containersElectro)
+        if (sharedViewModel.filters[MyConstants.CONTAINER_ELECTRO] == true) {
+            readCollection(
+                MyConstants.CONTAINER_ELECTRO,
+                db,
+                sharedViewModel.containersElectro
+            )
         }
-        if(sharedViewModel.filters[MyConstants.CONTAINER_GLASS] == true) {
-            readCollection(MyConstants.CONTAINER_GLASS, db, containersGlass)
+        if (sharedViewModel.filters[MyConstants.CONTAINER_GLASS] == true) {
+            readCollection(
+                MyConstants.CONTAINER_GLASS,
+                db,
+                sharedViewModel.containersGlass
+            )
         }
-        if(sharedViewModel.filters[MyConstants.BIN_COMMUNAL] == true) {
-            readCollection(MyConstants.BIN_COMMUNAL, db, binsCommunal)
+        if (sharedViewModel.filters[MyConstants.BIN_COMMUNAL] == true) {
+            readCollection(MyConstants.BIN_COMMUNAL, db, sharedViewModel.binsCommunal)
         }
-        if(sharedViewModel.filters[MyConstants.BIN_PAPER] == true) {
-            readCollection(MyConstants.BIN_PAPER, db, binsPaper)
+        if (sharedViewModel.filters[MyConstants.BIN_PAPER] == true) {
+            readCollection(MyConstants.BIN_PAPER, db, sharedViewModel.binsPaper)
         }
-        if(sharedViewModel.filters[MyConstants.BIN_PLASTIC] == true) {
-            readCollection(MyConstants.BIN_PLASTIC, db, binsPlastic)
+        if (sharedViewModel.filters[MyConstants.BIN_PLASTIC] == true) {
+            readCollection(MyConstants.BIN_PLASTIC, db, sharedViewModel.binsPlastic)
         }
-
-
-
-
-        /*readCollection(MyConstants.CLOTHES_COLLECTING, db, clothesCollecting)
-        readCollection(MyConstants.BACK_UP, db, backUpMachines)
-        readCollection(MyConstants.CONTAINER_BIO, db, containersBio)
-        readCollection(MyConstants.CONTAINER_COMMUNAL, db, containersCommunal)
-        readCollection(MyConstants.CONTAINER_PAPER, db, containersPaper)
-        readCollection(MyConstants.CONTAINER_PLASTIC, db, containersPlastic)
-        readCollection(MyConstants.CONTAINER_ELECTRO, db, containersElectro)
-        readCollection(MyConstants.CONTAINER_GLASS, db, containersGlass)
-        readCollection(MyConstants.BIN_COMMUNAL, db, binsCommunal)
-        readCollection(MyConstants.BIN_PAPER, db, binsPaper)
-        readCollection(MyConstants.BIN_PLASTIC, db, binsPlastic)*/
-        //db.collection("sample_collection")
-        //db.collection("trash_containers")
-        //db.collection("backUp")
-        /*db.collection("olo_data")
-            .get()
-            .addOnSuccessListener { result ->
-                result.forEach { document ->
-                    Log.d("DATA", "${document.id} => ${document.data}")
-                    val p = Place(
-                        document.getDouble("latitude")!!,
-                        document.getDouble("longitude")!!
-                    )
-                    backUpPlaces.add(p)
-                    addAnnotationToMap(
-                        Point.fromLngLat(p.longitude, p.latitude),
-                        R.drawable.marker_container_glass,
-                        false
-                    )
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d("DATA", "Error getting documents: ", exception)
-            }*/
     }
 
     override fun onMapLongClick(point: Point): Boolean {
