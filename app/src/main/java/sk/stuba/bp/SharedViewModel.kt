@@ -128,7 +128,7 @@ class SharedViewModel : ViewModel() {
                         document.getBoolean("isActive"),
                         document.getDouble("latitude"),
                         document.getDouble("longitude"),
-                        document.getDate("timeStamp"),
+                        //document.getDate("timeStamp"),
                         document.getBoolean("custom")
                     )
 
@@ -174,7 +174,7 @@ class SharedViewModel : ViewModel() {
                         document.getBoolean("isActive"),
                         document.getDouble("latitude"),
                         document.getDouble("longitude"),
-                        document.getDate("timeStamp"),
+                        //document.getDate("timeStamp"),
                         document.getBoolean("custom")
                     )
 

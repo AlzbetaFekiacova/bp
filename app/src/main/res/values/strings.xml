@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Zahoď svoje smeti</string>
+    <string name="app_name">Trash map</string>
     <string name="mapbox_access_token">pk.eyJ1Ijoic2lzaWxpZW5rYSIsImEiOiJja3VtajBpdWMwand1Mm50aHNpZ2QwaXloIn0.thJyUu4aO5VyCuiS3ilxoQ</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btnLocalize">btnLocalize</string>

@@ -8,7 +8,7 @@ import java.util.*
     var isActive: Boolean? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
-    var timeStamp: Date? = null,
+    //var timeStamp: Date? = null,
     val custom: Boolean?=null
  ) : Serializable{
 

@@ -81,7 +81,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                 true,
                 pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
                 pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude(),
-                Calendar.getInstance().time,
+                //Calendar.getInstance().time,
                 true
             )
 

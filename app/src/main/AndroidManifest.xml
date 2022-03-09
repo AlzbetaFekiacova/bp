@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name="sk.stuba.bp.activities.MainActivity"
+            android:name=".activities.MainActivity"
+            android:label="Home"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -23,14 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtViewLogInTitle"
         android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/et_style"
         android:hint="@string/name"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="20sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 
     <EditText
         android:id="@+id/editTxtPasswordLogIn"
