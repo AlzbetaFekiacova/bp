@@ -37,13 +37,12 @@ import com.mapbox.maps.plugin.gestures.OnMapLongClickListener
 import com.mapbox.maps.plugin.gestures.addOnMapLongClickListener
 import sk.stuba.bp.*
 import sk.stuba.bp.databinding.FragmentMapBinding
-import java.util.*
 import kotlin.collections.ArrayList
 
 
 const val REQUEST_CODE = 101
 
-class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
+class MapFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
@@ -81,7 +80,6 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                 true,
                 pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
                 pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude(),
-                //Calendar.getInstance().time,
                 true
             )
 
@@ -116,9 +114,6 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         if (::onMapReady.isInitialized) {
             onMapReady.invoke(mapboxMap)
         }
-        mapboxMap.addOnMapLongClickListener(this)
-
-
     }
 
     override fun onClick(postition: View?) {
@@ -404,7 +399,8 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                 Toast.makeText(context, "Clicked on app info", Toast.LENGTH_LONG).show()
             }
             R.id.itemRecycleInfo -> {
-                Toast.makeText(context, "Clicked on recycle info", Toast.LENGTH_LONG).show()
+                //Toast.makeText(context, "Clicked on recycle info", Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.separationInfoFragment)
             }
             R.id.itemBin -> {
                 if (!checkIfLoggedIn())
@@ -734,15 +730,6 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         db.collection(name)
             .get()
             .addOnSuccessListener { result ->
-                /*for (document in result) {
-                    Log.d("DOC", document.data.toString())
-                    val container = Container(
-                        document.getBoolean("isActive")!!, document.getDouble("latitude")!!,
-                        document.getDouble("longitude")!!
-                    )
-                    Log.d("CONTAINER", container.toString())
-                    arrayToFill.add(container)
-                }*/
                 arrayToFill.addAll(result.toObjects(Container::class.java))
                 addMarkersFromArray(arrayToFill, name)
                 databaseName = name
@@ -762,7 +749,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_glass,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.CONTAINER_PLASTIC -> {
@@ -770,7 +757,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_plastic,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.CONTAINER_PAPER -> {
@@ -778,7 +765,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_paper,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.CONTAINER_BIO -> {
@@ -786,7 +773,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_bio,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.CONTAINER_COMMUNAL -> {
@@ -794,7 +781,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_comunal,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.CONTAINER_ELECTRO -> {
@@ -802,7 +789,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_electro,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.BIN_PLASTIC -> {
@@ -818,7 +805,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_bin_paper,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.BIN_COMMUNAL -> {
@@ -826,7 +813,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_bin_comunal,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.CLOTHES_COLLECTING -> {
@@ -834,7 +821,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_collecting_clothes,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
                 MyConstants.BACK_UP -> {
@@ -842,14 +829,16 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_back_up,
                         draggable = false,
-                        custom = true
+                        container.custom!!
                     )
                 }
             }
-            sharedViewModel.addCustom(
-                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1],
-                container
-            )
+            if (container.custom == true) {
+                sharedViewModel.addCustom(
+                    pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1],
+                    container
+                )
+            }
 
         }
     }
@@ -903,6 +892,9 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
                 db,
                 sharedViewModel.containersGlass
             )
+
+            readCollection(MyConstants.OLO_DATA_GLASS, db, sharedViewModel.containersGlass)
+
         }
         if (sharedViewModel.filters[MyConstants.BIN_COMMUNAL] == true) {
             readCollection(MyConstants.BIN_COMMUNAL, db, sharedViewModel.binsCommunal)
@@ -913,11 +905,6 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapLongClickListener {
         if (sharedViewModel.filters[MyConstants.BIN_PLASTIC] == true) {
             readCollection(MyConstants.BIN_PLASTIC, db, sharedViewModel.binsPlastic)
         }
-    }
-
-    override fun onMapLongClick(point: Point): Boolean {
-        Log.d("KLICK", "kliknutie na mapu")
-        return false
     }
 
 }

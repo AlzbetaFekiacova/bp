@@ -19,10 +19,6 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -100,8 +96,6 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
 
 
     private fun checkEqualityOfPassword(): Boolean {
-        return binding.editTxtPasswordRegister.text.toString().equals(
-            binding.editTxtReenterPasswordRegister.text.toString()
-        )
+        return binding.editTxtPasswordRegister.text.toString() == binding.editTxtReenterPasswordRegister.text.toString()
     }
 }

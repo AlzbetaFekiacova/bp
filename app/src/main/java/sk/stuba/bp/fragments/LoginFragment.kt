@@ -20,9 +20,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private var numberOfLogs = 0
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +34,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
             val emailAddress = binding.editTxtEmailLogIn.text.toString().trim { it <= ' ' }
 
             Firebase.auth.sendPasswordResetEmail(emailAddress)
-                .addOnCompleteListener { task ->
+                .addOnCompleteListener { _ ->
                     Toast.makeText(context, "Zaslany reset hesla na Váš email.", Toast.LENGTH_SHORT).show()
                     binding.btnForgottenPassword.visibility = View.INVISIBLE
                     binding.btnLogIn.visibility = View.VISIBLE

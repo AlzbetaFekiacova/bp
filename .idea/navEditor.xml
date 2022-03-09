@@ -41,6 +41,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_mapFragment_to_profileFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_mapFragment_to_registrationFragment">
                               <value>
                                 <LayoutPositions />
@@ -70,6 +75,18 @@
                           <Point>
                             <option name="x" value="175" />
                             <option name="y" value="-92" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="separationInfoFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-299" />
+                            <option name="y" value="784" />
                           </Point>
                         </option>
                       </LayoutPositions>

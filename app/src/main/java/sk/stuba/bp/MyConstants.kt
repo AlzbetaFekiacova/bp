@@ -12,4 +12,5 @@ object MyConstants {
     const val BIN_PLASTIC = "binsPlastic"
     const val BIN_PAPER = "binsPaper"
     const val CLOTHES_COLLECTING = "clothesCollecting"
+    const val OLO_DATA_GLASS ="olo_data"
 }

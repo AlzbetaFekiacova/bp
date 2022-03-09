@@ -34,6 +34,7 @@ class SharedViewModel : ViewModel() {
     var binsPaper = arrayListOf<Container>()
     var binsCommunal = arrayListOf<Container>()
     var clothesCollecting = arrayListOf<Container>()
+    var oloGlassContainers = arrayListOf<Container>()
 
     //private var _container = MutableLiveData<Container>()
     //var container: LiveData<Container> = _container
@@ -104,9 +105,6 @@ class SharedViewModel : ViewModel() {
     fun click(pointAnnotation: PointAnnotation, pointAnnotationManager: PointAnnotationManager) {
         this.annotation = pointAnnotation
         this.annotationManager = pointAnnotationManager
-        for (i in customAnnotations) {
-            Log.d("CONT", i.value.toString())
-        }
 
     }
 

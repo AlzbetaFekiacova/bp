@@ -67,13 +67,6 @@ class FilterFragment : DialogFragment() {
                         findNavController().navigate(R.id.mapFragment)
                     } else {
                         sharedViewModel.change(listOfKeys[position])
-                        Toast.makeText(
-                            context,
-                            "Cliked on $position",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-
                     }
                 }
 
