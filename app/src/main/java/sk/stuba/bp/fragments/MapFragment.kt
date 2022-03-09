@@ -599,9 +599,6 @@ class MapFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     addingContent = true
-                    //databaseName = "trashContainers"
-                    //content = 6
-                    //addItem(5, 6)
                     databaseName = MyConstants.CONTAINER_GLASS
                     addItem(databaseName)
                 }

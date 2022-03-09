@@ -1,11 +1,12 @@
 package sk.stuba.bp.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import sk.stuba.bp.R
 import sk.stuba.bp.adapters.ItemAdapter
@@ -34,6 +35,7 @@ class SeparationInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         _binding = FragmentSeparationInfoBinding.inflate(inflater, container, false)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         separationTitles.addAll(resources.getStringArray(R.array.separation_info))
@@ -46,5 +48,26 @@ class SeparationInfoFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+    @SuppressLint("RestrictedApi")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
+        inflater.inflate(R.menu.back_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("MENU", "click")
+        findNavController().navigate(R.id.mapFragment)
+        return super.onOptionsItemSelected(item)
     }
 }
