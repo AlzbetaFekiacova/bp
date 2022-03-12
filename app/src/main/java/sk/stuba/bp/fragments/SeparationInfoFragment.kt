@@ -70,4 +70,7 @@ class SeparationInfoFragment : Fragment() {
         findNavController().navigate(R.id.mapFragment)
         return super.onOptionsItemSelected(item)
     }
+
+
+
 }

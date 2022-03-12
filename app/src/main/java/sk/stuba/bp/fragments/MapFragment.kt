@@ -8,6 +8,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.location.Location
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -903,5 +904,6 @@ class MapFragment : Fragment(), View.OnClickListener {
             readCollection(MyConstants.BIN_PLASTIC, db, sharedViewModel.binsPlastic)
         }
     }
+
 
 }

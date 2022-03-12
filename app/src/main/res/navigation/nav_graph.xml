@@ -11,8 +11,7 @@
     <fragment
         android:id="@+id/mapFragment"
         android:name="sk.stuba.bp.fragments.MapFragment"
-        android:label="fragment_map"
-        tools:layout="@layout/fragment_map" >
+        android:label="fragment_map">
         <action
             android:id="@+id/action_mapFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
