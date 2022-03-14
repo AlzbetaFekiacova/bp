@@ -8,7 +8,6 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.location.Location
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -34,8 +33,6 @@ import com.mapbox.maps.plugin.animation.MapAnimationOptions.Companion.mapAnimati
 import com.mapbox.maps.plugin.animation.flyTo
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.*
-import com.mapbox.maps.plugin.gestures.OnMapLongClickListener
-import com.mapbox.maps.plugin.gestures.addOnMapLongClickListener
 import sk.stuba.bp.*
 import sk.stuba.bp.databinding.FragmentMapBinding
 import kotlin.collections.ArrayList
@@ -73,20 +70,33 @@ class MapFragment : Fragment(), View.OnClickListener {
         mapView = binding.mapView
 
         Log.d("MAP", sharedViewModel.filters.toString())
+
+        binding.btnCancel.setOnClickListener {
+
+            pointAnnotationManager.delete(pointAnnotationManager.annotations[pointAnnotationManager.annotations.lastIndex])
+            binding.btnCancel.visibility = View.INVISIBLE
+            binding.btnDone.visibility = View.INVISIBLE
+            addingContent = false
+        }
+
+
         binding.btnDone.setOnClickListener {
 
             pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].isDraggable =
                 false
             val container = Container(
-                true,
-                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
-                pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude(),
-                true
+                custom = true,
+                isActive = true,
+                latitude = pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
+                longitude = pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude()
+
             )
 
             val db = FirebaseFirestore.getInstance()
             sharedViewModel.saveContainer(container, databaseName, db)
             binding.btnDone.visibility = View.INVISIBLE
+            binding.btnCancel.visibility = View.INVISIBLE
+
             addingContent = false
 
         }
@@ -711,6 +721,7 @@ class MapFragment : Fragment(), View.OnClickListener {
 
 
         binding.btnDone.visibility = View.VISIBLE
+        binding.btnCancel.visibility = View.VISIBLE
 
 
     }

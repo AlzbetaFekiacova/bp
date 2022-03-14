@@ -123,11 +123,11 @@ class SharedViewModel : ViewModel() {
                     //Log.d("KOS", "${document.id} => ${document.data}")
                     id = document.id
                     container = Container(
+                        document.getBoolean("custom"),
                         document.getBoolean("isActive"),
                         document.getDouble("latitude"),
                         document.getDouble("longitude"),
                         //document.getDate("timeStamp"),
-                        document.getBoolean("custom")
                     )
 
                 }
@@ -169,11 +169,12 @@ class SharedViewModel : ViewModel() {
                     //Log.d("KOS", "${document.id} => ${document.data}")
                     id = document.id
                     container = Container(
+                        document.getBoolean("custom"),
                         document.getBoolean("isActive"),
                         document.getDouble("latitude"),
                         document.getDouble("longitude"),
                         //document.getDate("timeStamp"),
-                        document.getBoolean("custom")
+
                     )
 
                 }

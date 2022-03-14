@@ -60,6 +60,17 @@
         android:src="@drawable/ic_baseline_gps_fixed_24"
         app:tint="@android:color/white" />
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom|left"
+        android:layout_margin ="16dp"
+        android:backgroundTint="@color/red"
+        android:contentDescription="@string/btnFilter"
+        android:src="@drawable/ic_baseline_cancel_24"
+        app:tint="@android:color/white"
+        android:visibility="invisible"
+        tools:ignore="RtlHardcoded" />
 </FrameLayout>
 </layout>
