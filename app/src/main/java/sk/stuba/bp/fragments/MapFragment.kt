@@ -18,6 +18,7 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -33,9 +34,13 @@ import com.mapbox.maps.plugin.animation.MapAnimationOptions.Companion.mapAnimati
 import com.mapbox.maps.plugin.animation.flyTo
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import sk.stuba.bp.*
 import sk.stuba.bp.databinding.FragmentMapBinding
 import kotlin.collections.ArrayList
+import kotlin.system.measureTimeMillis
 
 
 const val REQUEST_CODE = 101
@@ -49,7 +54,7 @@ class MapFragment : Fragment(), View.OnClickListener {
     private lateinit var onMapReady: (MapboxMap) -> Unit
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var auth: FirebaseAuth
-    private lateinit var pointAnnotationManager: PointAnnotationManager
+    private var pointAnnotationManager: PointAnnotationManager? = null
     private var currentPosition = Point.fromLngLat(19.13491, 48.6385)
     private var addingContent = false
     private lateinit var content: Number
@@ -65,6 +70,13 @@ class MapFragment : Fragment(), View.OnClickListener {
         //super.onCreate(savedInstanceState)
         // Initialize Firebase Auth
         auth = Firebase.auth
+        lifecycleScope.launch {
+            val time = measureTimeMillis {
+                anonymousUser()
+            }
+            Log.d("TIME", "it took $time")
+
+        }
         readDatabase()
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         mapView = binding.mapView
@@ -73,7 +85,7 @@ class MapFragment : Fragment(), View.OnClickListener {
 
         binding.btnCancel.setOnClickListener {
 
-            pointAnnotationManager.delete(pointAnnotationManager.annotations[pointAnnotationManager.annotations.lastIndex])
+            pointAnnotationManager!!.delete(pointAnnotationManager!!.annotations[pointAnnotationManager!!.annotations.lastIndex])
             binding.btnCancel.visibility = View.INVISIBLE
             binding.btnDone.visibility = View.INVISIBLE
             addingContent = false
@@ -82,13 +94,13 @@ class MapFragment : Fragment(), View.OnClickListener {
 
         binding.btnDone.setOnClickListener {
 
-            pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].isDraggable =
+            pointAnnotationManager!!.annotations[pointAnnotationManager!!.annotations.size - 1].isDraggable =
                 false
             val container = Container(
                 custom = true,
                 isActive = true,
-                latitude = pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.latitude(),
-                longitude = pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1].point.longitude()
+                latitude = pointAnnotationManager!!.annotations[pointAnnotationManager!!.annotations.size - 1].point.latitude(),
+                longitude = pointAnnotationManager!!.annotations[pointAnnotationManager!!.annotations.size - 1].point.longitude()
 
             )
 
@@ -202,9 +214,9 @@ class MapFragment : Fragment(), View.OnClickListener {
                 .withDraggable(draggable)
 
 
-            pointAnnotationManager.create(pointAnnotationOptions)
+            pointAnnotationManager!!.create(pointAnnotationOptions)
             if (custom) {
-                pointAnnotationManager.addClickListener(OnPointAnnotationClickListener { it ->
+                pointAnnotationManager!!.addClickListener(OnPointAnnotationClickListener { it ->
                     if (currentPosition.latitude() != 48.6385 && currentPosition.longitude() != 19.13491) {
 
                         if (getDistance(
@@ -259,7 +271,7 @@ class MapFragment : Fragment(), View.OnClickListener {
                                 }
                             }
                             sharedViewModel.db = FirebaseFirestore.getInstance()
-                            sharedViewModel.click(it, pointAnnotationManager)
+                            sharedViewModel.click(it, pointAnnotationManager!!)
                             val confirmationFragment = PositionConfirmationFragment()
                             confirmationFragment.show(parentFragmentManager, "customDialog")
                         }
@@ -728,7 +740,23 @@ class MapFragment : Fragment(), View.OnClickListener {
 
     private fun checkIfLoggedIn(): Boolean {
         val currentUser = auth.currentUser
-        return currentUser != null
+        if (currentUser != null) {
+            return currentUser.email != null
+        }
+        return false
+    }
+
+    suspend fun anonymousUser() = withContext(Dispatchers.IO) {
+        auth.signInAnonymously()
+            .addOnSuccessListener {
+                val currentUser = auth.currentUser
+                Log.d("signInAnonymously", "Authentication successful")
+            }
+            .addOnFailureListener { task ->
+                Log.w("signInAnonymously", "Authentication failed", task.cause)
+            }
+
+
     }
 
     private fun readCollection(
@@ -842,9 +870,10 @@ class MapFragment : Fragment(), View.OnClickListener {
                     )
                 }
             }
-            if (container.custom == true) {
+            if (container.custom == true && pointAnnotationManager != null) {
+
                 sharedViewModel.addCustom(
-                    pointAnnotationManager.annotations[pointAnnotationManager.annotations.size - 1],
+                    pointAnnotationManager!!.annotations[pointAnnotationManager!!.annotations.size - 1],
                     container
                 )
             }
