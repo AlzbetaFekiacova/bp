@@ -53,7 +53,7 @@ class MapFragment : Fragment(), View.OnClickListener {
     private lateinit var mapboxMap: MapboxMap
     private lateinit var onMapReady: (MapboxMap) -> Unit
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var auth: FirebaseAuth
+    //private lateinit var auth: FirebaseAuth
     private var pointAnnotationManager: PointAnnotationManager? = null
     private var currentPosition = Point.fromLngLat(19.13491, 48.6385)
     private var addingContent = false
@@ -69,14 +69,18 @@ class MapFragment : Fragment(), View.OnClickListener {
         setHasOptionsMenu(true)
         //super.onCreate(savedInstanceState)
         // Initialize Firebase Auth
-        auth = Firebase.auth
-        lifecycleScope.launch {
+        //auth = Firebase.auth
+        /*lifecycleScope.launch {
             val time = measureTimeMillis {
                 anonymousUser()
             }
             Log.d("TIME", "it took $time")
 
+        }*/
+        if (!checkIfLoggedIn()) {
+            lifecycleScope.launch { anonymousUser()}
         }
+
         readDatabase()
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         mapView = binding.mapView
@@ -739,17 +743,23 @@ class MapFragment : Fragment(), View.OnClickListener {
     }
 
     private fun checkIfLoggedIn(): Boolean {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        Log.d("MAP_FRAGMENT LOG", currentUser?.email.toString());
+        /*if (currentUser != null) {
             return currentUser.email != null
+        }*/
+        if(currentUser!=null){
+            Log.d("MAP_FRAGMENT", currentUser.isAnonymous.toString())
+            return ! currentUser.isAnonymous;
         }
+        //return FirebaseAuth.getInstance().currentUser?.isAnonymous ?:
         return false
     }
 
     suspend fun anonymousUser() = withContext(Dispatchers.IO) {
-        auth.signInAnonymously()
+        FirebaseAuth.getInstance().signInAnonymously()
             .addOnSuccessListener {
-                val currentUser = auth.currentUser
+                val currentUser = FirebaseAuth.getInstance().currentUser
                 Log.d("signInAnonymously", "Authentication successful")
             }
             .addOnFailureListener { task ->

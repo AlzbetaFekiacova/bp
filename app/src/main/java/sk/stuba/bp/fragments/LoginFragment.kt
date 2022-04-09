@@ -2,12 +2,14 @@ package sk.stuba.bp.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -57,7 +59,48 @@ class LoginFragment : Fragment(), View.OnClickListener {
             else -> {
                 val email = binding.editTxtEmailLogIn.text.toString().trim { it <= ' ' }
                 val password = binding.editTxtPasswordLogIn.text.toString()
+                val credential = EmailAuthProvider.getCredential(email, password)
+
+
                 auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(context, "Prihlásenie bolo úspešné", Toast.LENGTH_LONG)
+                                .show()
+                            val user = auth.currentUser
+                            auth.currentUser!!.linkWithCredential(credential)
+                                .addOnCompleteListener() { task ->
+                                    if (task.isSuccessful) {
+                                        Log.d("LOGINFRAGMENT", "linkWithCredential:success")
+                                        val user = task.result?.user
+                                        //updateUI(user)
+                                    } else {
+                                        Log.w("LOGINFRAGMENT", "linkWithCredential:failure", task.exception)
+                                        Toast.makeText(context, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show()
+                                        //updateUI(null)
+                                    }
+                                }
+                            findNavController().navigate(R.id.mapFragment)
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(context, task.exception.toString(), Toast.LENGTH_LONG)
+                                .show()
+                            numberOfLogs++
+                            if (numberOfLogs >= 3) {
+                                numberOfLogs = 0
+                                binding.btnLogIn.visibility = View.INVISIBLE
+                                binding.btnForgottenPassword.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+            }
+
+
+
+
+               /* auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
@@ -76,9 +119,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
                                 binding.btnForgottenPassword.visibility = View.VISIBLE
                             }
                         }
-                    }
+                    }*/
 
-            }
+
         }
 
     }
