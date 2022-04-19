@@ -23,18 +23,18 @@ class SharedViewModel : ViewModel() {
     )
 
     var result = false
-    var backUpMachines = arrayListOf<Container>()
-    var containersPlastic = arrayListOf<Container>()
-    var containersPaper = arrayListOf<Container>()
-    var containersCommunal = arrayListOf<Container>()
-    var containersBio = arrayListOf<Container>()
-    var containersMetal = arrayListOf<Container>()
-    var containersGlass = arrayListOf<Container>()
-    var binsPlastic = arrayListOf<Container>()
-    var binsPaper = arrayListOf<Container>()
-    var binsCommunal = arrayListOf<Container>()
-    var clothesCollecting = arrayListOf<Container>()
-    var oloGlassContainers = arrayListOf<Container>()
+//    var backUpMachines = arrayListOf<Container>()
+//    var containersPlastic = arrayListOf<Container>()
+//    var containersPaper = arrayListOf<Container>()
+//    var containersCommunal = arrayListOf<Container>()
+//    var containersBio = arrayListOf<Container>()
+//    var containersMetal = arrayListOf<Container>()
+//    var containersGlass = arrayListOf<Container>()
+//    var binsPlastic = arrayListOf<Container>()
+//    var binsPaper = arrayListOf<Container>()
+//    var binsCommunal = arrayListOf<Container>()
+//    var clothesCollecting = arrayListOf<Container>()
+//    var oloGlassContainers = arrayListOf<Container>()
 
     lateinit var databaseName: String
     lateinit var db: FirebaseFirestore
@@ -44,10 +44,6 @@ class SharedViewModel : ViewModel() {
     lateinit var annotation: PointAnnotation
 
     var customAnnotations = mutableMapOf<PointAnnotation, Container>()
-
-    fun saveDb(dbb: FirebaseFirestore) {
-        this.db = dbb
-    }
 
     fun saveContainer(item: Container, databaseName: String, db: FirebaseFirestore) {
         this.db = db

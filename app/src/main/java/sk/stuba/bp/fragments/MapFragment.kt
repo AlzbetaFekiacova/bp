@@ -36,6 +36,7 @@ import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import sk.stuba.bp.*
 import sk.stuba.bp.databinding.FragmentMapBinding
@@ -53,14 +54,27 @@ class MapFragment : Fragment(), View.OnClickListener {
     private lateinit var mapboxMap: MapboxMap
     private lateinit var onMapReady: (MapboxMap) -> Unit
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     //private lateinit var auth: FirebaseAuth
     private var pointAnnotationManager: PointAnnotationManager? = null
     private var currentPosition = Point.fromLngLat(19.13491, 48.6385)
+    private val constLocation = Point.fromLngLat(19.13491, 48.6385)
     private var addingContent = false
     private lateinit var content: Number
     private lateinit var databaseName: String
     private val sharedViewModel: SharedViewModel by activityViewModels()
-
+    var backUpMachines = arrayListOf<Container>()
+    var containersPlastic = arrayListOf<Container>()
+    var containersPaper = arrayListOf<Container>()
+    var containersCommunal = arrayListOf<Container>()
+    var containersBio = arrayListOf<Container>()
+    var containersMetal = arrayListOf<Container>()
+    var containersGlass = arrayListOf<Container>()
+    var binsPlastic = arrayListOf<Container>()
+    var binsPaper = arrayListOf<Container>()
+    var binsCommunal = arrayListOf<Container>()
+    var clothesCollecting = arrayListOf<Container>()
+    var oloGlassContainers = arrayListOf<Container>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,7 +91,7 @@ class MapFragment : Fragment(), View.OnClickListener {
             Log.d("TIME", "it took $time")
         }*/
         if (!checkIfLoggedIn()) {
-            lifecycleScope.launch { anonymousUser()}
+            lifecycleScope.launch { anonymousUser() }
         }
 
         readDatabase()
@@ -88,7 +102,7 @@ class MapFragment : Fragment(), View.OnClickListener {
 
         binding.btnCancel.setOnClickListener {
 
-            pointAnnotationManager!!.delete(pointAnnotationManager!!.annotations[pointAnnotationManager!!.annotations.lastIndex])
+            pointAnnotationManager?.delete(pointAnnotationManager!!.annotations[pointAnnotationManager!!.annotations.lastIndex])
             binding.btnCancel.visibility = View.INVISIBLE
             binding.btnDone.visibility = View.INVISIBLE
             addingContent = false
@@ -218,7 +232,7 @@ class MapFragment : Fragment(), View.OnClickListener {
 
 
             pointAnnotationManager!!.create(pointAnnotationOptions)
-            if (custom) {
+            if (custom && checkIfLoggedIn()) {
                 pointAnnotationManager!!.addClickListener(OnPointAnnotationClickListener { it ->
                     if (currentPosition.latitude() != 48.6385 && currentPosition.longitude() != 19.13491) {
 
@@ -747,15 +761,15 @@ class MapFragment : Fragment(), View.OnClickListener {
         /*if (currentUser != null) {
             return currentUser.email != null
         }*/
-        if(currentUser!=null){
+        if (currentUser != null) {
             Log.d("MAP_FRAGMENT", currentUser.isAnonymous.toString())
-            return ! currentUser.isAnonymous;
+            return !currentUser.isAnonymous;
         }
         //return FirebaseAuth.getInstance().currentUser?.isAnonymous ?:
         return false
     }
 
-    suspend fun anonymousUser() = withContext(Dispatchers.IO) {
+    private suspend fun anonymousUser() = withContext(Dispatchers.IO) {
         FirebaseAuth.getInstance().signInAnonymously()
             .addOnSuccessListener {
                 val currentUser = FirebaseAuth.getInstance().currentUser
@@ -767,6 +781,39 @@ class MapFragment : Fragment(), View.OnClickListener {
 
 
     }
+
+
+//    suspend fun fetchDecksByLanguage(name: String,
+//                                     db: FirebaseFirestore,
+//                                     arrayToFill: ArrayList<Container>): List<Container> {
+//
+//        val result = suspendCancellableCoroutine<List<Container>> { continuation ->
+//
+//            db.collection("Decks")
+//                .whereArrayContains("languages", activeLanguage)
+//                .get()
+//                .addOnSuccessListener { documents ->
+//
+//                    val items = ArrayList<Decks>()
+//
+//                    if (documents != null) {
+//                        for (document in documents) {
+//                            val id: String = document.id
+//                            val name: String = document.data["name"] as String
+//                            val languages: List<String> =
+//                                document.data["languages"] as List<String>
+//                            items.add(Decks(id, name, languages))
+//                        }
+//
+//                    }
+//                    continuation.resume(items)
+//                }
+//                .addOnFailureListener { err ->
+//                    continuation.resumeWithException(err)
+//                }
+//        }
+//        return result
+//    }
 
     private fun readCollection(
         name: String,
@@ -896,60 +943,89 @@ class MapFragment : Fragment(), View.OnClickListener {
             readCollection(
                 MyConstants.CLOTHES_COLLECTING,
                 db,
-                sharedViewModel.clothesCollecting
+                // sharedViewModel.clothesCollecting
+                clothesCollecting
             )
         }
         if (sharedViewModel.filters[MyConstants.BACK_UP] == true) {
-            readCollection(MyConstants.BACK_UP, db, sharedViewModel.backUpMachines)
+            readCollection(
+                MyConstants.BACK_UP, db,
+                //sharedViewModel.backUpMachines)
+                backUpMachines
+            )
         }
         if (sharedViewModel.filters[MyConstants.CONTAINER_BIO] == true) {
-            readCollection(MyConstants.CONTAINER_BIO, db, sharedViewModel.containersBio)
+            readCollection(
+                MyConstants.CONTAINER_BIO, db,
+                //sharedViewModel.containersBio
+                containersBio
+            )
         }
         if (sharedViewModel.filters[MyConstants.CONTAINER_COMMUNAL] == true) {
             readCollection(
                 MyConstants.CONTAINER_COMMUNAL,
                 db,
-                sharedViewModel.containersCommunal
+                //sharedViewModel.containersCommunal
+                containersCommunal
             )
         }
         if (sharedViewModel.filters[MyConstants.CONTAINER_PAPER] == true) {
             readCollection(
                 MyConstants.CONTAINER_PAPER,
                 db,
-                sharedViewModel.containersPaper
+                //sharedViewModel.
+                containersPaper
             )
         }
         if (sharedViewModel.filters[MyConstants.CONTAINER_PLASTIC] == true) {
             readCollection(
                 MyConstants.CONTAINER_PLASTIC,
                 db,
-                sharedViewModel.containersPlastic
+                //sharedViewModel.
+                containersPlastic
             )
         }
         if (sharedViewModel.filters[MyConstants.CONTAINER_METAL] == true) {
             readCollection(
                 MyConstants.CONTAINER_METAL,
                 db,
-                sharedViewModel.containersMetal            )
+                //sharedViewModel.
+                containersMetal
+            )
         }
         if (sharedViewModel.filters[MyConstants.CONTAINER_GLASS] == true) {
             readCollection(
                 MyConstants.CONTAINER_GLASS,
                 db,
-                sharedViewModel.containersGlass
+                //sharedViewModel.
+                containersGlass
             )
 
-            readCollection(MyConstants.OLO_DATA_GLASS, db, sharedViewModel.containersGlass)
+            readCollection(
+                MyConstants.OLO_DATA_GLASS, db,
+                //sharedViewModel.
+                containersGlass
+            )
 
         }
         if (sharedViewModel.filters[MyConstants.BIN_COMMUNAL] == true) {
-            readCollection(MyConstants.BIN_COMMUNAL, db, sharedViewModel.binsCommunal)
+            readCollection(
+                MyConstants.BIN_COMMUNAL, db,
+                //sharedViewModel.
+                binsCommunal
+            )
         }
         if (sharedViewModel.filters[MyConstants.BIN_PAPER] == true) {
-            readCollection(MyConstants.BIN_PAPER, db, sharedViewModel.binsPaper)
+            readCollection(
+                MyConstants.BIN_PAPER, db, //sharedViewModel.
+                binsPaper
+            )
         }
         if (sharedViewModel.filters[MyConstants.BIN_PLASTIC] == true) {
-            readCollection(MyConstants.BIN_PLASTIC, db, sharedViewModel.binsPlastic)
+            readCollection(
+                MyConstants.BIN_PLASTIC, db, //sharedViewModel.
+                binsPlastic
+            )
         }
     }
 
