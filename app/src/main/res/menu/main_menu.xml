@@ -51,7 +51,7 @@
             <item
                 android:id="@+id/subItemElectronicsContainer"
                 android:icon="@drawable/ic_trash_container_red"
-                android:title="@string/forElectronics" />
+                android:title="@string/forMetal" />
             <item
                 android:id="@+id/subItemMixContainer"
                 android:icon="@drawable/ic_trash_container_black"
@@ -78,10 +78,10 @@
         android:id="@+id/itemRegister"
         android:icon="@drawable/ic_baseline_app_registration_24"
         android:title="@string/register" />
-    <item
+    <!---<item
         android:id="@+id/itemAppInfo"
         android:icon="@drawable/ic_baseline_info_24"
-        android:title="@string/appInfo" />
+        android:title="@string/appInfo" />-->
     <item
         android:id="@+id/itemRecycleInfo"
         android:icon="@drawable/ic_baseline_how_to_vote_24"

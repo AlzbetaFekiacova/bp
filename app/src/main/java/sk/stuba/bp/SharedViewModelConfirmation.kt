@@ -1,7 +1,6 @@
 package sk.stuba.bp
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -63,7 +62,7 @@ class SharedViewModelConfirmation : ViewModel() {
                 container.value?.let { containersGlass.add(it) }
 
             }
-            MyConstants.CONTAINER_ELECTRO -> {
+            MyConstants.CONTAINER_METAL -> {
                 container.value?.let { containersElectro.add(it) }
 
             }

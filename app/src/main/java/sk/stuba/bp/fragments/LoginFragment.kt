@@ -74,12 +74,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
                                     if (task.isSuccessful) {
                                         Log.d("LOGINFRAGMENT", "linkWithCredential:success")
                                         val user = task.result?.user
-                                        //updateUI(user)
                                     } else {
                                         Log.w("LOGINFRAGMENT", "linkWithCredential:failure", task.exception)
-                                        Toast.makeText(context, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show()
-                                        //updateUI(null)
+                                        /*Toast.makeText(context, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show()*/
                                     }
                                 }
                             findNavController().navigate(R.id.mapFragment)

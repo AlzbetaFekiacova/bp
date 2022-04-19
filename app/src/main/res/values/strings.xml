@@ -11,7 +11,7 @@
     <string name="addContainer">Pridať kontajner</string>
     <string name="forGlass">Sklo</string>
     <string name="forBio">Bio odpad</string>
-    <string name="forElectronics">Elektro odpad</string>
+    <string name="forMetal">Kov</string>
     <string name="addClothesCollect">Pridať zber šatstva</string>
     <string name="addCollectingSite">Pridať zberné miesto</string>
     <string name="logIn">Prihlásiť sa</string>
@@ -40,7 +40,7 @@
         <item>Komunálny odpad</item>
         <item>Zber šatstva</item>
         <item>Zálohovanie fliaš a plechoviek</item>
-        <item>Elektro odpad</item>
+        <item>Kov</item>
     </string-array>
 
     <string-array name="separation_description">
@@ -50,7 +50,7 @@
         <item>Patrí: šupky, čajové vrecúška, ovocie, zelenina, odpad z verejnej zelene, lístie, tráva, záhradný odpad \nNepatrí:  mäso, popol, stavebný odpad a pod.</item>
         <item>Patrí: zmesový komunálny odpad (zvyšok po vytriedení) \nNepatrí: biologicky rozložiteľný odpad, elektro-odpad a batérie, objemnný odpad, stavebný odpad, horľaviny</item>
         <item>Patrí: akékľvek oblečenie, topánky \nNepatrí: hocičo iné</item>
-        <item>Patrí: nestlačené plechovky a flaše od nápojov označené Z \nNepatrí: poškodené plechovky a flaše, nezláhovateľné obaly</item>
+        <item>Patrí: nestlačené plechovky a flaše od nápojov označené Z \nNepatrí: poškodené plechovky a flaše, nezálohovateľné obaly</item>
         <item>Patrí: kovové obaly, konzervy, kovové výrobky a súčiastky, alobal, nápojové plechovky. Triedia sa podľa pokynov obce/mesta. \nNepatrí: Kovové obaly kombinované s iným materiálom, napr. tuby z krémov a pást. Mäkké vrecúška, napr. z kávy. Kovové obaly obsahujúce zvyšky nebezpečných látok. Nadrozmerný kovový odpad je potrebné odniesť do zberní kovov, príp. do zberných dvorov.</item>
     </string-array>
 

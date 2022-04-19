@@ -75,7 +75,6 @@ class MapFragment : Fragment(), View.OnClickListener {
                 anonymousUser()
             }
             Log.d("TIME", "it took $time")
-
         }*/
         if (!checkIfLoggedIn()) {
             lifecycleScope.launch { anonymousUser()}
@@ -245,7 +244,7 @@ class MapFragment : Fragment(), View.OnClickListener {
                                 }
                                 R.drawable.marker_container_electro -> {
                                     sharedViewModel.databaseName =
-                                        MyConstants.CONTAINER_ELECTRO
+                                        MyConstants.CONTAINER_METAL
                                 }
                                 R.drawable.marker_container_bio -> {
                                     sharedViewModel.databaseName =
@@ -422,9 +421,9 @@ class MapFragment : Fragment(), View.OnClickListener {
             R.id.itemRegister -> {
                 findNavController().navigate(R.id.registrationFragment)
             }
-            R.id.itemAppInfo -> {
-                Toast.makeText(context, "Clicked on app info", Toast.LENGTH_LONG).show()
-            }
+//            R.id.itemAppInfo -> {
+//                Toast.makeText(context, "Clicked on app info", Toast.LENGTH_LONG).show()
+//            }
             R.id.itemRecycleInfo -> {
                 //Toast.makeText(context, "Clicked on recycle info", Toast.LENGTH_LONG).show()
                 findNavController().navigate(R.id.separationInfoFragment)
@@ -593,7 +592,7 @@ class MapFragment : Fragment(), View.OnClickListener {
                     //databaseName = "trashContainers"
                     //content = 4
                     //addItem(5, 4)
-                    databaseName = MyConstants.CONTAINER_ELECTRO
+                    databaseName = MyConstants.CONTAINER_METAL
                     addItem(databaseName)
                 }
             }
@@ -649,7 +648,7 @@ class MapFragment : Fragment(), View.OnClickListener {
                     custom = true
                 )
             }
-            MyConstants.CONTAINER_ELECTRO -> {
+            MyConstants.CONTAINER_METAL -> {
                 addAnnotationToMap(
                     position, R.drawable.marker_container_electro,
                     draggable = true,
@@ -831,7 +830,7 @@ class MapFragment : Fragment(), View.OnClickListener {
                         container.custom!!
                     )
                 }
-                MyConstants.CONTAINER_ELECTRO -> {
+                MyConstants.CONTAINER_METAL -> {
                     addAnnotationToMap(
                         Point.fromLngLat(container.longitude!!, container.latitude!!),
                         R.drawable.marker_container_electro,
@@ -927,12 +926,11 @@ class MapFragment : Fragment(), View.OnClickListener {
                 sharedViewModel.containersPlastic
             )
         }
-        if (sharedViewModel.filters[MyConstants.CONTAINER_ELECTRO] == true) {
+        if (sharedViewModel.filters[MyConstants.CONTAINER_METAL] == true) {
             readCollection(
-                MyConstants.CONTAINER_ELECTRO,
+                MyConstants.CONTAINER_METAL,
                 db,
-                sharedViewModel.containersElectro
-            )
+                sharedViewModel.containersMetal            )
         }
         if (sharedViewModel.filters[MyConstants.CONTAINER_GLASS] == true) {
             readCollection(

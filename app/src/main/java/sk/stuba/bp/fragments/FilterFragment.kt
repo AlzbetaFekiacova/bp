@@ -2,7 +2,6 @@ package sk.stuba.bp.fragments
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -24,7 +23,7 @@ class FilterFragment : DialogFragment() {
         "Kontajner - Plast",
         "Kontajner - Papier",
         "Kontajner - Zmesový odpad",
-        "Kontajner - Elktro odpad",
+        "Kontajner - Kovy",
         "Kontajner - Bio odpad",
         "Kôš - Zmesový odpad",
         "Kôš - Plast",
@@ -39,7 +38,7 @@ class FilterFragment : DialogFragment() {
         MyConstants.CONTAINER_PLASTIC,
         MyConstants.CONTAINER_PAPER,
         MyConstants.CONTAINER_COMMUNAL,
-        MyConstants.CONTAINER_ELECTRO,
+        MyConstants.CONTAINER_METAL,
         MyConstants.CONTAINER_BIO,
         MyConstants.BIN_COMMUNAL,
         MyConstants.BIN_PLASTIC,

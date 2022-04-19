@@ -6,7 +6,7 @@ object MyConstants {
     const val CONTAINER_PLASTIC = "containersPlastic"
     const val CONTAINER_PAPER = "containersPaper"
     const val CONTAINER_COMMUNAL = "containersCommunal"
-    const val CONTAINER_ELECTRO = "containersElectro"
+    const val CONTAINER_METAL = "containersMetal"
     const val CONTAINER_BIO = "containersBio"
     const val BIN_COMMUNAL = "binsCommunal"
     const val BIN_PLASTIC = "binsPlastic"

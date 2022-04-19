@@ -14,7 +14,7 @@ class SharedViewModel : ViewModel() {
         MyConstants.CONTAINER_PLASTIC to true,
         MyConstants.CONTAINER_PAPER to true,
         MyConstants.CONTAINER_COMMUNAL to true,
-        MyConstants.CONTAINER_ELECTRO to true,
+        MyConstants.CONTAINER_METAL to true,
         MyConstants.CONTAINER_BIO to true,
         MyConstants.BIN_COMMUNAL to true,
         MyConstants.BIN_PLASTIC to true,
@@ -28,7 +28,7 @@ class SharedViewModel : ViewModel() {
     var containersPaper = arrayListOf<Container>()
     var containersCommunal = arrayListOf<Container>()
     var containersBio = arrayListOf<Container>()
-    var containersElectro = arrayListOf<Container>()
+    var containersMetal = arrayListOf<Container>()
     var containersGlass = arrayListOf<Container>()
     var binsPlastic = arrayListOf<Container>()
     var binsPaper = arrayListOf<Container>()
@@ -36,8 +36,6 @@ class SharedViewModel : ViewModel() {
     var clothesCollecting = arrayListOf<Container>()
     var oloGlassContainers = arrayListOf<Container>()
 
-    //private var _container = MutableLiveData<Container>()
-    //var container: LiveData<Container> = _container
     lateinit var databaseName: String
     lateinit var db: FirebaseFirestore
     var container = Container()
@@ -64,44 +62,6 @@ class SharedViewModel : ViewModel() {
     }
 
 
-    fun fillCollection(databaseName: String, container: Container) {
-        when (databaseName) {
-            MyConstants.BIN_PLASTIC -> {
-                binsPlastic.add(container)
-            }
-            MyConstants.BIN_PAPER -> {
-                binsPaper.add(container)
-            }
-            MyConstants.BIN_COMMUNAL -> {
-                binsCommunal.add(container)
-            }
-            MyConstants.CLOTHES_COLLECTING -> {
-                clothesCollecting.add(container)
-            }
-            MyConstants.BACK_UP -> {
-                backUpMachines.add(container)
-            }
-            MyConstants.CONTAINER_COMMUNAL -> {
-                containersCommunal.add(container)
-            }
-            MyConstants.CONTAINER_GLASS -> {
-                containersGlass.add(container)
-            }
-            MyConstants.CONTAINER_ELECTRO -> {
-                containersElectro.add(container)
-            }
-            MyConstants.CONTAINER_PLASTIC -> {
-                containersPlastic.add(container)
-            }
-            MyConstants.CONTAINER_PAPER -> {
-                containersPaper.add(container)
-            }
-            MyConstants.CONTAINER_BIO -> {
-                containersBio.add(container)
-            }
-        }
-    }
-
     fun click(pointAnnotation: PointAnnotation, pointAnnotationManager: PointAnnotationManager) {
         this.annotation = pointAnnotation
         this.annotationManager = pointAnnotationManager
@@ -127,7 +87,6 @@ class SharedViewModel : ViewModel() {
                         document.getBoolean("isActive"),
                         document.getDouble("latitude"),
                         document.getDouble("longitude"),
-                        //document.getDate("timeStamp"),
                     )
 
                 }
