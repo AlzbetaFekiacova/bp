@@ -54,8 +54,6 @@ class MapFragment : Fragment(), View.OnClickListener {
     private lateinit var mapboxMap: MapboxMap
     private lateinit var onMapReady: (MapboxMap) -> Unit
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
-    //private lateinit var auth: FirebaseAuth
     private var pointAnnotationManager: PointAnnotationManager? = null
     private var currentPosition = Point.fromLngLat(19.13491, 48.6385)
     private val constLocation = Point.fromLngLat(19.13491, 48.6385)
@@ -235,7 +233,6 @@ class MapFragment : Fragment(), View.OnClickListener {
             if (custom && checkIfLoggedIn()) {
                 pointAnnotationManager!!.addClickListener(OnPointAnnotationClickListener { it ->
                     if (currentPosition.latitude() != 48.6385 && currentPosition.longitude() != 19.13491) {
-
                         if (getDistance(
                                 currentPosition.latitude(),
                                 currentPosition.longitude(),
@@ -650,109 +647,116 @@ class MapFragment : Fragment(), View.OnClickListener {
     @SuppressLint("MissingPermission")
     //private fun addItem(container: Int, content: Int) {
     private fun addItem(item: String) {
-        val position = Point.fromLngLat(
-            currentPosition.longitude() - 0.001,
-            currentPosition.latitude() + 0.001
-        )
-        when (item) {
-            MyConstants.CONTAINER_GLASS -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_container_glass,
-                    draggable = true,
-                    custom = true
-                )
+        if(currentPosition.equals(constLocation)){
+            Toast.makeText(context, "Pre pridanie sa musíš najprv lokalizovať", Toast.LENGTH_SHORT).show()
+            addingContent = false
+        }
+        else {
+
+
+            val position = Point.fromLngLat(
+                currentPosition.longitude() - 0.001,
+                currentPosition.latitude() + 0.001
+            )
+            when (item) {
+                MyConstants.CONTAINER_GLASS -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_container_glass,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.CONTAINER_METAL -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_container_electro,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.CONTAINER_PLASTIC -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_container_plastic,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.CONTAINER_PAPER -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_container_paper,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.CONTAINER_COMMUNAL -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_container_comunal,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.CONTAINER_BIO -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_container_bio,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.BIN_PLASTIC -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_bin_plastic,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.BIN_PAPER -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_bin_paper,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.BIN_COMMUNAL -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_bin_comunal,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.CLOTHES_COLLECTING -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_collecting_clothes,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+                MyConstants.BACK_UP -> {
+                    addAnnotationToMap(
+                        position, R.drawable.marker_back_up,
+                        draggable = true,
+                        custom = true
+                    )
+                }
+
             }
-            MyConstants.CONTAINER_METAL -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_container_electro,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.CONTAINER_PLASTIC -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_container_plastic,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.CONTAINER_PAPER -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_container_paper,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.CONTAINER_COMMUNAL -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_container_comunal,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.CONTAINER_BIO -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_container_bio,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.BIN_PLASTIC -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_bin_plastic,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.BIN_PAPER -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_bin_paper,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.BIN_COMMUNAL -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_bin_comunal,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.CLOTHES_COLLECTING -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_collecting_clothes,
-                    draggable = true,
-                    custom = true
-                )
-            }
-            MyConstants.BACK_UP -> {
-                addAnnotationToMap(
-                    position, R.drawable.marker_back_up,
-                    draggable = true,
-                    custom = true
-                )
-            }
+
+            val cameraOptions = CameraOptions.Builder()
+                .center(position)
+                .zoom(15.5)
+                .build()
+
+            mapView.getMapboxMap().flyTo(
+                cameraOptions,
+                mapAnimationOptions {
+                    duration(3000)
+                }
+            )
+
+
+
+            binding.btnDone.visibility = View.VISIBLE
+            binding.btnCancel.visibility = View.VISIBLE
 
         }
-
-        val cameraOptions = CameraOptions.Builder()
-            .center(position)
-            .zoom(15.5)
-            .build()
-
-        mapView.getMapboxMap().flyTo(
-            cameraOptions,
-            mapAnimationOptions {
-                duration(3000)
-            }
-        )
-
-
-
-        binding.btnDone.visibility = View.VISIBLE
-        binding.btnCancel.visibility = View.VISIBLE
-
-
     }
 
     private fun checkIfLoggedIn(): Boolean {
