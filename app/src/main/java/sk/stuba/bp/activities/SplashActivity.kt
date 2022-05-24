@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import sk.stuba.bp.R
 
+//https://www.youtube.com/watch?v=Q0gRqbtFLcw
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

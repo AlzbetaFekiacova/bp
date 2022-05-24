@@ -31,6 +31,24 @@
     <string name="yes">Áno</string>
     <string name="log_out">Odhlásiť sa</string>
     <string name="userInfo">Informácie o užívateľovi</string>
+    <string name="promtToFinifshAdding">Pre pridanie musis najprv potvrdit pridanie posledneho kosa</string>
+    <string name="promtToLocalize">Pre pridanie sa musíš najprv lokalizovať</string>
+    <string name="localizedTxt">Lokalizovné</string>
+    <string name="lozalizationNotSuccessfulTxt">Nepodarilo sa lokalizovať</string>
+    <string name="IwantToLogInTxt">Áno, chcem sa odhlásiť</string>
+    <string name="IdoNotWantToLogOut">Nie, nechcem sa odhlásiť</string>
+    <string name="succesffulyLoggedOut">Boli ste úspešne odhlásený</string>
+    <string name="toLogOut">ODHLÁSENIE Z ÚČTU</string>
+    <string name="NotFullFuncionallityTxt">Po odhlásení nebude možné využívať plnú funkcionalitu aplikácie.</string>
+    <string name="yesToDelete">Áno, chcem zmazať</string>
+    <string name="successfullyDeleted">Váš účet bol úspešne odstránený</string>
+    <string name="noToDelete">Nie, nechcem zmazať</string>
+    <string name="ToDelete">ZMAZANIE ÚČTU</string>
+    <string name="afterDeleteNoFullFuncionallity">Po zamazní účtu stratíte prístup k vášmu účtu.</string>
+    <string name="noSuccessfulLogIn">Prihlásenie nebolo úspešné</string>
+    <string name="successfulRegistration">Úspešná registrácia</string>
+    <string name="emailRequierdText">Musíš zadať emailovú adresu</string>
+    <string name="enterPassworText">Musíš zadať heslo</string>
 
     <string-array name="separation_info">
         <item>Papier</item>

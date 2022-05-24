@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.plugin:maps-animation:10.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b82e6b6ffc362fcbdcf6df2d130e6029/transformed/maps-animation-10.3.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b82e6b6ffc362fcbdcf6df2d130e6029/transformed/maps-animation-10.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b82e6b6ffc362fcbdcf6df2d130e6029/transformed/maps-animation-10.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5f9dd91abe62ebb69e51f09d6a23f418/transformed/maps-animation-10.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5f9dd91abe62ebb69e51f09d6a23f418/transformed/maps-animation-10.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5f9dd91abe62ebb69e51f09d6a23f418/transformed/maps-animation-10.3.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-animation/10.3.0/f106cf06476122bc00e8ac8e244d44c1e78c59c/maps-animation-10.3.0-javadoc.jar!/" />

@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.plugin:maps-annotation:10.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/83dc6124dd972333cac3f305defd3e0b/transformed/maps-annotation-10.3.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/83dc6124dd972333cac3f305defd3e0b/transformed/maps-annotation-10.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/83dc6124dd972333cac3f305defd3e0b/transformed/maps-annotation-10.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ac08a1f0e0ca9010ecbc0b13995c50ff/transformed/maps-annotation-10.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ac08a1f0e0ca9010ecbc0b13995c50ff/transformed/maps-annotation-10.3.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ac08a1f0e0ca9010ecbc0b13995c50ff/transformed/maps-annotation-10.3.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-annotation/10.3.0/cd8bce783ca55c6db792c02374f9f629f99568c8/maps-annotation-10.3.0-javadoc.jar!/" />

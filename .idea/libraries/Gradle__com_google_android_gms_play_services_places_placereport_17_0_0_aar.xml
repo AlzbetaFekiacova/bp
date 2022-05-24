@@ -2,9 +2,10 @@
   <library name="Gradle: com.google.android.gms:play-services-places-placereport:17.0.0@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1606b4e2f29b1477a42ed21506dd2df4/transformed/play-services-places-placereport-17.0.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c315acf8ed2b9f660386a45f67387d9f/transformed/play-services-places-placereport-17.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c315acf8ed2b9f660386a45f67387d9f/transformed/play-services-places-placereport-17.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c315acf8ed2b9f660386a45f67387d9f/transformed/play-services-places-placereport-17.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/84c5baa5b115b300da9c7163f726044c/transformed/play-services-places-placereport-17.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/84c5baa5b115b300da9c7163f726044c/transformed/play-services-places-placereport-17.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/84c5baa5b115b300da9c7163f726044c/transformed/play-services-places-placereport-17.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

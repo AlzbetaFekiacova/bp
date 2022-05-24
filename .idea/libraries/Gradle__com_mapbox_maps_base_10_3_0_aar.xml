@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.maps:base:10.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4c0175741c23e872a93a1b2efe31f71a/transformed/base-10.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4c0175741c23e872a93a1b2efe31f71a/transformed/base-10.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4c0175741c23e872a93a1b2efe31f71a/transformed/base-10.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e118accb874d4c4054d33f931b2e1b2e/transformed/base-10.3.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e118accb874d4c4054d33f931b2e1b2e/transformed/base-10.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e118accb874d4c4054d33f931b2e1b2e/transformed/base-10.3.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.maps/base/10.3.0/e1e5bd9a3fe16884827df4c2c0c36ec3043ffeef/base-10.3.0-javadoc.jar!/" />

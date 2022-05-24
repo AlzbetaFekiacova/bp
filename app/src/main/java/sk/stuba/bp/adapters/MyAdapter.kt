@@ -1,33 +1,32 @@
 package sk.stuba.bp.adapters
 
-import android.content.ClipDescription
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import sk.stuba.bp.R
 
+//https://guides.codepath.com/android/using-the-recyclerview
 class MyAdapter(
     val context: Context,
     private val separationTitles: ArrayList<String>,
     private val separationDescription: ArrayList<String>,
     private val images: ArrayList<Int>
 ) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
-    private lateinit var holder: MyAdapter.ViewHolder
+    private lateinit var holder: ViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        holder = MyAdapter.ViewHolder(
+        holder = ViewHolder(
             LayoutInflater.from(context).inflate(R.layout.item_separarion_row, parent, false)
         )
         return holder
 
     }
 
-    override fun onBindViewHolder(holder: MyAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.imageView.setImageResource(images[position])
         holder.titleText.text = separationTitles[position]
         holder.contentText.text = separationDescription[position]

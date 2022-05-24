@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import sk.stuba.bp.R
 
+//https://guides.codepath.com/android/using-the-recyclerview
 class ItemAdapter(
     val context: Context,
     private val items: ArrayList<String>,
@@ -18,7 +19,7 @@ class ItemAdapter(
 ) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
-    private lateinit var clickListener: onItemClickListener
+    private lateinit var clickListener: OnMyItemClickListener
     private lateinit var holder: ViewHolder
     private var boolValues = all.values.toList()
 
@@ -32,7 +33,7 @@ class ItemAdapter(
     }
 
 
-    fun setOnItemClickListener(listener: onItemClickListener) {
+    fun setOnItemClickListener(listener: OnMyItemClickListener) {
         clickListener = listener
 
     }
@@ -143,7 +144,7 @@ class ItemAdapter(
     }
 
 
-    class ViewHolder(view: View, listener: onItemClickListener) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, listener: OnMyItemClickListener) : RecyclerView.ViewHolder(view) {
         val tvViewItem: TextView = view.findViewById(R.id.txtViewFilter)
         val imageIcon: ImageView = view.findViewById(R.id.image_icon)
         val cardViewItem: CardView = view.findViewById(R.id.card_view_item)
@@ -163,7 +164,7 @@ class ItemAdapter(
 
     }
 
-    interface onItemClickListener {
+    interface OnMyItemClickListener {
         fun onItemClick(position: Int)
     }
 }

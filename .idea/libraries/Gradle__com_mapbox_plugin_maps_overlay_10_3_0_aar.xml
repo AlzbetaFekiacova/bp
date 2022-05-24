@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.plugin:maps-overlay:10.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/26db4f255a28fe0eec565910a8341621/transformed/maps-overlay-10.3.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/26db4f255a28fe0eec565910a8341621/transformed/maps-overlay-10.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/26db4f255a28fe0eec565910a8341621/transformed/maps-overlay-10.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/71a9823d60003fc6e3e0f41b36919b64/transformed/maps-overlay-10.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/71a9823d60003fc6e3e0f41b36919b64/transformed/maps-overlay-10.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/71a9823d60003fc6e3e0f41b36919b64/transformed/maps-overlay-10.3.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-overlay/10.3.0/53c399e9ddd0956eb47d2e9654766d644c66124c/maps-overlay-10.3.0-javadoc.jar!/" />

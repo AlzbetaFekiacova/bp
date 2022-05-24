@@ -36,7 +36,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
             val emailAddress = binding.editTxtEmailLogIn.text.toString().trim { it <= ' ' }
 
             Firebase.auth.sendPasswordResetEmail(emailAddress)
-                .addOnCompleteListener { _ ->
+                .addOnCompleteListener {
                     Toast.makeText(context, "Zaslany reset hesla na Váš email.", Toast.LENGTH_SHORT).show()
                     binding.btnForgottenPassword.visibility = View.INVISIBLE
                     binding.btnLogIn.visibility = View.VISIBLE
@@ -61,7 +61,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 val password = binding.editTxtPasswordLogIn.text.toString()
                 val credential = EmailAuthProvider.getCredential(email, password)
 
-
+                //https://firebase.google.com/docs/auth/android/start
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -76,8 +76,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
                                         val user = task.result?.user
                                     } else {
                                         Log.w("LOGINFRAGMENT", "linkWithCredential:failure", task.exception)
-                                        /*Toast.makeText(context, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show()*/
                                     }
                                 }
                             findNavController().navigate(R.id.mapFragment)
@@ -94,32 +92,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         }
                     }
             }
-
-
-
-
-               /* auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(context, "Prihlásenie bolo úspešné", Toast.LENGTH_LONG)
-                                .show()
-                            val user = auth.currentUser
-                            findNavController().navigate(R.id.mapFragment)
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(context, task.exception.toString(), Toast.LENGTH_LONG)
-                                .show()
-                            numberOfLogs++
-                            if (numberOfLogs >= 3) {
-                                numberOfLogs = 0
-                                binding.btnLogIn.visibility = View.INVISIBLE
-                                binding.btnForgottenPassword.visibility = View.VISIBLE
-                            }
-                        }
-                    }*/
-
-
         }
 
     }

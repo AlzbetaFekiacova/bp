@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.common:okhttp:21.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c1b1c9ed97907bafac1f3901e26ea0b1/transformed/okhttp-21.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c1b1c9ed97907bafac1f3901e26ea0b1/transformed/okhttp-21.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c1b1c9ed97907bafac1f3901e26ea0b1/transformed/okhttp-21.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/35d1497f17ed0657ee2eefcfcde6753a/transformed/okhttp-21.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/35d1497f17ed0657ee2eefcfcde6753a/transformed/okhttp-21.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/35d1497f17ed0657ee2eefcfcde6753a/transformed/okhttp-21.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.common/okhttp/21.1.0/ba18652b1187ab9dfdf9be878b78fb68ca8ad24b/okhttp-21.1.0-javadoc.jar!/" />

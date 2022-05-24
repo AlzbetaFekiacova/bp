@@ -22,28 +22,15 @@ class SharedViewModel : ViewModel() {
         MyConstants.CLOTHES_COLLECTING to true
     )
 
-    var result = false
-//    var backUpMachines = arrayListOf<Container>()
-//    var containersPlastic = arrayListOf<Container>()
-//    var containersPaper = arrayListOf<Container>()
-//    var containersCommunal = arrayListOf<Container>()
-//    var containersBio = arrayListOf<Container>()
-//    var containersMetal = arrayListOf<Container>()
-//    var containersGlass = arrayListOf<Container>()
-//    var binsPlastic = arrayListOf<Container>()
-//    var binsPaper = arrayListOf<Container>()
-//    var binsCommunal = arrayListOf<Container>()
-//    var clothesCollecting = arrayListOf<Container>()
-//    var oloGlassContainers = arrayListOf<Container>()
-
+    private var result = false
     lateinit var databaseName: String
     lateinit var db: FirebaseFirestore
-    var container = Container()
-    var deleted = false
-    lateinit var annotationManager: PointAnnotationManager
-    lateinit var annotation: PointAnnotation
+    private var container = Container()
+    private var deleted = false
+    private lateinit var annotationManager: PointAnnotationManager
+    private lateinit var annotation: PointAnnotation
 
-    var customAnnotations = mutableMapOf<PointAnnotation, Container>()
+    private var customAnnotations = mutableMapOf<PointAnnotation, Container>()
 
     fun saveContainer(item: Container, databaseName: String, db: FirebaseFirestore) {
         this.db = db
@@ -111,8 +98,6 @@ class SharedViewModel : ViewModel() {
 
 
     fun clickNo() {
-        //Log.d("MENO", databaseName)
-        //Log.d("ANN", customAnnotations[annotation].toString())
         var id = ""
         deleted = false
         db.collection(databaseName)
@@ -121,15 +106,12 @@ class SharedViewModel : ViewModel() {
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    //Log.d("KOS", "${document.id} => ${document.data}")
                     id = document.id
                     container = Container(
                         document.getBoolean("custom"),
                         document.getBoolean("isActive"),
                         document.getDouble("latitude"),
                         document.getDouble("longitude"),
-                        //document.getDate("timeStamp"),
-
                     )
 
                 }

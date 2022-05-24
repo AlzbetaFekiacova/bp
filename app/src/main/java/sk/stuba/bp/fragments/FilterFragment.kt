@@ -12,7 +12,7 @@ import sk.stuba.bp.SharedViewModel
 import sk.stuba.bp.adapters.ItemAdapter
 import sk.stuba.bp.databinding.FragmentFilterBinding
 
-
+//https://guides.codepath.com/android/using-the-recyclerview
 class FilterFragment : DialogFragment() {
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
@@ -58,11 +58,10 @@ class FilterFragment : DialogFragment() {
         val itemAdapter = ItemAdapter(requireContext(), getItemList(), sharedViewModel.filters)
         binding.recyclerViewItems.adapter = itemAdapter
         itemAdapter.setOnItemClickListener(
-            object : ItemAdapter.onItemClickListener {
+            object : ItemAdapter.OnMyItemClickListener {
                 override fun onItemClick(position: Int) {
                     if (position == 11) {
                         dismiss()
-                        //FragmentManager.findFragment<MapFragment>(requireView())
                         findNavController().navigate(R.id.mapFragment)
                     } else {
                         sharedViewModel.change(listOfKeys[position])

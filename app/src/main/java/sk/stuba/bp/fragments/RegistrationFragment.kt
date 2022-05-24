@@ -24,7 +24,6 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         binding.btnRegister.setOnClickListener(this)
         auth = Firebase.auth
@@ -39,11 +38,11 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when {
             TextUtils.isEmpty(binding.editTxtEmailRegister.text.toString().trim { it <= ' ' }) -> {
-                Toast.makeText(context, "Musíš zadať emailovú adresu", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.emailRequierdText), Toast.LENGTH_LONG).show()
             }
             TextUtils.isEmpty(
                 binding.editTxtPasswordRegister.text.toString().trim { it <= ' ' }) -> {
-                Toast.makeText(context, "Musíš zadať heslo", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.enterPassworText), Toast.LENGTH_LONG).show()
             }
             TextUtils.isEmpty(
                 binding.editTxtReenterPasswordRegister.text.toString().trim { it <= ' ' }) -> {
@@ -56,14 +55,14 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
                 val email = binding.editTxtEmailRegister.text.toString().trim { it <= ' ' }
                 val password = binding.editTxtPasswordRegister.text.toString()
 
-                // Create a
+
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
 
                             val user = auth.currentUser
                             logInUser(email, password)
-                            Toast.makeText(context, "Úspešná registrácia", Toast.LENGTH_SHORT)
+                            Toast.makeText(context, getString(R.string.successfulRegistration), Toast.LENGTH_SHORT)
                                 .show()
                             findNavController().navigate(R.id.mapFragment)
                         } else {
@@ -82,12 +81,10 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                 } else {
-                    // If sign in fails, display a message to the user.
                     Toast.makeText(
-                        context, "Prihlásenie nebolo úspešné",
+                        context, getString(R.string.noSuccessfulLogIn),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

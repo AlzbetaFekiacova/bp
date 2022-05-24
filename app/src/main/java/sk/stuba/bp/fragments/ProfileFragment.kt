@@ -39,22 +39,21 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 val builder = AlertDialog.Builder(it)
                 builder.apply {
                     setPositiveButton(
-                        "Áno, chcem sa odhlásiť"
+                        getString(R.string.IwantToLogInTxt)
                     ) { _, _ ->
                         auth.signOut()
-                        Toast.makeText(context, "Boli ste úspešne odhlásený", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, getString(R.string.succesffulyLoggedOut), Toast.LENGTH_SHORT)
                             .show()
                         findNavController().navigate(R.id.mapFragment)
                     }
                     setNegativeButton(
-                        "Nie, nechcem sa odhlásiť"
+                        getString(R.string.IdoNotWantToLogOut)
                     ) { _, _ ->
                         findNavController().navigate(R.id.mapFragment)
                     }
                 }
-                builder.setTitle("ODHLÁSENIE Z ÚČTU")
-                builder.setMessage("Po odhlásení nebude možné využívať plnú funkcionalitu aplikácie.")
-                // Create the AlertDialog
+                builder.setTitle(getString(R.string.toLogOut))
+                builder.setMessage(getString(R.string.NotFullFuncionallityTxt))
                 builder.create()
             }
             alertDialog?.show()
@@ -66,7 +65,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 val builder = AlertDialog.Builder(it)
                 builder.apply {
                     setPositiveButton(
-                        "Áno, chcem zmazať"
+                        getString(R.string.yesToDelete)
                     ) { _, _ ->
                         val user = Firebase.auth.currentUser!!
 
@@ -75,7 +74,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                                 if (task.isSuccessful) {
                                     Toast.makeText(
                                         context,
-                                        "Váš účet bol úspešne odstánený",
+                                        getString(R.string.successfullyDeleted),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     findNavController().navigate(R.id.mapFragment)
@@ -83,14 +82,14 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                             }
                     }
                     setNegativeButton(
-                        "Nie, nechcem zmazať"
+                        getString(R.string.noToDelete)
                     ) { _, _ ->
                         findNavController().navigate(R.id.mapFragment)
                     }
                 }
                 // Set other dialog properties
-                builder.setTitle("ZMAZANIE ÚČTU")
-                builder.setMessage("Po zamazní účtu stratíte prístup k vášmu účtu.")
+                builder.setTitle(getString(R.string.ToDelete))
+                builder.setMessage(getString(R.string.afterDeleteNoFullFuncionallity))
                 // Create the AlertDialog
                 builder.create()
             }

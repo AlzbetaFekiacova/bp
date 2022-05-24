@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import sk.stuba.bp.R
-import sk.stuba.bp.adapters.ItemAdapter
 import sk.stuba.bp.adapters.MyAdapter
 import sk.stuba.bp.databinding.FragmentSeparationInfoBinding
 
+//https://guides.codepath.com/android/using-the-recyclerview
 class SeparationInfoFragment : Fragment() {
     private var _binding: FragmentSeparationInfoBinding? = null
     private val binding get() = _binding!!

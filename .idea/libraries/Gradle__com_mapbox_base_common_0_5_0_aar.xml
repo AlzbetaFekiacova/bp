@@ -2,9 +2,10 @@
   <library name="Gradle: com.mapbox.base:common:0.5.0@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/424a1247b8f33f72eb17683b7f31e3a2/transformed/common-0.5.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7372fc887fc211ed02f8ed3b4e057fc4/transformed/common-0.5.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7372fc887fc211ed02f8ed3b4e057fc4/transformed/common-0.5.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/7372fc887fc211ed02f8ed3b4e057fc4/transformed/common-0.5.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7a2276a11fa9a31dcada91008e273924/transformed/common-0.5.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7a2276a11fa9a31dcada91008e273924/transformed/common-0.5.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/7a2276a11fa9a31dcada91008e273924/transformed/common-0.5.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.base/common/0.5.0/926fe12c03fc6e6fe57037966e7f535454348399/common-0.5.0-javadoc.jar!/" />

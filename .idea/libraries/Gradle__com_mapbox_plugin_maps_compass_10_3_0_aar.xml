@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.plugin:maps-compass:10.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c999f25918d4b613a355cb70592734a5/transformed/maps-compass-10.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c999f25918d4b613a355cb70592734a5/transformed/maps-compass-10.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c999f25918d4b613a355cb70592734a5/transformed/maps-compass-10.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3f215b5f473da3f9caa509642b136074/transformed/maps-compass-10.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/3f215b5f473da3f9caa509642b136074/transformed/maps-compass-10.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3f215b5f473da3f9caa509642b136074/transformed/maps-compass-10.3.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-compass/10.3.0/632f3d32b8eda5755747b378f2bbc8a927a012cc/maps-compass-10.3.0-javadoc.jar!/" />

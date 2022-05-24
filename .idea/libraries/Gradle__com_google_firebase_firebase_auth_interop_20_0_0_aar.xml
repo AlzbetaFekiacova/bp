@@ -2,9 +2,10 @@
   <library name="Gradle: com.google.firebase:firebase-auth-interop:20.0.0@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b9560c3a5749e13edf039556320ce6fb/transformed/firebase-auth-interop-20.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cc12c0fde502d429cf14c6ef046d476f/transformed/firebase-auth-interop-20.0.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/cc12c0fde502d429cf14c6ef046d476f/transformed/firebase-auth-interop-20.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cc12c0fde502d429cf14c6ef046d476f/transformed/firebase-auth-interop-20.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/872cd2570dd66a1c0fabd1f190e31b5c/transformed/firebase-auth-interop-20.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/872cd2570dd66a1c0fabd1f190e31b5c/transformed/firebase-auth-interop-20.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/872cd2570dd66a1c0fabd1f190e31b5c/transformed/firebase-auth-interop-20.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-auth-interop/20.0.0/8014b3cbc53e9c14226052dd919055a99d0d46d8/firebase-auth-interop-20.0.0-javadoc.jar!/" />
