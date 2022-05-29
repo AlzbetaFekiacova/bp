@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import sk.stuba.bp.globalConstants.MyConstants
 import sk.stuba.bp.R
-import sk.stuba.bp.ViewModels.SharedViewModel
+import sk.stuba.bp.viewModels.SharedViewModel
 import sk.stuba.bp.adapters.ItemAdapter
 import sk.stuba.bp.databinding.FragmentFilterBinding
 
@@ -18,7 +18,7 @@ class FilterFragment : DialogFragment() {
     private val binding get() = _binding!!
     private lateinit var sharedViewModel: SharedViewModel
     private var values = arrayListOf(
-        "Zberné miesta",
+        "Zálohovacie automaty",
         "Kontajner - Sklo",
         "Kontajner - Plast",
         "Kontajner - Papier",

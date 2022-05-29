@@ -13,7 +13,7 @@
     <string name="forBio">Bio odpad</string>
     <string name="forMetal">Kov</string>
     <string name="addClothesCollect">Pridať zber šatstva</string>
-    <string name="addCollectingSite">Pridať zberné miesto</string>
+    <string name="addCollectingSite">Pridať zálohovací automat</string>
     <string name="logIn">Prihlásiť sa</string>
     <string name="register">Registrovať sa</string>
     <string name="appInfo">Informácie o aplikácií</string>
@@ -49,6 +49,18 @@
     <string name="successfulRegistration">Úspešná registrácia</string>
     <string name="emailRequierdText">Musíš zadať emailovú adresu</string>
     <string name="enterPassworText">Musíš zadať heslo</string>
+    <string name="skCansAndBottles">Zálohovacie automaty</string>
+    <string name="skGlassContainer">Kontajner - Sklo</string>
+    <string name="skPlasticContainter">Kontajner - Plast</string>
+    <string name="skPaperContainter">Kontajner - Papier</string>
+    <string name="skCommunalContainter">Kontajner - Zmesový odpad</string>
+    <string name="skMetalContainter">Kontajner - Kovy</string>
+    <string name="skBioContainter">Kontajner - Bio odpad</string>
+    <string name="skCommunalBin">Kôš - Zmesový odpad</string>
+    <string name="skPlasticBin">Kôš - Plast</string>
+    <string name="skPaperBin">Kôš - Papier</string>
+    <string name="skClothesCollecting">Zber - Šatstvo</string>
+    <string name="saveFilterTxt">Uložiť filter</string>
 
     <string-array name="separation_info">
         <item>Papier</item>
@@ -60,16 +72,16 @@
         <item>Zálohovanie fliaš a plechoviek</item>
         <item>Kov</item>
     </string-array>
-
+<!--    https://www.olo.sk/separacia-odpadov-triedeny-zber/-->
     <string-array name="separation_description">
-        <item>Patrí: noviny, časopisy, letáky, katalógy, papierové tašky, kartónové obaly (stlačené),kancelársky papier, obálky, pohľadnice, listy \nNepatrí: znečistený, mokrý, mastný papier, použité hygienické potreby (plienky, vložky), nápojové kartóny, použité papierové vreckovky a utierky</item>
-        <item>Patrí: stlačené alebo zošliapnuté PET fľaše z nápojov, plastové a mikroténové vrecká, baliace fólie, polystyrén, tégliky z jogurtov,obaly z CD, obaly z pracích a čistiacich prostriedkov a kozmetiky\nNepatrí: Mastné obaly so zvyškom potravín, podlahové krytiny, novodurové rúrky, obaly z nebezpečných látok, ako napr. motorových olejov,farieb a pod.</item>
-        <item>Patrí: nevratné obaly zo skla z alkoholických alebo nealkoholických nápojov, poháre, tabuľové sklo z okien a dverí (väčšie množstvo patrí na zberný dvor), sklenené črepy a pod. \nNepatrí: Porcelán, keramika, drôtené sklo, autosklo, zrkadlá, TV obrazovky, pozlátené pokovované sklo, alebo technické druhy skla </item>
-        <item>Patrí: šupky, čajové vrecúška, ovocie, zelenina, odpad z verejnej zelene, lístie, tráva, záhradný odpad \nNepatrí:  mäso, popol, stavebný odpad a pod.</item>
-        <item>Patrí: zmesový komunálny odpad (zvyšok po vytriedení) \nNepatrí: biologicky rozložiteľný odpad, elektro-odpad a batérie, objemnný odpad, stavebný odpad, horľaviny</item>
-        <item>Patrí: akékľvek oblečenie, topánky \nNepatrí: hocičo iné</item>
-        <item>Patrí: nestlačené plechovky a flaše od nápojov označené Z \nNepatrí: poškodené plechovky a flaše, nezálohovateľné obaly</item>
-        <item>Patrí: kovové obaly, konzervy, kovové výrobky a súčiastky, alobal, nápojové plechovky. Triedia sa podľa pokynov obce/mesta. \nNepatrí: Kovové obaly kombinované s iným materiálom, napr. tuby z krémov a pást. Mäkké vrecúška, napr. z kávy. Kovové obaly obsahujúce zvyšky nebezpečných látok. Nadrozmerný kovový odpad je potrebné odniesť do zberní kovov, príp. do zberných dvorov.</item>
+        <item><b>Patrí:</b> Noviny, časopisy, letáky, katalógy, papierové tašky, kartónové obaly (stlačené),kancelársky papier, obálky, pohľadnice, listy.\n\n<b>Nepatrí:</b> Znečistený, mokrý, mastný papier, použité hygienické potreby (plienky, vložky), nápojové kartóny, použité papierové vreckovky a utierky.</item>
+        <item><b>Patrí:</b> Stlačené alebo zošliapnuté PET fľaše z nápojov, plastové a mikroténové vrecká, baliace fólie, polystyrén, tégliky z jogurtov,obaly z CD, obaly z pracích a čistiacich prostriedkov a kozmetiky.\n\n<b>Nepatrí:</b> Mastné obaly so zvyškom potravín, podlahové krytiny, novodurové rúrky, obaly z nebezpečných látok, ako napr. motorových olejov,farieb a pod.</item>
+        <item><b>Patrí:</b> Nevratné obaly zo skla z alkoholických alebo nealkoholických nápojov, poháre, tabuľové sklo z okien a dverí (väčšie množstvo patrí na zberný dvor), sklenené črepy a pod.\n\n<b>Nepatrí:</b> Porcelán, keramika, drôtené sklo, autosklo, zrkadlá, TV obrazovky, pozlátené pokovované sklo, alebo technické druhy skla.</item>
+        <item><b>Patrí:</b> Šupky, čajové vrecúška, ovocie, zelenina, odpad z verejnej zelene, lístie, tráva, záhradný odpad.\n\n<b>Nepatrí:</b> Mäso, popol, stavebný odpad a pod.</item>
+        <item><b>Patrí:</b> Zmesový komunálny odpad (zvyšok po vytriedení).\n\n<b>Nepatrí:</b> Biologicky rozložiteľný odpad, elektro-odpad a batérie, objemnný odpad, stavebný odpad, horľaviny.</item>
+        <item><b>Patrí:</b> Akékľvek oblečenie, topánky.\n<b>Nepatrí: Hocičo iné.</b></item>
+        <item><b>Patrí:</b> Nestlačené plechovky a flaše od nápojov označené Z.\n\n<b>Nepatrí:</b> Poškodené plechovky a flaše, nezálohovateľné obaly.</item>
+        <item><b>Patrí:</b> Kovové obaly, konzervy, kovové výrobky a súčiastky, alobal, nápojové plechovky. Triedia sa podľa pokynov obce/mesta.\n\n<b>Nepatrí:</b> Kovové obaly kombinované s iným materiálom, napr. tuby z krémov a pást. Mäkké vrecúška, napr. z kávy. Kovové obaly obsahujúce zvyšky nebezpečných látok. Nadrozmerný kovový odpad je potrebné odniesť do zberní kovov, príp. do zberných dvorov.</item>
     </string-array>
 
 

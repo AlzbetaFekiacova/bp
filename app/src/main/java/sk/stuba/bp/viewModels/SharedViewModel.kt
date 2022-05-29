@@ -1,4 +1,4 @@
-package sk.stuba.bp.ViewModels
+package sk.stuba.bp.viewModels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

@@ -36,7 +36,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import sk.stuba.bp.*
-import sk.stuba.bp.ViewModels.SharedViewModel
+import sk.stuba.bp.viewModels.SharedViewModel
 import sk.stuba.bp.databaseClasses.Container
 import sk.stuba.bp.databinding.FragmentMapBinding
 import sk.stuba.bp.globalConstants.MyConstants

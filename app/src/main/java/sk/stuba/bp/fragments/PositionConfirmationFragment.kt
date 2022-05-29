@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import sk.stuba.bp.R
-import sk.stuba.bp.ViewModels.SharedViewModel
+import sk.stuba.bp.viewModels.SharedViewModel
 import sk.stuba.bp.databinding.FragmentPositionConfirmationBinding
 
 class PositionConfirmationFragment : DialogFragment() {
