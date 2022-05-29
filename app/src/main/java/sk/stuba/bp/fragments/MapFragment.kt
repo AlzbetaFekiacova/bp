@@ -36,7 +36,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import sk.stuba.bp.*
+import sk.stuba.bp.ViewModels.SharedViewModel
+import sk.stuba.bp.databaseClasses.Container
 import sk.stuba.bp.databinding.FragmentMapBinding
+import sk.stuba.bp.globalConstants.MyConstants
 import kotlin.collections.ArrayList
 
 
@@ -68,6 +71,7 @@ class MapFragment : Fragment(), View.OnClickListener {
     private var binsPaper = arrayListOf<Container>()
     private var binsCommunal = arrayListOf<Container>()
     private var clothesCollecting = arrayListOf<Container>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -189,7 +193,11 @@ class MapFragment : Fragment(), View.OnClickListener {
                 )
 
             } else {
-                Toast.makeText(context, getString(R.string.lozalizationNotSuccessfulTxt), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    getString(R.string.lozalizationNotSuccessfulTxt),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -332,6 +340,7 @@ class MapFragment : Fragment(), View.OnClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val logOrRegDialogFragment = LogOrRegDialogFragment()
+
         when (item.itemId) {
 
             R.id.itemProfile -> {

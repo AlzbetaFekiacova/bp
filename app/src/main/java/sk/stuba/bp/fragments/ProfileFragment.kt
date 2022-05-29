@@ -26,7 +26,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         auth = Firebase.auth
@@ -87,10 +86,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         findNavController().navigate(R.id.mapFragment)
                     }
                 }
-                // Set other dialog properties
+
                 builder.setTitle(getString(R.string.ToDelete))
                 builder.setMessage(getString(R.string.afterDeleteNoFullFuncionallity))
-                // Create the AlertDialog
                 builder.create()
             }
             alertDialog?.show()

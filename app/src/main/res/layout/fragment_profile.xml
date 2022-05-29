@@ -102,7 +102,7 @@
         android:layout_below="@+id/textView_identity"
         android:layout_centerInParent="true"
         android:layout_marginTop="25dp"
-        android:contentDescription="@string/img_desc_application_icon"
+        android:contentDescription="@string/imgDescApplicationIcon"
         android:src="@drawable/ic_trash_310219"
         app:tint="@color/mild_green" />
 

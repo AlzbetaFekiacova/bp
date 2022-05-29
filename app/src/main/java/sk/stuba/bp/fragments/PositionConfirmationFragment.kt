@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import sk.stuba.bp.R
-import sk.stuba.bp.SharedViewModel
+import sk.stuba.bp.ViewModels.SharedViewModel
 import sk.stuba.bp.databinding.FragmentPositionConfirmationBinding
 
 class PositionConfirmationFragment : DialogFragment() {

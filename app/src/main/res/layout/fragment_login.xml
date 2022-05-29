@@ -10,7 +10,7 @@
         android:id="@+id/txtViewLogInTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_log_in"
+        android:text="@string/titleLogIn"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:textSize="30sp"
@@ -66,7 +66,7 @@
         android:id="@+id/btn_logIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/log_in_txt"
+        android:text="@string/logInTxt"
         android:layout_below="@id/editTxtPasswordLogIn"
         android:layout_marginTop="120dp"
         android:layout_centerInParent="true"
@@ -85,7 +85,7 @@
         android:layout_marginTop="5dp"
         android:layout_centerInParent="true"
         app:tint="@color/mild_green"
-        android:contentDescription="@string/img_desc_application_icon" />
+        android:contentDescription="@string/imgDescApplicationIcon" />
 
 
 

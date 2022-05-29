@@ -11,10 +11,6 @@ import sk.stuba.bp.R
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        const val REQUEST_SIGN_IN = 1
-    }
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {

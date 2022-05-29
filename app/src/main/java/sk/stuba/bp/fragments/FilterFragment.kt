@@ -6,9 +6,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import sk.stuba.bp.MyConstants
+import sk.stuba.bp.globalConstants.MyConstants
 import sk.stuba.bp.R
-import sk.stuba.bp.SharedViewModel
+import sk.stuba.bp.ViewModels.SharedViewModel
 import sk.stuba.bp.adapters.ItemAdapter
 import sk.stuba.bp.databinding.FragmentFilterBinding
 

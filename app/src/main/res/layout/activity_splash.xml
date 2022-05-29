@@ -11,7 +11,7 @@
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_centerInParent="true"
-        android:contentDescription="@string/img_desc_application_icon"
+        android:contentDescription="@string/imgDescApplicationIcon"
         android:src="@drawable/ic_trash_310219"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
