@@ -219,7 +219,7 @@ class MapFragment : Fragment(), View.OnClickListener {
             pointAnnotationManager!!.create(pointAnnotationOptions)
             if (custom && checkIfLoggedIn() && !addingContent) {
                 pointAnnotationManager!!.addClickListener(OnPointAnnotationClickListener { it ->
-                    if (currentPosition.latitude() != 48.6385 && currentPosition.longitude() != 19.13491) {
+                    if ((currentPosition.latitude() != 48.6385 && currentPosition.longitude() != 19.13491) && !(addingContent)) {
                         if (getDistance(
                                 currentPosition.latitude(),
                                 currentPosition.longitude(),
@@ -601,8 +601,8 @@ class MapFragment : Fragment(), View.OnClickListener {
 
 
             val position = Point.fromLngLat(
-                currentPosition.longitude() - 0.001,
-                currentPosition.latitude() + 0.001
+                currentPosition.longitude() + 0.000001,
+                currentPosition.latitude() + 0.000001
             )
             when (item) {
                 MyConstants.CONTAINER_GLASS -> {
