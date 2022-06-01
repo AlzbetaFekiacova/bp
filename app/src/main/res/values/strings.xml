@@ -32,9 +32,9 @@
     <string name="logOut">Odhlásiť sa</string>
     <string name="userInfo">Informácie o užívateľovi</string>
     <string name="promtToFinifshAdding">Pre pridanie musis najprv potvrdit pridanie posledneho kosa</string>
-    <string name="promtToLocalize">Pre pridanie sa musíš najprv lokalizovať</string>
-    <string name="localizedTxt">Lokalizovné</string>
-    <string name="lozalizationNotSuccessfulTxt">Nepodarilo sa lokalizovať</string>
+    <string name="promtToLocalize">Pre pridanie musíš povoliť prístup k polohe</string>
+    <string name="localizedTxt">Poloha získaná</string>
+    <string name="lozalizationNotSuccessfulTxt">Nepodarilo sa nájsť polohu</string>
     <string name="IwantToLogInTxt">Áno, chcem sa odhlásiť</string>
     <string name="IdoNotWantToLogOut">Nie, nechcem sa odhlásiť</string>
     <string name="succesffulyLoggedOut">Boli ste úspešne odhlásený</string>
